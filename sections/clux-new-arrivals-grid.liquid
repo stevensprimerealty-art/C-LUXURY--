@@ -1,0 +1,58 @@
+<section>
+  <div class="clux-section-title">{{ section.settings.title }}</div>
+
+  {% assign col = collections[section.settings.collection] %}
+  {% if col == blank %}
+    {% assign col = collections['all'] %}
+  {% endif %}
+
+  <div class="clux-grid">
+    {% for product in col.products limit: section.settings.limit %}
+      {% assign v = product.selected_or_first_available_variant %}
+
+      <div class="clux-card">
+        <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+          {% if product.featured_image %}
+            <img
+              class="clux-card__img"
+              src="{{ product.featured_image | image_url: width: 1200 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              loading="lazy">
+          {% endif %}
+        </a>
+
+        <!-- Quick Buy ABOVE product name & price -->
+        <a class="clux-glass-btn clux-quickbuy"
+           href="{{ product.url }}"
+           data-clux-quickbuy
+           data-variant-id="{{ v.id }}">
+          Quick Buy
+        </a>
+
+        <a href="{{ product.url }}" style="text-decoration:none;">
+          <p class="clux-title">{{ product.title }}</p>
+        </a>
+
+        <p class="clux-price">
+          {% if v.compare_at_price > v.price %}
+            <s>{{ v.compare_at_price | money }}</s>{{ v.price | money }}
+          {% else %}
+            {{ v.price | money }}
+          {% endif %}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C-LUXURY New Arrivals Grid",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "C-New arrivals" },
+    { "type": "collection", "id": "collection", "label": "Collection (optional)" },
+    { "type": "number", "id": "limit", "label": "Product limit", "default": 16 }
+  ],
+  "presets": [{ "name": "C-LUXURY New Arrivals Grid" }]
+}
+{% endschema %}
