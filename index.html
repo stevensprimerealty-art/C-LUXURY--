@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>C-LUXURY</title>
+  <link rel="stylesheet" href="./assets/clux.css" />
+</head>
+<body>
+
+<header class="clux-header">
+  <div class="clux-header__inner">
+    <a class="clux-logo" href="#">
+      <img src="./assets/logo.png" alt="C-LUXURY" />
+    </a>
+
+    <div class="clux-header__icons">
+      <button class="clux-icon" aria-label="Search" id="searchBtn">🔍</button>
+      <button class="clux-icon" aria-label="Menu" id="menuBtn">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- Mini Menu -->
+<nav class="clux-menu" id="cluxMenu" aria-hidden="true">
+  <button class="clux-menu__close" id="menuClose" aria-label="Close">✕</button>
+  <a href="#shop">Shop</a>
+  <a href="#products">Products</a>
+  <a href="#lookbook">Lookbook</a>
+  <a href="#about">About</a>
+  <a href="#login">Login</a>
+  <a href="#create">Create account</a>
+</nav>
+
+<!-- HERO -->
+<section class="clux-hero clux-grain clux-cinematic" data-clux-hero data-interval-ms="3000">
+  <div class="clux-hero__stage">
+    <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url('./assets/hero-1.jpg')"></div>
+    <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-2.jpg')"></div>
+    <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-3.jpg')"></div>
+  </div>
+  <div class="clux-hero__cta-wrap">
+    <a class="clux-glass-btn clux-hero__cta" href="https://mrcharliestxs.myshopify.com/collections/all">
+      Shop now
+    </a>
+  </div>
+</section>
+
+<!-- NEW ARRIVALS -->
+<section id="products">
+  <div class="clux-section-title">C-New arrivals</div>
+  <div class="clux-grid" id="productGrid"></div>
+</section>
+
+<!-- BANNERS -->
+<section class="clux-banners">
+  <div class="clux-banner clux-grain clux-cinematic">
+    <div class="clux-banner__bg" data-clux-bubble style="background-image:url('./assets/banner-1.jpg')"></div>
+    <div class="clux-banner__overlay"></div>
+    <div class="clux-banner__content">
+      <p class="clux-banner__text">Explore c-collections</p>
+      <a class="clux-glass-btn" href="https://mrcharliestxs.myshopify.com/collections/all">Explore more now</a>
+    </div>
+  </div>
+
+  <div class="clux-banner clux-grain clux-cinematic">
+    <div class="clux-banner__bg" data-clux-bubble style="background-image:url('./assets/banner-2.jpg')"></div>
+    <div class="clux-banner__overlay"></div>
+    <div class="clux-banner__content">
+      <p class="clux-banner__text">Explore c-collections</p>
+      <a class="clux-glass-btn" href="https://mrcharliestxs.myshopify.com/collections/all">Explore more now</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="clux-community">
+  <h2>Join our community</h2>
+  <p>To receive more information on our brand growth every day</p>
+  <div class="clux-actions">
+    <a class="clux-glass-btn" href="https://www.tiktok.com/@_cluxury" target="_blank" rel="noopener">Follow us on TikTok</a>
+    <a class="clux-glass-btn" href="https://www.instagram.com/_cluxury0" target="_blank" rel="noopener">Follow us on Instagram</a>
+  </div>
+</section>
+
+<!-- FIXED TOOLS -->
+<div class="clux-tools">
+  <div class="clux-toolbox">
+    <div class="clux-toggle">
+      <span>Currency</span>
+      <button type="button" id="currencyToggle">USD ↔ NGN</button>
+    </div>
+  </div>
+
+  <div class="clux-toolbox">
+    <button class="clux-glass-btn clux-chatbtn" type="button" id="chatOpen">
+      Chat now
+    </button>
+  </div>
+</div>
+
+<!-- CHAT MODAL -->
+<div class="clux-chat" id="chatBox" aria-hidden="true">
+  <div class="clux-chat__panel clux-grain clux-cinematic">
+    <button class="clux-chat__close" id="chatClose">✕</button>
+    <div class="clux-chat__logo">C-LUXURY</div>
+    <div class="clux-chat__msg">
+      <strong>Welcome to C-LUXURY Support 👋</strong><br><br>
+      For order updates, kindly share your order number.<br><br>
+      For anything else, drop us a message and we’ll assist you.
+    </div>
+    <a class="clux-glass-btn" href="mailto:support@cluxury.com">Send message</a>
+  </div>
+</div>
+
+<script src="./assets/index.js" defer></script>
+</body>
+</html>
