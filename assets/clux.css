@@ -1,214 +1,335 @@
-/* ================================
+/* =========================================
    C-LUXURY — GLOBAL RESET
-================================ */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root{
+  --bg: #ffffff;              /* YOU SAID WHITE */
+  --text: #0b0b0b;
+  --muted: rgba(11,11,11,.65);
+
+  --glass: rgba(255,255,255,.16);
+  --glassBorder: rgba(255,255,255,.28);
+  --glassDark: rgba(0,0,0,.55);
+  --glassDarkBorder: rgba(255,255,255,.22);
+
+  --radius: 18px;
 }
 
-html, body {
-  background: #0b0b0b;
-  color: #ffffff;
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+html, body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
   scroll-behavior: smooth;
 }
 
-/* ================================
-   CINEMATIC GRAIN OVERLAY
-================================ */
-.clux-grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
-  pointer-events: none;
-  mix-blend-mode: overlay;
+/* =========================================
+   HEADER (WHITE) — LOGO + ICONS
+   (Your HTML should place logo + icons)
+========================================= */
+.clux-header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,.06);
 }
 
-/* ================================
-   HERO — CROSSFADE SLIDER
-================================ */
-.clux-hero {
+.clux-header__inner{
+  height: 72px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.clux-logo{
+  height: 34px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.clux-header__icons{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.clux-icon-btn{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(10px);
+}
+
+/* =========================================
+   CINEMATIC GRAIN + DARK FADE (SUBTLE)
+========================================= */
+.clux-grain{
   position: relative;
-  height: 100vh;
+}
+
+.clux-grain::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.13'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: .65;
+}
+
+.clux-cinematic-dark::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: radial-gradient(80% 80% at 50% 30%,
+              rgba(0,0,0,.18) 0%,
+              rgba(0,0,0,.45) 55%,
+              rgba(0,0,0,.60) 100%);
+  opacity:.55;
+}
+
+/* =========================================
+   HERO — 3 IMAGES CROSSFADE (3s each)
+   CTA DOES NOT FADE OR MOVE
+========================================= */
+.clux-hero{
+  position: relative;
+  height: calc(100vh - 72px);
+  min-height: 520px;
   overflow: hidden;
 }
 
-.clux-hero__slide {
-  position: absolute;
-  inset: 0;
+.clux-hero__slide{
+  position:absolute;
+  inset:0;
   background-size: cover;
   background-position: center;
-  opacity: 0;
+  opacity:0;
+  filter: contrast(1.05) saturate(0.98);
   animation: cluxFade 9s infinite;
 }
 
-.clux-hero__slide:nth-child(1) { animation-delay: 0s; }
-.clux-hero__slide:nth-child(2) { animation-delay: 3s; }
-.clux-hero__slide:nth-child(3) { animation-delay: 6s; }
+.clux-hero__slide:nth-child(1){ animation-delay: 0s; }
+.clux-hero__slide:nth-child(2){ animation-delay: 3s; }
+.clux-hero__slide:nth-child(3){ animation-delay: 6s; }
 
-@keyframes cluxFade {
-  0% { opacity: 0; }
-  10% { opacity: 1; }
-  30% { opacity: 1; }
-  40% { opacity: 0; }
+@keyframes cluxFade{
+  0%   { opacity: 0; }
+  8%   { opacity: 1; }
+  30%  { opacity: 1; }
+  40%  { opacity: 0; }
   100% { opacity: 0; }
 }
 
-/* ================================
-   HERO CTA — GLASS BUTTON
-================================ */
-.clux-hero__cta {
-  position: absolute;
-  bottom: 80px;
-  left: 50%;
+.clux-hero__cta{
+  position:absolute;
+  left:50%;
+  bottom: 70px;
   transform: translateX(-50%);
+  z-index: 3;
 }
 
-.clux-glass-btn {
-  padding: 16px 40px;
-  border-radius: 40px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.25);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-}
-
-/* ================================
-   SECTION TITLE
-================================ */
-.clux-section-title {
-  text-align: center;
-  margin: 100px 0 40px;
-  font-size: 2rem;
-  letter-spacing: 0.15em;
-}
-
-/* ================================
-   PRODUCT GRID — 2 COLUMN / 16 ITEMS
-================================ */
-.clux-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
-  padding: 0 6vw 120px;
-}
-
-.clux-product {
-  position: relative;
-}
-
-.clux-product img {
-  width: 100%;
-  border-radius: 14px;
-}
-
-/* QUICK BUY BUTTON */
-.clux-quick-buy {
-  position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 28px;
+/* Glass button (for Shop Now / Explore etc.) */
+.clux-glass-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 14px 34px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glassBorder);
   color: #fff;
-  font-size: 0.9rem;
+  text-decoration:none;
+  letter-spacing: .06em;
+  font-weight: 600;
+  box-shadow: 0 10px 40px rgba(0,0,0,.22);
 }
 
-/* PRODUCT TEXT STYLE */
-.clux-product-name {
-  margin-top: 18px;
-  font-size: 0.95rem;
-  letter-spacing: 0.05em;
+/* =========================================
+   SECTION TITLE (C-NEW ARRIVALS)
+========================================= */
+.clux-section{
+  padding: 90px 6vw 0;
 }
 
-.clux-product-price {
-  margin-top: 6px;
-  opacity: 0.7;
-  font-size: 0.9rem;
+.clux-section-title{
+  text-align:center;
+  font-size: 1.6rem;
+  letter-spacing: .20em;
+  font-weight: 700;
+  color: #0b0b0b;
+  margin-bottom: 34px;
 }
 
-/* ================================
-   TWO BANNERS — CINEMATIC FLOAT
-================================ */
-.clux-banners {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  padding: 120px 6vw;
+/* =========================================
+   PRODUCT GRID — 2 COLUMN / 16 ITEMS
+   Quick Buy ABOVE name/price (like your inspo)
+========================================= */
+.clux-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 0 6vw 80px;
 }
 
-.clux-banner {
-  position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-  animation: floatBanner 6s ease-in-out infinite;
-}
-
-@keyframes floatBanner {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0); }
-}
-
-.clux-banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* BANNER CTA */
-.clux-banner-btn {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-}
-
-/* ================================
-   COMMUNITY SECTION
-================================ */
-.clux-community {
-  text-align: center;
-  padding: 120px 6vw;
-}
-
-.clux-community p {
-  margin-top: 16px;
-  opacity: 0.75;
-}
-
-.clux-social-btns {
-  margin-top: 40px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-/* ================================
-   FOOTER TOOLS (CURRENCY + CHAT)
-================================ */
-.clux-tools {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  display: flex;
+.clux-product{
+  display:flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.clux-tool-btn {
-  padding: 14px 20px;
+.clux-product__img{
+  width: 100%;
+  border-radius: var(--radius);
+  overflow:hidden;
+  background: #f3f3f3;
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.clux-product__img img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* Quick Buy button ABOVE name/price */
+.clux-quick-buy{
+  width: 100%;
+  text-align: center;
+  padding: 14px 18px;
   border-radius: 999px;
-  background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,.82);
+  border: 1px solid rgba(255,255,255,.20);
   color: #fff;
-  font-size: 0.85rem;
+  font-size: .95rem;
+  letter-spacing: .06em;
+  backdrop-filter: blur(14px);
+}
+
+/* Text format like your grid inspo */
+.clux-product-name{
+  font-size: .92rem;
+  letter-spacing: .06em;
+  text-transform: none;
+}
+
+.clux-product-price{
+  font-size: .92rem;
+  color: rgba(11,11,11,.60);
+}
+
+/* =========================================
+   TWO BANNERS — GRAIN + BUBBLE MOVEMENT
+========================================= */
+.clux-banners{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  padding: 20px 6vw 80px;
+}
+
+.clux-banner{
+  position:relative;
+  border-radius: 22px;
+  overflow:hidden;
+  min-height: 320px;
+  border: 1px solid rgba(0,0,0,.06);
+  animation: floatBanner 7s ease-in-out infinite;
+}
+
+.clux-banner:nth-child(2){
+  animation-delay: 1.2s;
+}
+
+@keyframes floatBanner{
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-10px) scale(1.01); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.clux-banner img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+  filter: contrast(1.05) saturate(0.95);
+}
+
+/* Banner CTA (glass, doesn’t fade) */
+.clux-banner-btn{
+  position:absolute;
+  left: 22px;
+  bottom: 22px;
+  z-index: 3;
+}
+
+/* =========================================
+   COMMUNITY SECTION
+========================================= */
+.clux-community{
+  text-align:center;
+  padding: 70px 6vw 120px;
+}
+
+.clux-community h2{
+  font-size: 1.45rem;
+  letter-spacing: .10em;
+  font-weight: 800;
+}
+
+.clux-community p{
+  margin-top: 14px;
+  color: rgba(11,11,11,.65);
+  line-height: 1.55;
+}
+
+.clux-social-btns{
+  margin-top: 26px;
+  display:flex;
+  justify-content:center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* =========================================
+   FOOTER TOOLS — Currency + Chat (BOTTOM RIGHT)
+========================================= */
+.clux-tools{
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 80;
+}
+
+.clux-tool-btn{
+  padding: 14px 16px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.82);
+  border: 1px solid rgba(255,255,255,.20);
+  color:#fff;
+  font-size: .88rem;
+  letter-spacing: .04em;
+  backdrop-filter: blur(14px);
+}
+
+/* =========================================
+   RESPONSIVE (MOBILE)
+========================================= */
+@media (max-width: 780px){
+  .clux-grid{ gap: 20px; }
+  .clux-banners{ grid-template-columns: 1fr; }
+  .clux-banner{ min-height: 280px; }
+  .clux-hero__cta{ bottom: 56px; }
 }
