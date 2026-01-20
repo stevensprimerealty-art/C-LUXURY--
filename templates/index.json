@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "hero": {
+      "type": "clux-hero-crossfade"
+    },
+    "new_arrivals": {
+      "type": "clux-new-arrivals-grid"
+    },
+    "banners": {
+      "type": "clux-two-banners"
+    },
+    "community": {
+      "type": "clux-community"
+    },
+    "tools": {
+      "type": "clux-footer-tools"
+    }
+  },
+  "order": [
+    "hero",
+    "new_arrivals",
+    "banners",
+    "community",
+    "tools"
+  ]
+}
