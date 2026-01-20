@@ -1,6 +1,6 @@
 // ============================
-// C-LUXURY — Standalone JS (FIXED)
-// Place in: /assets/index.js
+// C-LUXURY — Standalone JS (FINAL)
+// File: /assets/index.js
 // ============================
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -8,8 +8,6 @@ const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 /* ============================
    HERO — Crossfade (JS controlled)
-   NOTE: Remove CSS cluxFade animation OR override with this approach.
-   This version uses .is-active and inline opacity for stability.
 ============================ */
 function initHero() {
   const hero = $("[data-clux-hero]");
@@ -21,7 +19,7 @@ function initHero() {
   const ms = Number(hero.getAttribute("data-interval-ms") || 3000);
   let i = 0;
 
-  // Force a clean start
+  // Clean start
   slides.forEach((s, idx) => {
     s.classList.toggle("is-active", idx === 0);
     s.style.opacity = idx === 0 ? "1" : "0";
@@ -41,7 +39,7 @@ function initHero() {
 }
 
 /* ============================
-   MINI MENU (Open/Close + Close on link click)
+   MINI MENU
 ============================ */
 function initMenu() {
   const menu = $("#cluxMenu");
@@ -59,13 +57,21 @@ function initMenu() {
     menu.setAttribute("aria-hidden", "true");
   };
 
-  openBtn.addEventListener("click", open);
-  closeBtn.addEventListener("click", close);
+  openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    open();
+  });
+
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    close();
+  });
 
   // Close when clicking any menu link
   $$("a", menu).forEach(a => a.addEventListener("click", close));
 
-  // Close if user taps outside menu (mobile friendly)
+  // Close if user taps outside menu
   document.addEventListener("click", (e) => {
     const isOpen = menu.getAttribute("aria-hidden") === "false";
     if (!isOpen) return;
@@ -75,22 +81,21 @@ function initMenu() {
 }
 
 /* ============================
-   SEARCH BUTTON (Scroll to products)
+   SEARCH BUTTON (scroll to products)
 ============================ */
 function initSearch() {
   const btn = $("#searchBtn");
   const target = $("#products");
   if (!btn || !target) return;
 
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
 /* ============================
    PRODUCTS (16 items)
-   NOTE: Without variant IDs we cannot true "Add to cart".
-   So we link users to the product page (Shopify handles cart there).
 ============================ */
 const PRODUCTS = [
   { title:"C-Lux Baseball Jersey - Vintage Brown Star Sleeve Shirt", priceUSD:48.31, url:"https://mrcharliestxs.myshopify.com/products/baseball-jersey-vintage-brown-star-sleeve-team-shirt" },
@@ -111,9 +116,9 @@ const PRODUCTS = [
   { title:"C-LUXURY Women's White Tie-Side Bikini Swimsuit", priceUSD:28.76, url:"https://mrcharliestxs.myshopify.com/products/white-tie-side-bikini-swimsuit-with-minimal-geometric-accent" }
 ];
 
-// Currency conversion (manual placeholder)
+// Currency conversion
 let currency = "USD";
-let usdToNgn = 1500; // set your real rate any time
+let usdToNgn = 1500; // change anytime
 
 function money(n) {
   if (currency === "USD") return `$${n.toFixed(2)}`;
@@ -127,7 +132,6 @@ function renderProducts() {
 
   grid.innerHTML = PRODUCTS.map((p) => `
     <div class="clux-card">
-      <!-- Quick Buy above name/price -->
       <a class="clux-quickbuy" href="${p.url}" target="_blank" rel="noopener">Quick Buy</a>
 
       <a href="${p.url}" target="_blank" rel="noopener" style="text-decoration:none;">
@@ -136,7 +140,9 @@ function renderProducts() {
 
       <p class="clux-price">${money(p.priceUSD)}</p>
 
-      <a class="clux-glass-btn" href="${p.url}" target="_blank" rel="noopener">Add to cart 🛒</a>
+      <a class="clux-glass-btn" href="${p.url}" target="_blank" rel="noopener">
+        Add to cart 🛒
+      </a>
     </div>
   `).join("");
 }
@@ -152,14 +158,17 @@ function initCurrency() {
 }
 
 /* ============================
-   CHAT MODAL (Open/Close)
-   Chat logo image is in HTML (jpg) inside modal
+   CHAT MODAL
 ============================ */
 function initChat() {
   const box = $("#chatBox");
   const open = $("#chatOpen");
   const close = $("#chatClose");
   if (!box || !open || !close) return;
+
+  // Start hidden
+  box.style.display = "none";
+  box.setAttribute("aria-hidden", "true");
 
   open.addEventListener("click", () => {
     box.style.display = "flex";
@@ -171,7 +180,7 @@ function initChat() {
     box.setAttribute("aria-hidden", "true");
   });
 
-  // Close if click outside panel
+  // Close when tapping outside the panel
   box.addEventListener("click", (e) => {
     if (e.target === box) {
       box.style.display = "none";
