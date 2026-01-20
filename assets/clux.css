@@ -387,3 +387,6 @@ img{max-width:100%;display:block}
   .clux-banners{grid-template-columns:1fr 1fr}
   .clux-banner{min-height:340px}
 }
+
+/* JS controls hero fade — disable CSS animation */
+.clux-hero__slide { animation: none !important; }
