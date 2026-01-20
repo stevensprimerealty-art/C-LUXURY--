@@ -1,0 +1,37 @@
+<section class="clux-hero clux-grain clux-cinematic" data-clux-hero data-interval-ms="{{ section.settings.interval_ms }}">
+  <div class="clux-hero__stage">
+    {% for block in section.blocks %}
+      {% if block.type == 'slide' and block.settings.image != blank %}
+        <div
+          class="clux-hero__slide {% if forloop.first %}is-active{% endif %}"
+          data-clux-slide
+          style="background-image:url('{{ block.settings.image | image_url: width: 2500 }}');">
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="clux-hero__cta-wrap">
+    <a class="clux-glass-btn clux-hero__cta" href="{{ section.settings.cta_link }}">
+      {{ section.settings.cta_text }}
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "C-LUXURY Hero Crossfade",
+  "settings": [
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Shop now" },
+    { "type": "url", "id": "cta_link", "label": "CTA link", "default": "https://mrcharliestxs.myshopify.com/collections/all" },
+    { "type": "number", "id": "interval_ms", "label": "Slide interval (ms)", "default": 3000 }
+  ],
+  "blocks": [
+    { "type": "slide", "name": "Slide", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" }
+    ]}
+  ],
+  "max_blocks": 3,
+  "presets": [{ "name": "C-LUXURY Hero Crossfade" }]
+}
+{% endschema %}
