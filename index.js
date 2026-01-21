@@ -14,6 +14,7 @@ function initHero() {
   if (!hero) return;
 
   const slides = $$("[data-clux-slide]", hero);
+  const copies = $$("[data-clux-copy]");
   if (slides.length < 2) return;
 
   const ms = Number(hero.getAttribute("data-interval-ms") || 3000);
@@ -28,7 +29,9 @@ function initHero() {
   setInterval(() => {
     const prev = i;
     i = (i + 1) % slides.length;
-
+   if (copies.length) {
+  copies.forEach((c, idx) => c.classList.toggle("is-active", idx === i));
+}
     slides[prev].classList.remove("is-active");
     slides[prev].style.opacity = "0";
 
