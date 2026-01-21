@@ -146,52 +146,114 @@ img{max-width:100%;display:block}
   opacity:.55;
 }
 
-/* =========================================
-   HERO — FULL WIDTH + CROSSFADE
-========================================= */
+/* ================================
+   HERO — INSPO STYLE (CENTER CTA + TEXT)
+   Dark / cinematic scenery
+================================ */
 .clux-hero{
-  position:relative;
-  width:100%;
-  height:calc(100vh - 72px);
-  min-height:520px;
-  overflow:hidden;
+  position: relative;
+  height: calc(100vh - 72px);
+  min-height: 560px;
+  overflow: hidden;
+  background: #000;
 }
 
-.clux-hero__stage{position:absolute; inset:0}
+/* stage + slides */
+.clux-hero__stage{
+  position:absolute;
+  inset:0;
+}
 
 .clux-hero__slide{
   position:absolute;
   inset:0;
-  background-size:cover;
-  background-position:center;
-  opacity:0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+  transform: scale(1.02);
 }
 
-.clux-hero__slide.is-active{opacity:1}
+/* active slide */
+.clux-hero__slide.is-active{
+  opacity: 1;
+}
 
-.clux-hero__cta{
+/* CINEMATIC DARK OVERLAY */
+.clux-hero__slide::before{
+  content:"";
   position:absolute;
-  left:50%;
-  bottom:64px;
-  transform:translateX(-50%);
-  z-index:3;
+  inset:0;
+  background:
+    radial-gradient(70% 70% at 50% 35%,
+      rgba(0,0,0,0.15) 0%,
+      rgba(0,0,0,0.55) 55%,
+      rgba(0,0,0,0.82) 100%),
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.55) 0%,
+      rgba(0,0,0,0.55) 50%,
+      rgba(0,0,0,0.80) 100%);
+  z-index: 1;
 }
 
-/* buttons */
-.clux-glass-btn{
+/* OPTIONAL: cinematic grading */
+.clux-hero__slide{
+  filter: contrast(1.15) saturate(0.85) brightness(0.85);
+}
+
+/* CONTENT LAYER */
+.clux-hero__content{
+  position:absolute;
+  inset:0;
+  z-index: 2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding: 0 10vw;
+  color:#fff;
+}
+
+/* top small text like inspo */
+.clux-hero__kicker{
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+
+/* big title like inspo */
+.clux-hero__title{
+  font-size: clamp(40px, 7vw, 86px);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.02;
+  margin-bottom: 28px;
+}
+
+/* SHOP NOW BUTTON — centered like inspo */
+.clux-hero__cta{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding:14px 34px;
-  border-radius:999px;
-  background:var(--glass);
-  backdrop-filter: blur(16px);
-  border:1px solid var(--glassBorder);
-  color:#fff;
+  padding: 18px 56px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.92);
+  color:#111;
   text-decoration:none;
-  letter-spacing:.06em;
-  font-weight:700;
-  box-shadow:0 10px 40px rgba(0,0,0,.22);
+  font-size: 22px;
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 55px rgba(0,0,0,0.35);
+}
+
+/* mobile spacing */
+@media (max-width: 780px){
+  .clux-hero__content{ padding: 0 8vw; }
+  .clux-hero__cta{ font-size: 18px; padding: 16px 46px; }
 }
 
 /* =========================================
