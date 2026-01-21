@@ -1,5 +1,6 @@
 /* =========================================
-   C-LUXURY — CLEAN STABLE CSS + HERO DOTS
+   C-LUXURY — CLEAN STABLE CSS + HERO DOTS (FIXED)
+   Replace your whole assets/clux.css with this
 ========================================= */
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -21,6 +22,7 @@ html,body{
   font-family:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
   scroll-behavior:smooth;
 }
+
 img{max-width:100%;display:block}
 
 .clux-wrap{
@@ -30,7 +32,7 @@ img{max-width:100%;display:block}
   padding:0 16px;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 .clux-header{
   position:sticky;
   top:0;
@@ -67,7 +69,7 @@ img{max-width:100%;display:block}
   cursor:pointer;
 }
 
-/* MENU */
+/* ================= MENU ================= */
 .clux-menu{
   display:none;
   position:fixed;
@@ -96,7 +98,7 @@ img{max-width:100%;display:block}
 }
 .clux-menu a:active{background:rgba(0,0,0,.05)}
 
-/* GRAIN (LIGHT) */
+/* ================= GRAIN (LIGHT) ================= */
 .clux-grain{position:relative}
 .clux-grain::after{
   content:"";
@@ -108,56 +110,74 @@ img{max-width:100%;display:block}
   opacity:.28;
 }
 
-/* HERO */
+/* ===================================================
+   HERO — CENTER TEXT + GLASS CTA + RING DOTS (NOT DARK)
+=================================================== */
 .clux-hero{
   position:relative;
   height: calc(100vh - 72px);
   min-height: 560px;
   overflow:hidden;
-  background:#222;
+  background:#111;
 }
-.clux-hero__stage{position:absolute;inset:0}
+
+/* stage + slides */
+.clux-hero__stage{ position:absolute; inset:0; }
+
 .clux-hero__slide{
   position:absolute;
   inset:0;
   background-size:cover;
   background-position:center;
   opacity:0;
-  transition:opacity 1s ease;
-  transform:scale(1.02);
-  filter: contrast(1.06) saturate(0.98) brightness(0.98); /* NOT DARK */
+  transition: opacity 1s ease;
+  transform: scale(1.02);
+  filter: contrast(1.03) saturate(1.03) brightness(1.05); /* brighter */
 }
-.clux-hero__slide.is-active{opacity:1}
+.clux-hero__slide.is-active{ opacity:1; }
 
-/* LIGHT OVERLAY only (so text is readable but not dark) */
+/* VERY LIGHT overlay (readable but not dark) */
 .clux-hero__slide::before{
   content:"";
   position:absolute;
   inset:0;
+  pointer-events:none;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,.10) 0%,
-    rgba(0,0,0,.08) 45%,
-    rgba(0,0,0,.10) 100%
+    rgba(0,0,0,.06) 0%,
+    rgba(0,0,0,.06) 55%,
+    rgba(0,0,0,.08) 100%
   );
-  z-index:1;
-  pointer-events:none;
 }
 
-/* HERO COPY */
+/* extra hero grain (light) */
+.clux-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+  opacity:.25;
+  z-index:2;
+}
+
+/* TEXT WRAP (TRUE CENTER) */
 .clux-hero__copywrap{
   position:absolute;
   inset:0;
-  z-index:2;
+  z-index:3;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   pointer-events:none;
+  padding: 0 8vw;
 
-  /* 👇 THIS controls how low the text sits */
-  padding-top: 120px;   /* move text down */
+  /* ✅ THIS is what you edit to move text down/up */
+  transform: translateY(20px);  /* +20px moves DOWN. try 30px if needed */
 }
+
 .clux-hero__copy{
   max-width:min(980px, 92%);
   opacity:0;
@@ -168,13 +188,15 @@ img{max-width:100%;display:block}
   opacity:1;
   transform: translateY(0);
 }
+
 .clux-hero__eyebrow{
-  color: rgba(255,255,255,.86);
+  color: rgba(255,255,255,.88);
   letter-spacing:.18em;
   text-transform: uppercase;
   font-size:12px;
   margin-bottom:14px;
 }
+
 .clux-hero__headline{
   color:#fff;
   font-size: clamp(34px, 7vw, 78px);
@@ -183,13 +205,13 @@ img{max-width:100%;display:block}
   line-height:1.04;
 }
 
-/* SHOP NOW (CENTER GLASS) */
+/* SHOP NOW — GLASS CENTER */
 .clux-hero__cta{
   position:absolute;
   left:50%;
-  bottom:64px;
-  transform:translateX(-50%);
-  z-index:3;
+  top:66%;                 /* sits below the text */
+  transform:translate(-50%, -50%);
+  z-index:4;
 
   display:inline-flex;
   align-items:center;
@@ -197,45 +219,51 @@ img{max-width:100%;display:block}
   padding: 16px 54px;
   border-radius:999px;
 
-  background: rgba(255,255,255,0.92);
-  border: 1px solid rgba(255,255,255,0.60);
-  color:#111;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.40);
+  color:#fff;
   text-decoration:none;
 
   font-size:20px;
   font-weight:500;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 16px 55px rgba(0,0,0,0.25);
+  letter-spacing:.02em;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
 }
 
-/* HERO DOTS (RING NAV) */
+/* DOTS — RING NAV */
 .clux-hero__dots{
   position:absolute;
   left:50%;
   bottom:22px;
   transform:translateX(-50%);
-  z-index:3;
+  z-index:4;
   display:flex;
   gap:14px;
   align-items:center;
   justify-content:center;
 }
+
 .clux-dot{
   width:12px;height:12px;
   border-radius:999px;
-  border:2px solid rgba(255,255,255,.65); /* ring */
+  border:2px solid rgba(255,255,255,.70);
   background: transparent;
   padding:0;
   cursor:pointer;
-  opacity:.9;
+  opacity:.95;
 }
 .clux-dot.is-active{
-  border-color: rgba(255,255,255,.95);
-  background: rgba(255,255,255,.22); /* soft fill */
+  border-color: rgba(255,255,255,1);
+  background: rgba(255,255,255,.22);
 }
-.clux-dot:active{transform:scale(.95)}
 
-/* SECTIONS */
+/* ✅ IMPORTANT: JS controls hero fade — disable CSS animation */
+.clux-hero__slide{animation:none!important}
+
+/* ================= SECTIONS ================= */
 .clux-section{width:100%;padding:84px 0 0}
 .clux-section-title{
   text-align:center;
@@ -245,7 +273,7 @@ img{max-width:100%;display:block}
   margin-bottom:28px;
 }
 
-/* PRODUCT GRID */
+/* ================= PRODUCT GRID ================= */
 .clux-grid{
   width:100%;
   display:grid;
@@ -280,7 +308,7 @@ img{max-width:100%;display:block}
 .clux-product-name{font-size:.92rem;letter-spacing:.04em;color:#0b0b0b}
 .clux-product-price{font-size:.92rem;color:rgba(11,11,11,.60)}
 
-/* BANNERS */
+/* ================= BANNERS ================= */
 .clux-banners{
   width:100%;
   display:grid;
@@ -297,7 +325,7 @@ img{max-width:100%;display:block}
 }
 .clux-banner img{width:100%;height:100%;object-fit:cover}
 
-/* TOOLS */
+/* ================= FLOATING TOOLS ================= */
 .clux-tools{
   position:fixed;
   right:14px;
@@ -319,7 +347,7 @@ img{max-width:100%;display:block}
   cursor:pointer;
 }
 
-/* CHAT */
+/* ================= CHAT ================= */
 .clux-chat{
   display:none;
   position:fixed;
@@ -353,7 +381,7 @@ img{max-width:100%;display:block}
 .clux-chat__brandmark{width:120px;margin:10px auto 12px}
 .clux-chat__msg{font-size:.95rem;line-height:1.6;opacity:.92;margin:10px 0 16px}
 
-/* COMMUNITY */
+/* ================= COMMUNITY ================= */
 .clux-community{width:100%;text-align:center;padding:70px 0 120px}
 .clux-community h2{font-size:1.35rem;letter-spacing:.10em;font-weight:900}
 .clux-community p{margin-top:12px;color:rgba(11,11,11,.65);line-height:1.55}
@@ -372,9 +400,19 @@ img{max-width:100%;display:block}
   letter-spacing:.04em;
 }
 
+/* ================= RESPONSIVE ================= */
 @media (max-width:780px){
-  .clux-hero__cta{font-size:18px;padding:14px 44px;bottom:54px}
-  .clux-hero__copywrap{padding-top:62px}
+  /* ✅ Keep CTA using TOP (do NOT use bottom) */
+  .clux-hero__cta{
+    top:70%;
+    font-size:18px;
+    padding:14px 44px;
+  }
+  /* ✅ keep centered, just tighten padding */
+  .clux-hero__copywrap{
+    padding: 0 7vw;
+    transform: translateY(18px);
+  }
 }
 
 @media (min-width:780px){
@@ -382,6 +420,3 @@ img{max-width:100%;display:block}
   .clux-banners{grid-template-columns:1fr 1fr}
   .clux-banner{min-height:340px}
 }
-
-/* JS controls hero fade — disable CSS animation */
-.clux-hero__slide{animation:none!important}
