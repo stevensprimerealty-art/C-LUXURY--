@@ -150,11 +150,13 @@ img{max-width:100%;display:block}
   inset:0;
   z-index:2;
   display:flex;
-  align-items:center;          /* ✅ center vertically */
-  justify-content:center;      /* ✅ center horizontally */
+  align-items:center;
+  justify-content:center;
   text-align:center;
   pointer-events:none;
-  padding: 0 16px 140px;       /* ✅ leaves space for the Shop Now + dots */
+
+  /* 👇 THIS controls how low the text sits */
+  padding-top: 120px;   /* move text down */
 }
 .clux-hero__copy{
   max-width:min(980px, 92%);
