@@ -1,6 +1,6 @@
 // ============================
-// C-LUXURY — Standalone JS (FINAL)
-// File: /assets/index.js
+// C-LUXURY — Standalone JS (ROOT /index.js)
+// Works with images in: /assets/product-1.jpg ... product-16.jpg
 // ============================
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -14,16 +14,15 @@ function initHero() {
   if (!hero) return;
 
   const slides = $$("[data-clux-slide]", hero);
-  if (!slides.length) return;
+  if (slides.length < 2) return;
 
   const ms = Number(hero.getAttribute("data-interval-ms") || 3000);
   let i = 0;
 
-  // Clean start
   slides.forEach((s, idx) => {
-    s.classList.toggle("is-active", idx === 0);
     s.style.opacity = idx === 0 ? "1" : "0";
     s.style.transition = "opacity 900ms ease";
+    s.classList.toggle("is-active", idx === 0);
   });
 
   setInterval(() => {
@@ -57,21 +56,11 @@ function initMenu() {
     menu.setAttribute("aria-hidden", "true");
   };
 
-  openBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    open();
-  });
+  openBtn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
 
-  closeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    close();
-  });
-
-  // Close when clicking any menu link
   $$("a", menu).forEach(a => a.addEventListener("click", close));
 
-  // Close if user taps outside menu
   document.addEventListener("click", (e) => {
     const isOpen = menu.getAttribute("aria-hidden") === "false";
     if (!isOpen) return;
@@ -81,44 +70,44 @@ function initMenu() {
 }
 
 /* ============================
-   SEARCH BUTTON (scroll to products)
+   SEARCH ICON → scroll to products
 ============================ */
 function initSearch() {
   const btn = $("#searchBtn");
   const target = $("#products");
   if (!btn || !target) return;
 
-  btn.addEventListener("click", (e) => {
-    e.preventDefault();
+  btn.addEventListener("click", () => {
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
 /* ============================
-   PRODUCTS (16 items)
+   PRODUCTS (16) — images in /assets/
+   You can edit titles/prices/urls anytime
 ============================ */
 const PRODUCTS = [
-  { title:"C-Lux Baseball Jersey - Vintage Brown Star Sleeve Shirt", priceUSD:48.31, url:"https://mrcharliestxs.myshopify.com/products/baseball-jersey-vintage-brown-star-sleeve-team-shirt" },
-  { title:"C-Lux Basketball Shorts Brown star shorts", priceUSD:40.26, url:"https://mrcharliestxs.myshopify.com/products/basketball-shorts-brown-starburst-all-over-print-athletic-shorts" },
-  { title:"C-Luxury Grey Hawaiian Eye pattern shirt", priceUSD:105.10, url:"https://mrcharliestxs.myshopify.com/products/mens-gray-camp-shirt-subtle-c-luxury-logo-hawaiian-button-up" },
-  { title:"C-Lux Grey Eye pattern Shorts", priceUSD:44.86, url:"https://mrcharliestxs.myshopify.com/products/grey-athletic-shorts-with-subtle-eye-pattern-casual-sportswear" },
-  { title:"C-Lux Pink Women's Baseball Jersey 'Cute' Sparkle Pattern", priceUSD:37.96, url:"https://mrcharliestxs.myshopify.com/collections/all" },
-  { title:"C-Lux Pink Sparkle Basketball Shorts", priceUSD:40.26, url:"https://mrcharliestxs.myshopify.com/products/pink-sparkle-basketball-shorts-womens-athletic-aop" },
-  { title:"C-Lux Women's blue Baseball eye pattern shirt", priceUSD:37.96, url:"https://mrcharliestxs.myshopify.com/collections/all" },
-  { title:"C-lux Blue eye pattern Women's Shorts", priceUSD:27.54, url:"https://mrcharliestxs.myshopify.com/products/blue-starlet-womens-shorts-all-over-print-cozy-lounge-workout-bottoms" },
-  { title:"C-LUXURY AURA BASEBALL CAP", priceUSD:24.99, url:"https://mrcharliestxs.myshopify.com/products/c-luxury-low-profile-baseball-cap" },
-  { title:"CLUX Star sparkle pet hoodie & sweatshirt", priceUSD:29.90, url:"https://mrcharliestxs.myshopify.com/products/c-luxury-pet-hoodie-designer-dog-cat-sweatshirt-luxe-branded-pet-apparel" },
-  { title:"CLUX Crop Tank Top Chill Graphic Spaghetti Strap", priceUSD:29.11, url:"https://mrcharliestxs.myshopify.com/products/chill-vibes-crop-tank-top-chill-graphic-spaghetti-strap" },
-  { title:"C-Luxury Women’s heather olive crop tee", priceUSD:22.46, url:"https://mrcharliestxs.myshopify.com/products/women-s-crop-tee-minimal-poly-cotton-casual-top" },
-  { title:"C-LUX WHITE TANK JERSEY", priceUSD:21.66, url:"https://mrcharliestxs.myshopify.com/products/unisex-jersey-muscle-tank" },
-  { title:"C-Lux white aura puffer jacket", priceUSD:87.41, url:"https://mrcharliestxs.myshopify.com/products/mens-white-puffer-jacket-subtle-grey-logo-tribal-motif-all-over-print" },
-  { title:"C-Lux Mini Clutch Bag", priceUSD:22.66, url:"https://mrcharliestxs.myshopify.com/products/mini-clutch-bag" },
-  { title:"C-LUXURY Women's White Tie-Side Bikini Swimsuit", priceUSD:28.76, url:"https://mrcharliestxs.myshopify.com/products/white-tie-side-bikini-swimsuit-with-minimal-geometric-accent" }
+  { title:"C-Lux Baseball Jersey - Vintage Brown Star Sleeve Shirt", priceUSD:48.31, url:"https://mrcharliestxs.myshopify.com/products/baseball-jersey-vintage-brown-star-sleeve-team-shirt", img:"./assets/product-1.jpg" },
+  { title:"C-Lux Basketball Shorts Brown star shorts", priceUSD:40.26, url:"https://mrcharliestxs.myshopify.com/products/basketball-shorts-brown-starburst-all-over-print-athletic-shorts", img:"./assets/product-2.jpg" },
+  { title:"C-Luxury Grey Hawaiian Eye pattern shirt", priceUSD:105.10, url:"https://mrcharliestxs.myshopify.com/products/mens-gray-camp-shirt-subtle-c-luxury-logo-hawaiian-button-up", img:"./assets/product-3.jpg" },
+  { title:"C-Lux Grey Eye pattern Shorts", priceUSD:44.86, url:"https://mrcharliestxs.myshopify.com/products/grey-athletic-shorts-with-subtle-eye-pattern-casual-sportswear", img:"./assets/product-4.jpg" },
+  { title:"C-Lux Pink Women's Baseball Jersey 'Cute' Sparkle Pattern", priceUSD:37.96, url:"https://mrcharliestxs.myshopify.com/collections/all", img:"./assets/product-5.jpg" },
+  { title:"C-Lux Pink Sparkle Basketball Shorts", priceUSD:40.26, url:"https://mrcharliestxs.myshopify.com/products/pink-sparkle-basketball-shorts-womens-athletic-aop", img:"./assets/product-6.jpg" },
+  { title:"C-Lux Women's blue Baseball eye pattern shirt", priceUSD:37.96, url:"https://mrcharliestxs.myshopify.com/collections/all", img:"./assets/product-7.jpg" },
+  { title:"C-lux Blue eye pattern Women's Shorts", priceUSD:27.54, url:"https://mrcharliestxs.myshopify.com/products/blue-starlet-womens-shorts-all-over-print-cozy-lounge-workout-bottoms", img:"./assets/product-8.jpg" },
+  { title:"C-LUXURY AURA BASEBALL CAP", priceUSD:24.99, url:"https://mrcharliestxs.myshopify.com/products/c-luxury-low-profile-baseball-cap", img:"./assets/product-9.jpg" },
+  { title:"CLUX Star sparkle pet hoodie & sweatshirt", priceUSD:29.90, url:"https://mrcharliestxs.myshopify.com/products/c-luxury-pet-hoodie-designer-dog-cat-sweatshirt-luxe-branded-pet-apparel", img:"./assets/product-10.jpg" },
+  { title:"CLUX Crop Tank Top Chill Graphic Spaghetti Strap", priceUSD:29.11, url:"https://mrcharliestxs.myshopify.com/products/chill-vibes-crop-tank-top-chill-graphic-spaghetti-strap", img:"./assets/product-11.jpg" },
+  { title:"C-Luxury Women’s heather olive crop tee", priceUSD:22.46, url:"https://mrcharliestxs.myshopify.com/products/women-s-crop-tee-minimal-poly-cotton-casual-top", img:"./assets/product-12.jpg" },
+  { title:"C-LUX WHITE TANK JERSEY", priceUSD:21.66, url:"https://mrcharliestxs.myshopify.com/products/unisex-jersey-muscle-tank", img:"./assets/product-13.jpg" },
+  { title:"C-Lux white aura puffer jacket", priceUSD:87.41, url:"https://mrcharliestxs.myshopify.com/products/mens-white-puffer-jacket-subtle-grey-logo-tribal-motif-all-over-print", img:"./assets/product-14.jpg" },
+  { title:"C-Lux Mini Clutch Bag", priceUSD:22.66, url:"https://mrcharliestxs.myshopify.com/products/mini-clutch-bag", img:"./assets/product-15.jpg" },
+  { title:"C-LUXURY Women's White Tie-Side Bikini Swimsuit", priceUSD:28.76, url:"https://mrcharliestxs.myshopify.com/products/white-tie-side-bikini-swimsuit-with-minimal-geometric-accent", img:"./assets/product-16.jpg" }
 ];
 
-// Currency conversion
+// Currency toggle
 let currency = "USD";
-let usdToNgn = 1500; // change anytime
+let usdToNgn = 1500;
 
 function money(n) {
   if (currency === "USD") return `$${n.toFixed(2)}`;
@@ -131,18 +120,17 @@ function renderProducts() {
   if (!grid) return;
 
   grid.innerHTML = PRODUCTS.map((p) => `
-    <div class="clux-card">
-      <a class="clux-quickbuy" href="${p.url}" target="_blank" rel="noopener">Quick Buy</a>
+    <div class="clux-product">
+      <div class="clux-product__img">
+        <a href="${p.url}" target="_blank" rel="noopener">
+          <img src="${p.img}" alt="${p.title}">
+        </a>
+      </div>
 
-      <a href="${p.url}" target="_blank" rel="noopener" style="text-decoration:none;">
-        <p class="clux-title">${p.title}</p>
-      </a>
+      <a class="clux-quick-buy" href="${p.url}" target="_blank" rel="noopener">Quick Buy</a>
 
-      <p class="clux-price">${money(p.priceUSD)}</p>
-
-      <a class="clux-glass-btn" href="${p.url}" target="_blank" rel="noopener">
-        Add to cart 🛒
-      </a>
+      <div class="clux-product-name">${p.title}</div>
+      <div class="clux-product-price">${money(p.priceUSD)}</div>
     </div>
   `).join("");
 }
@@ -158,7 +146,7 @@ function initCurrency() {
 }
 
 /* ============================
-   CHAT MODAL
+   CHAT MODAL (Open/Close)
 ============================ */
 function initChat() {
   const box = $("#chatBox");
@@ -180,7 +168,6 @@ function initChat() {
     box.setAttribute("aria-hidden", "true");
   });
 
-  // Close when tapping outside the panel
   box.addEventListener("click", (e) => {
     if (e.target === box) {
       box.style.display = "none";
