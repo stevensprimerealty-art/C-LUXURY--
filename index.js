@@ -7,45 +7,92 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 /* ============================
-   HERO — Crossfade + Copy Sync
+   HERO — Crossfade + Copy + Dots Sync
+   HTML expected:
+   - [data-clux-hero]
+   - [data-clux-slide] inside hero
+   - [data-clux-copy] inside hero
+   - .clux-hero__dots (optionally with [data-clux-dots])
+     containing buttons .clux-dot[data-dot="0..n-1"]
 ============================ */
 function initHero() {
   const hero = $("[data-clux-hero]");
   if (!hero) return;
 
   const slides = $$("[data-clux-slide]", hero);
-  const copies = $$("[data-clux-copy]", hero); // ✅ FIX: only inside hero
+  const copies = $$("[data-clux-copy]", hero);
   if (slides.length < 2) return;
 
-  const ms = Number(hero.getAttribute("data-interval-ms") || 3000);
+  const ms = Number(hero.getAttribute("data-interval-ms") || 3200);
+
+  // Dots wrapper (supports either data attr or class)
+  const dotsWrap =
+    hero.querySelector("[data-clux-dots]") ||
+    hero.querySelector(".clux-hero__dots");
+
+  // Collect dots if they exist
+  let dots = dotsWrap ? $$("[data-dot]", dotsWrap) : [];
+
   let i = 0;
+  let timer = null;
 
-  // Start state
-  slides.forEach((s, idx) => {
-    s.style.opacity = idx === 0 ? "1" : "0";
-    s.style.transition = "opacity 900ms ease";
-    s.classList.toggle("is-active", idx === 0);
-  });
+  function setActive(index) {
+    // Slides
+    slides.forEach((s, idx) => {
+      const on = idx === index;
+      s.classList.toggle("is-active", on);
+      s.style.opacity = on ? "1" : "0";
+      s.style.transition = "opacity 900ms ease";
+    });
 
-  if (copies.length) {
-    copies.forEach((c, idx) => c.classList.toggle("is-active", idx === 0));
+    // Copy (sync)
+    if (copies.length) {
+      copies.forEach((c, idx) => c.classList.toggle("is-active", idx === index));
+    }
+
+    // Dots (sync)
+    if (dots.length) {
+      dots.forEach((d, idx) => d.classList.toggle("is-active", idx === index));
+    }
   }
 
-  setInterval(() => {
-    const prev = i;
+  function next() {
     i = (i + 1) % slides.length;
+    setActive(i);
+  }
 
-    slides[prev].classList.remove("is-active");
-    slides[prev].style.opacity = "0";
+  function goTo(index) {
+    i = ((index % slides.length) + slides.length) % slides.length;
+    setActive(i);
+  }
 
-    slides[i].classList.add("is-active");
-    slides[i].style.opacity = "1";
+  function start() {
+    stop();
+    timer = setInterval(next, ms);
+  }
 
-    // ✅ Copy changes with slide
-    if (copies.length) {
-      copies.forEach((c, idx) => c.classList.toggle("is-active", idx === i));
-    }
-  }, ms);
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  // Init state
+  setActive(0);
+  start();
+
+  // Dot click support
+  if (dotsWrap) {
+    dotsWrap.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-dot]");
+      if (!btn) return;
+
+      const n = Number(btn.getAttribute("data-dot"));
+      if (Number.isNaN(n)) return;
+
+      goTo(n);
+      start(); // restart timer after manual nav
+    });
+  }
 }
 
 /* ============================
@@ -70,7 +117,7 @@ function initMenu() {
   openBtn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
 
-  $$("a", menu).forEach(a => a.addEventListener("click", close));
+  $$("a", menu).forEach((a) => a.addEventListener("click", close));
 
   document.addEventListener("click", (e) => {
     const isOpen = menu.getAttribute("aria-hidden") === "false";
@@ -95,6 +142,9 @@ function initSearch() {
 
 /* ============================
    PRODUCTS (16) — images in /assets/
+   IMPORTANT:
+   Your files must be EXACTLY:
+   /assets/product-1.jpg ... /assets/product-16.jpg
 ============================ */
 const PRODUCTS = [
   { title:"C-Lux Baseball Jersey - Vintage Brown Star Sleeve Shirt", priceUSD:48.31, url:"https://mrcharliestxs.myshopify.com/products/baseball-jersey-vintage-brown-star-sleeve-team-shirt", img:"./assets/product-1.jpg" },
