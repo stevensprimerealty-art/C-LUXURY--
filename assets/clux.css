@@ -1,34 +1,28 @@
 /* =========================================
-   C-LUXURY — CLEAN STABLE CSS (MOBILE NORMAL)
-   Replace your whole assets/clux.css with this
+   C-LUXURY — CLEAN STABLE CSS + HERO DOTS
 ========================================= */
 *{margin:0;padding:0;box-sizing:border-box}
 
 :root{
   --bg:#fff;
   --text:#0b0b0b;
+  --radius:18px;
 
-  --glass: rgba(255,255,255,.16);
-  --glassBorder: rgba(255,255,255,.28);
   --darkBtn: rgba(0,0,0,.82);
   --darkBtnBorder: rgba(255,255,255,.20);
-
-  --radius:18px;
 }
 
 html,body{
   width:100%;
   max-width:100%;
-  overflow-x:hidden; /* IMPORTANT: kills the right-side blank */
+  overflow-x:hidden;
   background:var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
   scroll-behavior:smooth;
 }
-
 img{max-width:100%;display:block}
 
-/* ---------- WRAPPER (keeps things centered but FULL WIDTH) ---------- */
 .clux-wrap{
   width:100%;
   max-width:1200px;
@@ -36,9 +30,7 @@ img{max-width:100%;display:block}
   padding:0 16px;
 }
 
-/* =========================================
-   HEADER — WHITE, BRAND TEXT, ICONS
-========================================= */
+/* HEADER */
 .clux-header{
   position:sticky;
   top:0;
@@ -48,32 +40,24 @@ img{max-width:100%;display:block}
   border-bottom:1px solid rgba(0,0,0,.06);
   width:100%;
 }
-
 .clux-header__inner{
   height:72px;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
-
 .clux-brand{
   text-decoration:none;
   font-family:"Georgia","Times New Roman",serif;
   font-size:20px;
   letter-spacing:.14em;
   font-weight:700;
-  /* gold look */
   background: linear-gradient(180deg,#fff1b8 0%,#caa34a 50%,#7a5a14 100%);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
 }
-
-.clux-header__icons{
-  display:flex;
-  gap:12px;
-}
-
+.clux-header__icons{display:flex;gap:12px}
 .clux-icon-btn{
   width:40px;height:40px;
   border-radius:12px;
@@ -83,14 +67,11 @@ img{max-width:100%;display:block}
   cursor:pointer;
 }
 
-/* =========================================
-   MENU (OFFCANVAS)
-========================================= */
+/* MENU */
 .clux-menu{
   display:none;
   position:fixed;
-  top:0;
-  right:0;
+  top:0; right:0;
   width:min(320px, 88vw);
   height:100vh;
   background:#fff;
@@ -98,7 +79,6 @@ img{max-width:100%;display:block}
   z-index:80;
   padding:18px;
 }
-
 .clux-menu__close{
   width:44px;height:44px;
   border-radius:14px;
@@ -107,7 +87,6 @@ img{max-width:100%;display:block}
   cursor:pointer;
   margin-bottom:12px;
 }
-
 .clux-menu a{
   display:block;
   padding:14px 10px;
@@ -115,97 +94,56 @@ img{max-width:100%;display:block}
   color:#0b0b0b;
   border-radius:12px;
 }
+.clux-menu a:active{background:rgba(0,0,0,.05)}
 
-.clux-menu a:active{
-  background:rgba(0,0,0,.05);
-}
-
-/* =========================================
-   CINEMATIC GRAIN + DARK FADE
-========================================= */
-.clux-grain{
-  position:relative;
-}
-
+/* GRAIN (LIGHT) */
+.clux-grain{position:relative}
 .clux-grain::after{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.10'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-  opacity:.35; /* lighter grain */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+  opacity:.28;
 }
 
-.clux-cinematic-dark{
-  position:relative;
-}
-
-.clux-cinematic-dark::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background: radial-gradient(80% 80% at 50% 30%,
-              rgba(0,0,0,.15) 0%,
-              rgba(0,0,0,.45) 55%,
-              rgba(0,0,0,.60) 100%);
-  opacity:.55;
-}
-
-/* ================================
-   HERO — DARK CINEMATIC + CROSSFADE
-================================ */
+/* HERO */
 .clux-hero{
-  position: relative;
+  position:relative;
   height: calc(100vh - 72px);
   min-height: 560px;
-  overflow: hidden;
-  background: #0b0b0b;
+  overflow:hidden;
+  background:#000;
 }
-
-/* stage + slides */
-.clux-hero__stage{
-  position:absolute;
-  inset:0;
-}
-
+.clux-hero__stage{position:absolute;inset:0}
 .clux-hero__slide{
   position:absolute;
   inset:0;
-  background-size: cover;
-  background-position: center;
+  background-size:cover;
+  background-position:center;
   opacity:0;
-  transition: opacity 1s ease;
-  transform: scale(1.02);
-  filter: contrast(1.15) saturate(0.85) brightness(0.88);
+  transition:opacity 1s ease;
+  transform:scale(1.02);
+  filter: contrast(1.06) saturate(0.98) brightness(0.98); /* NOT DARK */
 }
+.clux-hero__slide.is-active{opacity:1}
 
-/* active slide */
-.clux-hero__slide.is-active{
-  opacity:1;
-}
-
-/* cinematic overlay on slide */
+/* LIGHT OVERLAY only (so text is readable but not dark) */
 .clux-hero__slide::before{
   content:"";
   position:absolute;
   inset:0;
-  background:
-    radial-gradient(70% 70% at 50% 35%,
-      rgba(0,0,0,0.10) 0%,
-      rgba(0,0,0,0.45) 55%,
-      rgba(0,0,0,0.70) 100%),
-    linear-gradient(to bottom,
-      rgba(0,0,0,0.40) 0%,
-      rgba(0,0,0,0.40) 50%,
-      rgba(0,0,0,0.65) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.20) 0%,
+    rgba(0,0,0,.18) 45%,
+    rgba(0,0,0,.22) 100%
+  );
   z-index:1;
 }
 
-/* =========================================
-   HERO TEXT COPY (AUTO FADE WITH SLIDES)
-========================================= */
+/* HERO COPY */
 .clux-hero__copywrap{
   position:absolute;
   inset:0;
@@ -217,36 +155,32 @@ img{max-width:100%;display:block}
   text-align:center;
   pointer-events:none;
 }
-
 .clux-hero__copy{
-  max-width:92%;
+  max-width:min(980px, 92%);
   opacity:0;
   transform: translateY(6px);
   transition: opacity 700ms ease, transform 700ms ease;
 }
-
 .clux-hero__copy.is-active{
   opacity:1;
   transform: translateY(0);
 }
-
 .clux-hero__eyebrow{
-  color: rgba(255,255,255,.75);
+  color: rgba(255,255,255,.86);
   letter-spacing:.18em;
   text-transform: uppercase;
   font-size:12px;
   margin-bottom:14px;
 }
-
-.clux-hero__title{
+.clux-hero__headline{
   color:#fff;
-  font-size: clamp(30px, 6vw, 56px);
-  font-weight: 500;
-  letter-spacing: .02em;
-  line-height: 1.12;
+  font-size: clamp(34px, 7vw, 78px);
+  font-weight:300;
+  letter-spacing:.01em;
+  line-height:1.04;
 }
 
-/* SHOP NOW BUTTON — GLASS / CENTER */
+/* SHOP NOW (CENTER GLASS) */
 .clux-hero__cta{
   position:absolute;
   left:50%;
@@ -259,30 +193,47 @@ img{max-width:100%;display:block}
   justify-content:center;
   padding: 16px 54px;
   border-radius:999px;
-  background: rgba(255,255,255,0.16);
-  border: 1px solid rgba(255,255,255,0.30);
-  color:#fff;
+
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(255,255,255,0.60);
+  color:#111;
   text-decoration:none;
+
   font-size:20px;
-  font-weight:600;
-  letter-spacing:.04em;
-  backdrop-filter: blur(16px);
-  box-shadow: 0 16px 55px rgba(0,0,0,0.30);
+  font-weight:500;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 55px rgba(0,0,0,0.25);
 }
 
-/* mobile spacing */
-@media (max-width: 780px){
-  .clux-hero__cta{ font-size: 18px; padding: 14px 44px; bottom:54px; }
+/* HERO DOTS (RING NAV) */
+.clux-hero__dots{
+  position:absolute;
+  left:50%;
+  bottom:22px;
+  transform:translateX(-50%);
+  z-index:3;
+  display:flex;
+  gap:14px;
+  align-items:center;
+  justify-content:center;
 }
-
-/* =========================================
-   SECTION + TITLE
-========================================= */
-.clux-section{
-  width:100%;
-  padding:84px 0 0;
+.clux-dot{
+  width:12px;height:12px;
+  border-radius:999px;
+  border:2px solid rgba(255,255,255,.65); /* ring */
+  background: transparent;
+  padding:0;
+  cursor:pointer;
+  opacity:.9;
 }
+.clux-dot.is-active{
+  border-color: rgba(255,255,255,.95);
+  background: rgba(255,255,255,.22); /* soft fill */
+}
+.clux-dot:active{transform:scale(.95)}
 
+/* SECTIONS */
+.clux-section{width:100%;padding:84px 0 0}
 .clux-section-title{
   text-align:center;
   font-size:1.55rem;
@@ -291,9 +242,7 @@ img{max-width:100%;display:block}
   margin-bottom:28px;
 }
 
-/* =========================================
-   PRODUCT GRID (2 COLUMN) — MATCHES YOUR JS
-========================================= */
+/* PRODUCT GRID */
 .clux-grid{
   width:100%;
   display:grid;
@@ -301,13 +250,11 @@ img{max-width:100%;display:block}
   gap:18px;
   padding-bottom:70px;
 }
-
 .clux-product{
   display:flex;
   flex-direction:column;
   gap:10px;
 }
-
 .clux-product__img{
   width:100%;
   border-radius: var(--radius);
@@ -315,13 +262,6 @@ img{max-width:100%;display:block}
   border:1px solid rgba(0,0,0,.06);
   background:#f4f4f4;
 }
-
-.clux-product__img img{
-  width:100%;
-  height:auto;
-  display:block;
-}
-
 .clux-quick-buy{
   width:100%;
   text-align:center;
@@ -334,28 +274,16 @@ img{max-width:100%;display:block}
   text-decoration:none;
   font-weight:700;
 }
+.clux-product-name{font-size:.92rem;letter-spacing:.04em;color:#0b0b0b}
+.clux-product-price{font-size:.92rem;color:rgba(11,11,11,.60)}
 
-.clux-product-name{
-  font-size:.92rem;
-  letter-spacing:.04em;
-  color:#0b0b0b;
-}
-
-.clux-product-price{
-  font-size:.92rem;
-  color:rgba(11,11,11,.60);
-}
-
-/* =========================================
-   BANNERS (STACK ON MOBILE / 2 COL ON DESKTOP)
-========================================= */
+/* BANNERS */
 .clux-banners{
   width:100%;
   display:grid;
   gap:16px;
   padding:0 0 80px;
 }
-
 .clux-banner{
   width:100%;
   border-radius:22px;
@@ -364,16 +292,9 @@ img{max-width:100%;display:block}
   border:1px solid rgba(0,0,0,.06);
   display:block;
 }
+.clux-banner img{width:100%;height:100%;object-fit:cover}
 
-.clux-banner img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* =========================================
-   FLOATING TOOLS
-========================================= */
+/* TOOLS */
 .clux-tools{
   position:fixed;
   right:14px;
@@ -383,7 +304,6 @@ img{max-width:100%;display:block}
   flex-direction:column;
   gap:10px;
 }
-
 .clux-tool-btn{
   padding:14px 16px;
   border-radius:999px;
@@ -396,9 +316,7 @@ img{max-width:100%;display:block}
   cursor:pointer;
 }
 
-/* =========================================
-   CHAT MODAL
-========================================= */
+/* CHAT */
 .clux-chat{
   display:none;
   position:fixed;
@@ -409,7 +327,6 @@ img{max-width:100%;display:block}
   justify-content:center;
   padding:18px;
 }
-
 .clux-chat__panel{
   width:min(420px, 92vw);
   border-radius:22px;
@@ -419,7 +336,6 @@ img{max-width:100%;display:block}
   background:#0b0b0b;
   color:#fff;
 }
-
 .clux-chat__close{
   position:absolute;
   top:10px;
@@ -431,56 +347,38 @@ img{max-width:100%;display:block}
   color:#fff;
   cursor:pointer;
 }
+.clux-chat__brandmark{width:120px;margin:10px auto 12px}
+.clux-chat__msg{font-size:.95rem;line-height:1.6;opacity:.92;margin:10px 0 16px}
 
-.clux-chat__brandmark{
-  width:120px;
-  margin:10px auto 12px;
-}
+/* COMMUNITY */
+.clux-community{width:100%;text-align:center;padding:70px 0 120px}
+.clux-community h2{font-size:1.35rem;letter-spacing:.10em;font-weight:900}
+.clux-community p{margin-top:12px;color:rgba(11,11,11,.65);line-height:1.55}
+.clux-social-btns{margin-top:24px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
 
-.clux-chat__msg{
-  font-size:.95rem;
-  line-height:1.6;
-  opacity:.92;
-  margin:10px 0 16px;
-}
-
-/* =========================================
-   COMMUNITY (LAST)
-========================================= */
-.clux-community{
-  width:100%;
-  text-align:center;
-  padding:70px 0 120px;
-}
-
-.clux-community h2{
-  font-size:1.35rem;
-  letter-spacing:.10em;
-  font-weight:900;
-}
-
-.clux-community p{
-  margin-top:12px;
-  color:rgba(11,11,11,.65);
-  line-height:1.55;
-}
-
-.clux-social-btns{
-  margin-top:24px;
-  display:flex;
+.clux-glass-btn{
+  display:inline-flex;
+  align-items:center;
   justify-content:center;
-  gap:14px;
-  flex-wrap:wrap;
+  padding: 14px 26px;
+  border-radius:999px;
+  background: rgba(0,0,0,0.82);
+  border: 1px solid rgba(255,255,255,0.20);
+  color:#fff;
+  text-decoration:none;
+  letter-spacing:.04em;
 }
 
-/* =========================================
-   DESKTOP LAYOUT
-========================================= */
-@media (min-width: 780px){
+@media (max-width:780px){
+  .clux-hero__cta{font-size:18px;padding:14px 44px;bottom:54px}
+  .clux-hero__copywrap{padding-top:62px}
+}
+
+@media (min-width:780px){
   .clux-grid{gap:26px}
   .clux-banners{grid-template-columns:1fr 1fr}
   .clux-banner{min-height:340px}
 }
 
 /* JS controls hero fade — disable CSS animation */
-.clux-hero__slide { animation: none !important; }
+.clux-hero__slide{animation:none!important}
