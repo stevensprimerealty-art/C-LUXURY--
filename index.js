@@ -7,36 +7,44 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 /* ============================
-   HERO — Crossfade (JS controlled)
+   HERO — Crossfade + Copy Sync
 ============================ */
 function initHero() {
   const hero = $("[data-clux-hero]");
   if (!hero) return;
 
   const slides = $$("[data-clux-slide]", hero);
-  const copies = $$("[data-clux-copy]");
+  const copies = $$("[data-clux-copy]", hero); // ✅ FIX: only inside hero
   if (slides.length < 2) return;
 
   const ms = Number(hero.getAttribute("data-interval-ms") || 3000);
   let i = 0;
 
+  // Start state
   slides.forEach((s, idx) => {
     s.style.opacity = idx === 0 ? "1" : "0";
     s.style.transition = "opacity 900ms ease";
     s.classList.toggle("is-active", idx === 0);
   });
 
+  if (copies.length) {
+    copies.forEach((c, idx) => c.classList.toggle("is-active", idx === 0));
+  }
+
   setInterval(() => {
     const prev = i;
     i = (i + 1) % slides.length;
-   if (copies.length) {
-  copies.forEach((c, idx) => c.classList.toggle("is-active", idx === i));
-}
+
     slides[prev].classList.remove("is-active");
     slides[prev].style.opacity = "0";
 
     slides[i].classList.add("is-active");
     slides[i].style.opacity = "1";
+
+    // ✅ Copy changes with slide
+    if (copies.length) {
+      copies.forEach((c, idx) => c.classList.toggle("is-active", idx === i));
+    }
   }, ms);
 }
 
@@ -87,7 +95,6 @@ function initSearch() {
 
 /* ============================
    PRODUCTS (16) — images in /assets/
-   You can edit titles/prices/urls anytime
 ============================ */
 const PRODUCTS = [
   { title:"C-Lux Baseball Jersey - Vintage Brown Star Sleeve Shirt", priceUSD:48.31, url:"https://mrcharliestxs.myshopify.com/products/baseball-jersey-vintage-brown-star-sleeve-team-shirt", img:"./assets/product-1.jpg" },
@@ -157,7 +164,6 @@ function initChat() {
   const close = $("#chatClose");
   if (!box || !open || !close) return;
 
-  // Start hidden
   box.style.display = "none";
   box.setAttribute("aria-hidden", "true");
 
