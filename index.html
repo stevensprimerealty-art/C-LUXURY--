@@ -5,19 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>C-LUXURY</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="./assets/clux.css" />
 </head>
 
 <body>
 
-  <!-- ================= HEADER (WHITE) ================= -->
+  <!-- ================= HEADER ================= -->
   <header class="clux-header">
     <div class="clux-wrap clux-header__inner">
-      <!-- BRAND TEXT ONLY -->
       <a class="clux-brand" href="#top" aria-label="C-LUXURY home">C-LUXURY</a>
 
-      <!-- ICONS -->
       <div class="clux-header__icons">
         <button class="clux-icon-btn" aria-label="Search" id="searchBtn">🔍</button>
         <button class="clux-icon-btn" aria-label="Menu" id="menuBtn">☰</button>
@@ -34,109 +31,111 @@
     <a href="#about">About</a>
   </nav>
 
-  <!-- ================= MAIN ================= -->
-  <main>
+  <!-- ================= HERO (3 IMAGE CROSSFADE) ================= -->
+  <section class="clux-hero clux-grain" data-clux-hero data-interval-ms="3200">
 
-    <!-- ================= HERO (3 IMAGE CROSSFADE) ================= -->
-    <section class="clux-hero clux-grain clux-cinematic-dark" data-clux-hero data-interval-ms="3000">
-      <div class="clux-hero__stage">
-        <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url('./assets/hero-1.jpg')"></div>
-        <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-2.jpg')"></div>
-        <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-3.jpg')"></div>
+    <div class="clux-hero__stage">
+      <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url('./assets/hero-1.jpg')"></div>
+      <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-2.jpg')"></div>
+      <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-3.jpg')"></div>
+    </div>
+
+    <!-- TEXT that fades with slides -->
+    <div class="clux-hero__copywrap">
+      <!-- Slide 1 -->
+      <div class="clux-hero__copy is-active" data-clux-copy>
+        <div class="clux-hero__eyebrow">New Exciting Drops From</div>
+        <h1 class="clux-hero__headline">
+          Streetwear in Different Colors, Culture &amp; Style
+        </h1>
       </div>
 
-      <!-- HERO TEXT (SYNC WITH SLIDES) -->
-      <div class="clux-hero__copywrap">
-        <!-- Slide 1 -->
-        <div class="clux-hero__copy is-active" data-clux-copy>
-          <div class="clux-hero__eyebrow">New Exciting Drops</div>
-          <h1 class="clux-hero__title">Street Wears In Different Colors, Culture And Style fashion without noise</h1>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="clux-hero__copy" data-clux-copy>
-          <h1 class="clux-hero__title">Be different be unique luxury isn't noise</h1>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="clux-hero__copy" data-clux-copy>
-          <h1 class="clux-hero__title">Explore more streetwears luxury outfits and items</h1>
-        </div>
+      <!-- Slide 2 -->
+      <div class="clux-hero__copy" data-clux-copy>
+        <h1 class="clux-hero__headline">
+          Explore New Street &amp; Distinctive Wears
+        </h1>
       </div>
 
-      <!-- ONE CTA ONLY (does not fade/move) -->
-      <a class="clux-hero__cta" href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">
-        Shop Now
-      </a>
-    </section>
-
-    <!-- ================= PRODUCTS (16 GRID / 2 COLUMN) ================= -->
-    <section id="products" class="clux-section">
-      <div class="clux-wrap">
-        <div class="clux-section-title">C-New arrivals</div>
-
-        <!-- JS will inject 16 product cards here -->
-        <div class="clux-grid" id="productGrid"></div>
+      <!-- Slide 3 -->
+      <div class="clux-hero__copy" data-clux-copy>
+        <h1 class="clux-hero__headline">
+          Explore New Drops From C-LUXURY
+        </h1>
       </div>
-    </section>
+    </div>
 
-    <!-- ================= BANNERS (IMAGES SHOW) ================= -->
-    <section id="banners">
-      <div class="clux-wrap">
-        <div class="clux-banners">
-          <a class="clux-banner clux-grain clux-cinematic-dark"
-             href="https://mrcharliestxs.myshopify.com/collections/all"
-             target="_blank" rel="noopener"
-             aria-label="Explore more now">
-            <img src="./assets/banner-1.jpg" alt="C-LUXURY banner 1" />
-          </a>
+    <!-- CENTER GLASS CTA (stays) -->
+    <a class="clux-hero__cta" href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">
+      Shop Now
+    </a>
 
-          <a class="clux-banner clux-grain clux-cinematic-dark"
-             href="https://mrcharliestxs.myshopify.com/collections/all"
-             target="_blank" rel="noopener"
-             aria-label="Explore more now">
-            <img src="./assets/banner-2.jpg" alt="C-LUXURY banner 2" />
-          </a>
-        </div>
+    <!-- DOT NAV (rings) -->
+    <div class="clux-hero__dots" aria-label="Hero navigation">
+      <button class="clux-dot is-active" type="button" aria-label="Slide 1" data-dot="0"></button>
+      <button class="clux-dot" type="button" aria-label="Slide 2" data-dot="1"></button>
+      <button class="clux-dot" type="button" aria-label="Slide 3" data-dot="2"></button>
+    </div>
+
+  </section>
+
+  <!-- ================= PRODUCTS ================= -->
+  <section id="products" class="clux-section">
+    <div class="clux-wrap">
+      <div class="clux-section-title">C-New Arrivals</div>
+      <div class="clux-grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= BANNERS ================= -->
+  <section id="banners">
+    <div class="clux-wrap">
+      <div class="clux-banners">
+        <a class="clux-banner clux-grain"
+           href="https://mrcharliestxs.myshopify.com/collections/all"
+           target="_blank" rel="noopener"
+           aria-label="Explore more now">
+          <img src="./assets/banner-1.jpg" alt="C-LUXURY banner 1" />
+        </a>
+
+        <a class="clux-banner clux-grain"
+           href="https://mrcharliestxs.myshopify.com/collections/all"
+           target="_blank" rel="noopener"
+           aria-label="Explore more now">
+          <img src="./assets/banner-2.jpg" alt="C-LUXURY banner 2" />
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ================= COMMUNITY (LAST SECTION) ================= -->
-    <section class="clux-community" id="about">
-      <div class="clux-wrap">
-        <h2>Join our community</h2>
-        <p>To receive more information on our brand growth every day</p>
+  <!-- ================= COMMUNITY (LAST) ================= -->
+  <section class="clux-community" id="about">
+    <div class="clux-wrap">
+      <h2>Join Our Community</h2>
+      <p>To receive more information on our brand growth every day.</p>
 
-        <div class="clux-social-btns">
-          <a class="clux-glass-btn"
-             href="https://www.tiktok.com/@_cluxury"
-             target="_blank" rel="noopener">
-            Follow us on TikTok
-          </a>
-          <a class="clux-glass-btn"
-             href="https://www.instagram.com/_cluxury0"
-             target="_blank" rel="noopener">
-            Follow us on Instagram
-          </a>
-        </div>
+      <div class="clux-social-btns">
+        <a class="clux-glass-btn" href="https://www.tiktok.com/@_cluxury" target="_blank" rel="noopener">
+          Follow us on TikTok
+        </a>
+        <a class="clux-glass-btn" href="https://www.instagram.com/_cluxury0" target="_blank" rel="noopener">
+          Follow us on Instagram
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
-
-  <!-- ================= FLOATING TOOLS ================= -->
+  <!-- FLOATING TOOLS -->
   <div class="clux-tools">
     <button type="button" class="clux-tool-btn" id="currencyToggle">USD ↔ NGN</button>
     <button type="button" class="clux-tool-btn" id="chatOpen">Chat now</button>
   </div>
 
-  <!-- ================= CHAT MODAL ================= -->
+  <!-- CHAT MODAL -->
   <div class="clux-chat" id="chatBox" aria-hidden="true">
-    <div class="clux-chat__panel clux-grain clux-cinematic-dark">
+    <div class="clux-chat__panel clux-grain">
       <button class="clux-chat__close" id="chatClose" aria-label="Close">✕</button>
-
-      <!-- Put the file in /assets as chat-logo.jpg -->
-      <img src="./assets/chat-logo.jpg" alt="C-LUXURY" class="clux-chat__brandmark" />
+      <img src="./assets/logo.jpg" alt="C-LUXURY" class="clux-chat__brandmark" />
 
       <div class="clux-chat__msg">
         <strong>Welcome to C-LUXURY Support 👋</strong><br><br>
@@ -148,7 +147,6 @@
     </div>
   </div>
 
-  <!-- JS (ROOT) -->
   <script src="./index.js" defer></script>
 </body>
 </html>
