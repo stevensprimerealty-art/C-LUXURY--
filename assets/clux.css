@@ -1,5 +1,5 @@
 /* =========================================
-   C-LUXURY — CLEAN STABLE CSS + HERO DOTS (LOCKED TEXT)
+   C-LUXURY — CLEAN STABLE CSS (LOCKED HERO TEXT + EDITORIAL BANNERS)
    Replace your whole assets/clux.css with this
 ========================================= */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -11,6 +11,12 @@
 
   --darkBtn: rgba(0,0,0,.82);
   --darkBtnBorder: rgba(255,255,255,.20);
+
+  /* ✅ EASY CONTROLS */
+  --heroTextTop: 58%;   /* move hero text DOWN/UP (try 56%~62%) */
+  --heroCtaTop: 74%;    /* move Shop Now DOWN/UP */
+  --bannerHeight: 520px; /* banner height on desktop */
+  --bannerHeightMobile: 460px; /* banner height on mobile */
 }
 
 html,body{
@@ -112,7 +118,7 @@ img{max-width:100%;display:block}
 }
 
 /* ===================================================
-   HERO — CENTER TEXT (LOCKED) + GLASS CTA + RING DOTS
+   HERO — LOCKED TEXT (NO JUMP) + GLASS CTA + DOTS
 =================================================== */
 .clux-hero{
   position:relative;
@@ -133,11 +139,11 @@ img{max-width:100%;display:block}
   opacity:0;
   transition: opacity 1s ease;
   transform: scale(1.02);
-  filter: contrast(1.03) saturate(1.03) brightness(1.05); /* brighter */
+  filter: contrast(1.03) saturate(1.03) brightness(1.05);
 }
 .clux-hero__slide.is-active{ opacity:1; }
 
-/* VERY LIGHT overlay */
+/* very light overlay */
 .clux-hero__slide::before{
   content:"";
   position:absolute;
@@ -163,21 +169,20 @@ img{max-width:100%;display:block}
   z-index:2;
 }
 
-/* ================= HERO TEXT (LOCKED — NO JUMP) ================= */
-/* This is the KEY FIX: fixed box + absolute stacking */
+/* ✅ HERO TEXT BLOCK — moved DOWN near CTA, still LOCKED (no jumping) */
 .clux-hero__copywrap{
   position:absolute;
   left:50%;
-  top:92px;                 /* ✅ move the whole text block down/up here */
-  transform:translateX(-50%);
+  top: var(--heroTextTop);        /* ✅ control here */
+  transform:translate(-50%, -50%);
   width:min(1100px, 92%);
-  height:260px;             /* ✅ fixed height stops shifting */
+  height:260px;                  /* fixed height = no shift */
   z-index:3;
   pointer-events:none;
   text-align:center;
 }
 
-/* all copies sit in the exact same place */
+/* all copies sit in same exact place */
 .clux-hero__copy{
   position:absolute;
   inset:0;
@@ -186,9 +191,8 @@ img{max-width:100%;display:block}
   align-items:center;
   justify-content:flex-start;
   opacity:0;
-  transition: opacity 700ms ease; /* ✅ only opacity */
+  transition: opacity 700ms ease;
 }
-
 .clux-hero__copy.is-active{ opacity:1; }
 
 .clux-hero__eyebrow{
@@ -199,21 +203,20 @@ img{max-width:100%;display:block}
   margin:0 0 16px 0;
 }
 
-/* “Straight” layout like your sample */
 .clux-hero__headline{
   color:#fff;
   font-size: clamp(38px, 7vw, 84px);
   font-weight:300;
   letter-spacing:.01em;
   line-height:1.05;
-  max-width: 18ch;          /* ✅ forces nice stacked lines */
+  max-width: 18ch; /* nice stacked lines like your sample */
 }
 
-/* SHOP NOW — GLASS CENTER */
+/* SHOP NOW — GLASS (moved lower so text can sit above it) */
 .clux-hero__cta{
   position:absolute;
   left:50%;
-  top:62%;                 /* ✅ button position */
+  top: var(--heroCtaTop);          /* ✅ control here */
   transform:translate(-50%, -50%);
   z-index:4;
 
@@ -311,22 +314,52 @@ img{max-width:100%;display:block}
 .clux-product-name{font-size:.92rem;letter-spacing:.04em;color:#0b0b0b}
 .clux-product-price{font-size:.92rem;color:rgba(11,11,11,.60)}
 
-/* ================= BANNERS ================= */
+/* ================= BANNERS — EDITORIAL STYLE (LIKE YOUR EXAMPLE) ================= */
 .clux-banners{
   width:100%;
   display:grid;
-  gap:16px;
-  padding:0 0 80px;
+  grid-template-columns: 1fr; /* ✅ always stacked like the sample */
+  gap:20px;
+  padding:20px 0 90px;
 }
+
 .clux-banner{
   width:100%;
   border-radius:22px;
   overflow:hidden;
-  min-height:260px;
   border:1px solid rgba(0,0,0,.06);
   display:block;
+  background:#f2f2f2;
+  min-height: var(--bannerHeight);
+  position:relative;
+  transform: translateZ(0);
 }
-.clux-banner img{width:100%;height:100%;object-fit:cover}
+
+.clux-banner img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform: scale(1.02);          /* subtle “editorial” zoom */
+  transition: transform 600ms ease;
+}
+
+.clux-banner:active img{
+  transform: scale(1.01);
+}
+
+/* subtle top/bottom fade like magazine banners */
+.clux-banner::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.10) 0%,
+    rgba(0,0,0,.00) 35%,
+    rgba(0,0,0,.12) 100%
+  );
+}
 
 /* ================= FLOATING TOOLS ================= */
 .clux-tools{
@@ -405,15 +438,17 @@ img{max-width:100%;display:block}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width:780px){
+  :root{
+    --bannerHeight: var(--bannerHeightMobile);
+  }
+
   .clux-hero__copywrap{
-    top:78px;
     height:300px;
   }
   .clux-hero__headline{
     max-width: 14ch;
   }
   .clux-hero__cta{
-    top:66%;
     font-size:18px;
     padding:14px 44px;
   }
@@ -421,6 +456,4 @@ img{max-width:100%;display:block}
 
 @media (min-width:780px){
   .clux-grid{gap:26px}
-  .clux-banners{grid-template-columns:1fr 1fr}
-  .clux-banner{min-height:340px}
 }
