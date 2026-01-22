@@ -118,12 +118,12 @@ img{max-width:100%;display:block}
 }
 
 /* ===================================================
-   HERO — LOCKED TEXT (NO JUMP) + GLASS CTA + DOTS
+   HERO — DESKTOP FIX (LOCKED TEXT, NO JUMP, GOOD ON LAPTOP)
 =================================================== */
 .clux-hero{
   position:relative;
   height: calc(100vh - 72px);
-  min-height: 560px;
+  min-height: 620px;              /* a bit taller for laptops */
   overflow:hidden;
   background:#111;
 }
@@ -137,13 +137,13 @@ img{max-width:100%;display:block}
   background-size:cover;
   background-position:center;
   opacity:0;
-  transition: opacity 1s ease;
+  transition: opacity 900ms ease;
   transform: scale(1.02);
   filter: contrast(1.03) saturate(1.03) brightness(1.05);
 }
 .clux-hero__slide.is-active{ opacity:1; }
 
-/* very light overlay */
+/* LIGHT overlay */
 .clux-hero__slide::before{
   content:"";
   position:absolute;
@@ -151,13 +151,13 @@ img{max-width:100%;display:block}
   pointer-events:none;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,.06) 0%,
-    rgba(0,0,0,.06) 55%,
-    rgba(0,0,0,.08) 100%
+    rgba(0,0,0,.08) 0%,
+    rgba(0,0,0,.08) 55%,
+    rgba(0,0,0,.10) 100%
   );
 }
 
-/* extra hero grain (light) */
+/* hero grain */
 .clux-hero::after{
   content:"";
   position:absolute;
@@ -169,29 +169,29 @@ img{max-width:100%;display:block}
   z-index:2;
 }
 
-/* ✅ HERO TEXT BLOCK — moved DOWN near CTA, still LOCKED (no jumping) */
+/* ✅ TEXT WRAP (LOCKED + RESPONSIVE POSITION) */
 .clux-hero__copywrap{
   position:absolute;
   left:50%;
-  top: var(--heroTextTop);        /* ✅ control here */
+  top:58%;                         /* ✅ moves text DOWN to near Shop Now */
   transform:translate(-50%, -50%);
   width:min(1100px, 92%);
-  height:260px;                  /* fixed height = no shift */
+  height: clamp(220px, 26vh, 320px); /* ✅ flexible height stops desktop issues */
   z-index:3;
   pointer-events:none;
   text-align:center;
 }
 
-/* all copies sit in same exact place */
+/* copies stack on top of each other (no jump) */
 .clux-hero__copy{
   position:absolute;
   inset:0;
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:flex-start;
+  justify-content:center;
   opacity:0;
-  transition: opacity 700ms ease;
+  transition: opacity 700ms ease;   /* ✅ opacity only */
 }
 .clux-hero__copy.is-active{ opacity:1; }
 
@@ -200,23 +200,23 @@ img{max-width:100%;display:block}
   letter-spacing:.22em;
   text-transform: uppercase;
   font-size:12px;
-  margin:0 0 16px 0;
+  margin:0 0 14px 0;
 }
 
 .clux-hero__headline{
   color:#fff;
-  font-size: clamp(38px, 7vw, 84px);
+  font-size: clamp(34px, 4.8vw, 76px); /* ✅ reduced for laptop */
   font-weight:300;
   letter-spacing:.01em;
   line-height:1.05;
-  max-width: 18ch; /* nice stacked lines like your sample */
+  max-width: 22ch;                   /* ✅ nicer lines on desktop */
 }
 
-/* SHOP NOW — GLASS (moved lower so text can sit above it) */
+/* ✅ SHOP NOW — keep below text */
 .clux-hero__cta{
   position:absolute;
   left:50%;
-  top: var(--heroCtaTop);          /* ✅ control here */
+  top:72%;                           /* ✅ button below text */
   transform:translate(-50%, -50%);
   z-index:4;
 
@@ -240,7 +240,7 @@ img{max-width:100%;display:block}
   box-shadow: 0 18px 60px rgba(0,0,0,0.25);
 }
 
-/* DOTS — RING NAV */
+/* DOTS */
 .clux-hero__dots{
   position:absolute;
   left:50%;
@@ -266,9 +266,25 @@ img{max-width:100%;display:block}
   background: rgba(255,255,255,.22);
 }
 
-/* ✅ IMPORTANT: JS controls hero fade — disable CSS animation */
+/* JS controls fade */
 .clux-hero__slide{animation:none!important}
 
+/* ✅ MOBILE TUNING */
+@media (max-width:780px){
+  .clux-hero__copywrap{
+    top:56%;
+    height: 300px;
+  }
+  .clux-hero__headline{
+    font-size: clamp(34px, 8.2vw, 62px);
+    max-width: 14ch;
+  }
+  .clux-hero__cta{
+    top:75%;
+    font-size:18px;
+    padding:14px 44px;
+  }
+   
 /* ================= SECTIONS ================= */
 .clux-section{width:100%;padding:84px 0 0}
 .clux-section-title{
