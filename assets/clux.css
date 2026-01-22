@@ -1,5 +1,5 @@
 /* =========================================
-   C-LUXURY — CLEAN STABLE CSS + HERO DOTS (FIXED)
+   C-LUXURY — CLEAN STABLE CSS + HERO DOTS (LOCKED TEXT)
    Replace your whole assets/clux.css with this
 ========================================= */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -25,6 +25,7 @@ html,body{
 
 img{max-width:100%;display:block}
 
+/* wrapper */
 .clux-wrap{
   width:100%;
   max-width:1200px;
@@ -111,7 +112,7 @@ img{max-width:100%;display:block}
 }
 
 /* ===================================================
-   HERO — CENTER TEXT + GLASS CTA + RING DOTS (NOT DARK)
+   HERO — CENTER TEXT (LOCKED) + GLASS CTA + RING DOTS
 =================================================== */
 .clux-hero{
   position:relative;
@@ -136,7 +137,7 @@ img{max-width:100%;display:block}
 }
 .clux-hero__slide.is-active{ opacity:1; }
 
-/* VERY LIGHT overlay (readable but not dark) */
+/* VERY LIGHT overlay */
 .clux-hero__slide::before{
   content:"";
   position:absolute;
@@ -162,54 +163,57 @@ img{max-width:100%;display:block}
   z-index:2;
 }
 
-/* TEXT WRAP (TRUE CENTER) */
+/* ================= HERO TEXT (LOCKED — NO JUMP) ================= */
+/* This is the KEY FIX: fixed box + absolute stacking */
 .clux-hero__copywrap{
   position:absolute;
-  inset:0;
+  left:50%;
+  top:92px;                 /* ✅ move the whole text block down/up here */
+  transform:translateX(-50%);
+  width:min(1100px, 92%);
+  height:260px;             /* ✅ fixed height stops shifting */
   z-index:3;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
   pointer-events:none;
-  padding: 0 8vw;
-
-  /* ✅ THIS is what you edit to move text down/up */
-  transform: translateY(20px);  /* +20px moves DOWN. try 30px if needed */
+  text-align:center;
 }
 
+/* all copies sit in the exact same place */
 .clux-hero__copy{
-  max-width:min(980px, 92%);
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
   opacity:0;
-  transform: translateY(6px);
-  transition: opacity 700ms ease, transform 700ms ease;
+  transition: opacity 700ms ease; /* ✅ only opacity */
 }
-.clux-hero__copy.is-active{
-  opacity:1;
-  transform: translateY(0);
-}
+
+.clux-hero__copy.is-active{ opacity:1; }
 
 .clux-hero__eyebrow{
   color: rgba(255,255,255,.88);
-  letter-spacing:.18em;
+  letter-spacing:.22em;
   text-transform: uppercase;
   font-size:12px;
-  margin-bottom:14px;
+  margin:0 0 16px 0;
 }
 
+/* “Straight” layout like your sample */
 .clux-hero__headline{
   color:#fff;
-  font-size: clamp(34px, 7vw, 78px);
+  font-size: clamp(38px, 7vw, 84px);
   font-weight:300;
   letter-spacing:.01em;
-  line-height:1.04;
+  line-height:1.05;
+  max-width: 18ch;          /* ✅ forces nice stacked lines */
 }
 
 /* SHOP NOW — GLASS CENTER */
 .clux-hero__cta{
   position:absolute;
   left:50%;
-  top:66%;                 /* sits below the text */
+  top:62%;                 /* ✅ button position */
   transform:translate(-50%, -50%);
   z-index:4;
 
@@ -245,7 +249,6 @@ img{max-width:100%;display:block}
   align-items:center;
   justify-content:center;
 }
-
 .clux-dot{
   width:12px;height:12px;
   border-radius:999px;
@@ -402,16 +405,17 @@ img{max-width:100%;display:block}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width:780px){
-  /* ✅ Keep CTA using TOP (do NOT use bottom) */
+  .clux-hero__copywrap{
+    top:78px;
+    height:300px;
+  }
+  .clux-hero__headline{
+    max-width: 14ch;
+  }
   .clux-hero__cta{
-    top:70%;
+    top:66%;
     font-size:18px;
     padding:14px 44px;
-  }
-  /* ✅ keep centered, just tighten padding */
-  .clux-hero__copywrap{
-    padding: 0 7vw;
-    transform: translateY(18px);
   }
 }
 
