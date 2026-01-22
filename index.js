@@ -1,13 +1,15 @@
 // ============================
-// C-LUXURY — Standalone JS (ROOT /index.js)
-// Works with images in: /assets/product-1.jpg ... product-16.jpg
+// C-LUXURY — Standalone JS (ROOT /index.js) ✅ FULL FIXED
+// - Hero crossfade + copy + dots (NO TEXT JUMP, no inline styling)
+// - Menu / Search / Products / Currency / Chat
 // ============================
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 /* ============================
-   HERO — Crossfade + Copy + Dots Sync (NO TEXT JUMP)
+   HERO — Crossfade + Copy + Dots Sync (CLEAN)
+   ✅ JS only toggles classes (CSS controls position + transitions)
    Requires:
    - [data-clux-hero]
    - [data-clux-slide] inside hero
@@ -24,7 +26,6 @@ function initHero() {
 
   const ms = Number(hero.getAttribute("data-interval-ms") || 3200);
 
-  // Dots wrapper (supports either data attr or class)
   const dotsWrap =
     hero.querySelector("[data-clux-dots]") ||
     hero.querySelector(".clux-hero__dots");
@@ -34,51 +35,28 @@ function initHero() {
   let i = 0;
   let timer = null;
 
-  // ✅ IMPORTANT: lock hero copy items to the exact same position (prevents jumping)
-  if (copies.length) {
-    const wrap = hero.querySelector(".clux-hero__copywrap");
-    if (wrap) wrap.style.position = "absolute";
-
-    copies.forEach((c) => {
-      c.style.position = "absolute";
-      c.style.inset = "0";
-      c.style.display = "flex";
-      c.style.flexDirection = "column";
-      c.style.alignItems = "center";
-      c.style.justifyContent = "center";
-      c.style.textAlign = "center";
-      c.style.pointerEvents = "none"; // keep hero clicks working
-    });
-  }
-
   function setActive(index) {
-    // Slides
+    i = ((index % slides.length) + slides.length) % slides.length;
+
     slides.forEach((s, idx) => {
-      const on = idx === index;
-      s.classList.toggle("is-active", on);
-      s.style.opacity = on ? "1" : "0";
-      s.style.transition = "opacity 900ms ease";
+      s.classList.toggle("is-active", idx === i);
     });
 
-    // Copy (sync)
     if (copies.length) {
-      copies.forEach((c, idx) => c.classList.toggle("is-active", idx === index));
+      copies.forEach((c, idx) => {
+        c.classList.toggle("is-active", idx === i);
+      });
     }
 
-    // Dots (sync)
     if (dots.length) {
-      dots.forEach((d, idx) => d.classList.toggle("is-active", idx === index));
+      dots.forEach((d, idx) => {
+        d.classList.toggle("is-active", idx === i);
+      });
     }
   }
 
   function next() {
-    i = (i + 1) % slides.length;
-    setActive(i);
-  }
-
-  function goTo(index) {
-    i = ((index % slides.length) + slides.length) % slides.length;
-    setActive(i);
+    setActive(i + 1);
   }
 
   function start() {
@@ -91,11 +69,11 @@ function initHero() {
     timer = null;
   }
 
-  // Init state
+  // Init
   setActive(0);
   start();
 
-  // Dot click support
+  // Dot navigation
   if (dotsWrap && dots.length) {
     dotsWrap.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-dot]");
@@ -104,18 +82,24 @@ function initHero() {
       const n = Number(btn.getAttribute("data-dot"));
       if (Number.isNaN(n)) return;
 
-      goTo(n);
-      start(); // restart timer after manual nav
+      setActive(n);
+      start(); // restart autoplay
     });
   }
 
-  // ✅ Optional: pause on hover (desktop)
+  // Pause on hover (desktop)
   hero.addEventListener("mouseenter", stop);
   hero.addEventListener("mouseleave", start);
 
-  // ✅ Optional: pause while touching (mobile)
+  // Pause on touch (mobile)
   hero.addEventListener("touchstart", stop, { passive: true });
   hero.addEventListener("touchend", start, { passive: true });
+
+  // Pause when tab not visible (saves battery + stops weird jumps)
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+    else start();
+  });
 }
 
 /* ============================
