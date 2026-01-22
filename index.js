@@ -7,13 +7,12 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 /* ============================
-   HERO — Crossfade + Copy + Dots Sync
-   HTML expected:
+   HERO — Crossfade + Copy + Dots Sync (NO TEXT JUMP)
+   Requires:
    - [data-clux-hero]
    - [data-clux-slide] inside hero
    - [data-clux-copy] inside hero
-   - .clux-hero__dots (optionally with [data-clux-dots])
-     containing buttons .clux-dot[data-dot="0..n-1"]
+   - .clux-hero__dots (optional) with buttons [data-dot="0..n-1"]
 ============================ */
 function initHero() {
   const hero = $("[data-clux-hero]");
@@ -30,11 +29,27 @@ function initHero() {
     hero.querySelector("[data-clux-dots]") ||
     hero.querySelector(".clux-hero__dots");
 
-  // Collect dots if they exist
-  let dots = dotsWrap ? $$("[data-dot]", dotsWrap) : [];
+  const dots = dotsWrap ? $$("[data-dot]", dotsWrap) : [];
 
   let i = 0;
   let timer = null;
+
+  // ✅ IMPORTANT: lock hero copy items to the exact same position (prevents jumping)
+  if (copies.length) {
+    const wrap = hero.querySelector(".clux-hero__copywrap");
+    if (wrap) wrap.style.position = "absolute";
+
+    copies.forEach((c) => {
+      c.style.position = "absolute";
+      c.style.inset = "0";
+      c.style.display = "flex";
+      c.style.flexDirection = "column";
+      c.style.alignItems = "center";
+      c.style.justifyContent = "center";
+      c.style.textAlign = "center";
+      c.style.pointerEvents = "none"; // keep hero clicks working
+    });
+  }
 
   function setActive(index) {
     // Slides
@@ -81,7 +96,7 @@ function initHero() {
   start();
 
   // Dot click support
-  if (dotsWrap) {
+  if (dotsWrap && dots.length) {
     dotsWrap.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-dot]");
       if (!btn) return;
@@ -93,6 +108,14 @@ function initHero() {
       start(); // restart timer after manual nav
     });
   }
+
+  // ✅ Optional: pause on hover (desktop)
+  hero.addEventListener("mouseenter", stop);
+  hero.addEventListener("mouseleave", start);
+
+  // ✅ Optional: pause while touching (mobile)
+  hero.addEventListener("touchstart", stop, { passive: true });
+  hero.addEventListener("touchend", start, { passive: true });
 }
 
 /* ============================
@@ -142,9 +165,6 @@ function initSearch() {
 
 /* ============================
    PRODUCTS (16) — images in /assets/
-   IMPORTANT:
-   Your files must be EXACTLY:
-   /assets/product-1.jpg ... /assets/product-16.jpg
 ============================ */
 const PRODUCTS = [
   { title:"C-Lux Baseball Jersey - Vintage Brown Star Sleeve Shirt", priceUSD:48.31, url:"https://mrcharliestxs.myshopify.com/products/baseball-jersey-vintage-brown-star-sleeve-team-shirt", img:"./assets/product-1.jpg" },
