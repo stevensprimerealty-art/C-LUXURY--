@@ -457,3 +457,96 @@ img{max-width:100%;display:block}
 @media (min-width:780px){
   .clux-grid{gap:26px}
 }
+
+/* =========================
+   INSPO BANNER STACK (like screenshot)
+========================= */
+.clux-bannerstack{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.clux-heroBanner{
+  position:relative;
+  width:100%;
+  height: clamp(300px, 60vh, 680px); /* tall like inspo */
+  display:block;
+  overflow:hidden;
+  text-decoration:none;
+  background:#111;
+  border-top:1px solid rgba(0,0,0,.06);
+}
+
+/* background image */
+.clux-heroBanner::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: var(--bannerImg);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+  filter: saturate(1.05) contrast(1.05);
+}
+
+/* dark overlay for readability */
+.clux-heroBanner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.30) 0%,
+    rgba(0,0,0,.22) 35%,
+    rgba(0,0,0,.55) 100%
+  );
+}
+
+/* text position like inspo */
+.clux-heroBanner__content{
+  position:absolute;
+  left:18px;
+  bottom:22px;
+  z-index:2;
+  color:#fff;
+}
+
+/* small spaced heading */
+.clux-heroBanner__kicker{
+  font-size:12px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  opacity:.88;
+  margin-bottom:16px;
+}
+
+/* underline CTA */
+.clux-heroBanner__link{
+  font-size:16px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  display:inline-block;
+  padding-bottom:6px;
+  border-bottom: 1px solid rgba(255,255,255,.75);
+}
+
+/* little interaction */
+.clux-heroBanner:hover::before{
+  transform: scale(1.05);
+  transition: transform 700ms ease;
+}
+.clux-heroBanner:active{
+  opacity:.98;
+}
+
+@media (max-width:780px){
+  .clux-heroBanner{
+    height: 46vh;
+    min-height: 320px;
+  }
+  .clux-heroBanner__content{
+    left:16px;
+    bottom:20px;
+  }
+}
