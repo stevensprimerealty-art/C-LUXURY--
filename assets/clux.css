@@ -1,6 +1,8 @@
 /* =========================================
-   C-LUXURY — FULL STABLE CSS (HERO + BANNERS + ABOUT PAGE)
-   Replace your whole assets/clux.css with this
+   C-LUXURY — FINAL STABLE CSS
+   - Hero crossfade (locked copy)
+   - Editorial banners (works on iPhone Safari)
+   - About page marquee
 ========================================= */
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -17,11 +19,11 @@
   --heroTextTop: 60%;
   --heroCtaTop: 74%;
 
-  /* banner height */
+  /* BANNERS */
   --bannerMinH: 320px;
   --bannerH: clamp(320px, 60vh, 680px);
 
-  /* about */
+  /* ABOUT */
   --aboutPad: clamp(44px, 7vw, 90px);
 }
 
@@ -55,14 +57,12 @@ img{max-width:100%;display:block}
   border-bottom:1px solid rgba(0,0,0,.06);
   width:100%;
 }
-
 .clux-header__inner{
   height:72px;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
-
 .clux-brand{
   text-decoration:none;
   font-family:"Georgia","Times New Roman",serif;
@@ -74,9 +74,7 @@ img{max-width:100%;display:block}
   background-clip:text;
   color:transparent;
 }
-
 .clux-header__icons{display:flex;gap:12px}
-
 .clux-icon-btn{
   width:40px;height:40px;
   border-radius:12px;
@@ -98,7 +96,6 @@ img{max-width:100%;display:block}
   z-index:80;
   padding:18px;
 }
-
 .clux-menu__close{
   width:44px;height:44px;
   border-radius:14px;
@@ -107,7 +104,6 @@ img{max-width:100%;display:block}
   cursor:pointer;
   margin-bottom:12px;
 }
-
 .clux-menu a{
   display:block;
   padding:14px 10px;
@@ -117,7 +113,7 @@ img{max-width:100%;display:block}
 }
 .clux-menu a:active{background:rgba(0,0,0,.05)}
 
-/* ================= LIGHT GRAIN (safe helper class) ================= */
+/* ================= GRAIN (LIGHT) ================= */
 .clux-grain{position:relative}
 .clux-grain::after{
   content:"";
@@ -130,7 +126,7 @@ img{max-width:100%;display:block}
 }
 
 /* ===================================================
-   HERO — LOCKED TEXT + CROSSFADE (NO JUMP)
+   HERO — LOCKED TEXT (NO JUMP)
 =================================================== */
 .clux-hero{
   position:relative;
@@ -140,7 +136,6 @@ img{max-width:100%;display:block}
   background:#111;
 }
 
-/* stage + slides */
 .clux-hero__stage{ position:absolute; inset:0; }
 
 .clux-hero__slide{
@@ -155,7 +150,6 @@ img{max-width:100%;display:block}
 }
 .clux-hero__slide.is-active{ opacity:1; }
 
-/* overlay */
 .clux-hero__slide::before{
   content:"";
   position:absolute;
@@ -169,7 +163,6 @@ img{max-width:100%;display:block}
   );
 }
 
-/* locked text wrap */
 .clux-hero__copywrap{
   position:absolute;
   left:50%;
@@ -182,7 +175,6 @@ img{max-width:100%;display:block}
   text-align:center;
 }
 
-/* all copies on same spot */
 .clux-hero__copy{
   position:absolute;
   inset:0;
@@ -212,7 +204,6 @@ img{max-width:100%;display:block}
   max-width: 22ch;
 }
 
-/* CTA */
 .clux-hero__cta{
   position:absolute;
   left:50%;
@@ -240,7 +231,6 @@ img{max-width:100%;display:block}
   box-shadow: 0 18px 60px rgba(0,0,0,0.25);
 }
 
-/* dots */
 .clux-hero__dots{
   position:absolute;
   left:50%;
@@ -284,13 +274,11 @@ img{max-width:100%;display:block}
   gap:18px;
   padding-bottom:70px;
 }
-
 .clux-product{
   display:flex;
   flex-direction:column;
   gap:10px;
 }
-
 .clux-product__img{
   width:100%;
   border-radius: var(--radius);
@@ -298,7 +286,6 @@ img{max-width:100%;display:block}
   border:1px solid rgba(0,0,0,.06);
   background:#f4f4f4;
 }
-
 .clux-quick-buy{
   width:100%;
   text-align:center;
@@ -311,7 +298,6 @@ img{max-width:100%;display:block}
   text-decoration:none;
   font-weight:700;
 }
-
 .clux-product-name{font-size:.92rem;letter-spacing:.04em;color:#0b0b0b}
 .clux-product-price{font-size:.92rem;color:rgba(11,11,11,.60)}
 
@@ -391,9 +377,8 @@ img{max-width:100%;display:block}
 }
 
 /* ===================================================
-   INSPO BANNER STACK (LIKE YOUR SCREENSHOT)
-   ✅ No clux-grain on the <a> (avoid ::after collision)
-   ✅ Use a child <span class="clux-bannerGrain">
+   EDITORIAL BANNERS (iPhone-safe)
+   IMPORTANT: put <span class="clux-bannerGrain"></span> inside the banner
 =================================================== */
 .clux-bannerstack{
   width:100%;
@@ -401,6 +386,7 @@ img{max-width:100%;display:block}
   flex-direction:column;
 }
 
+/* remove purple underline always */
 .clux-heroBanner,
 .clux-heroBanner:visited,
 .clux-heroBanner:hover,
@@ -420,18 +406,20 @@ img{max-width:100%;display:block}
   text-decoration:none;
 }
 
-/* background image */
+/* ✅ iPhone-safe: use background-image, not shorthand */
 .clux-heroBanner::before{
   content:"";
   position:absolute;
   inset:0;
-  background: var(--bannerImg) center / cover no-repeat;
+  background-image: var(--bannerImg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   transform: scale(1.02);
   filter: saturate(1.05) contrast(1.05);
   z-index:0;
 }
 
-/* dark overlay */
 .clux-heroBanner::after{
   content:"";
   position:absolute;
@@ -445,7 +433,6 @@ img{max-width:100%;display:block}
   z-index:1;
 }
 
-/* grain layer (separate element) */
 .clux-bannerGrain{
   position:absolute;
   inset:0;
@@ -463,7 +450,6 @@ img{max-width:100%;display:block}
   z-index:3;
   color:#fff;
 }
-
 .clux-heroBanner__kicker{
   font-size:12px;
   letter-spacing:.32em;
@@ -471,7 +457,6 @@ img{max-width:100%;display:block}
   opacity:.88;
   margin-bottom:16px;
 }
-
 .clux-heroBanner__link{
   font-size:16px;
   letter-spacing:.08em;
@@ -492,7 +477,6 @@ img{max-width:100%;display:block}
 .clux-about{
   padding: var(--aboutPad) 0;
 }
-
 .clux-about__title{
   text-align:center;
   font-size: clamp(28px, 4vw, 48px);
@@ -500,7 +484,6 @@ img{max-width:100%;display:block}
   font-weight:800;
   margin-bottom:24px;
 }
-
 .clux-about__copy{
   max-width: 860px;
   margin: 0 auto;
@@ -510,7 +493,7 @@ img{max-width:100%;display:block}
   font-size: 1.02rem;
 }
 
-/* Continuous C-LUXURY slide (marquee) */
+/* Marquee */
 .clux-marquee{
   width:100%;
   overflow:hidden;
@@ -519,7 +502,6 @@ img{max-width:100%;display:block}
   background:#fff;
   margin: 34px 0;
 }
-
 .clux-marquee__track{
   display:flex;
   gap:40px;
@@ -527,7 +509,6 @@ img{max-width:100%;display:block}
   width:max-content;
   animation: cluxMarquee 26s linear infinite;
 }
-
 .clux-marquee__item{
   font-family:"Georgia","Times New Roman",serif;
   font-weight:700;
@@ -537,7 +518,6 @@ img{max-width:100%;display:block}
   opacity:.92;
   white-space:nowrap;
 }
-
 @keyframes cluxMarquee{
   0%{ transform: translateX(0); }
   100%{ transform: translateX(-50%); }
@@ -545,12 +525,8 @@ img{max-width:100%;display:block}
 
 /* ================= RESPONSIVE ================= */
 @media (max-width:780px){
-  .clux-hero{
-    min-height: 560px;
-  }
-  .clux-hero__copywrap{
-    height:300px;
-  }
+  .clux-hero{ min-height: 560px; }
+  .clux-hero__copywrap{ height:300px; }
   .clux-hero__headline{
     font-size: clamp(36px, 9vw, 54px);
     max-width: 16ch;
@@ -565,55 +541,7 @@ img{max-width:100%;display:block}
   .clux-grid{gap:26px}
 }
 
-/* =========================================
-   FINAL PATCH — HERO + BANNERS (PASTE LAST)
-========================================= */
-
-/* prevent anchor default purple/underline in banners */
-.clux-heroBanner,
-.clux-heroBanner:visited,
-.clux-heroBanner:hover,
-.clux-heroBanner:active{
-  color:#fff !important;
-  text-decoration:none !important;
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .clux-marquee__track{ animation: none; }
 }
-.clux-heroBanner *{
-  color:#fff !important;
-  text-decoration:none !important;
-}
-
-/* make sure the banner image variable actually renders */
-.clux-heroBanner::before{
-  background: var(--bannerImg) center / cover no-repeat !important;
-}
-
-/* HERO stability on laptop */
-.clux-hero{
-  width:100%;
-  overflow:hidden;
-}
-
-/* keep copy always centered and never “push” layout */
-.clux-hero__copywrap{
-  pointer-events:none;
-}
-
-/* Fix big headline on desktop/laptop */
-@media (min-width: 900px){
-  .clux-hero{
-    min-height: 640px;
-  }
-  .clux-hero__headline{
-    font-size: clamp(44px, 5vw, 76px);
-    max-width: 20ch;
-    line-height: 1.06;
-  }
-}
-
-/* smaller phones */
-@media (max-width: 430px){
-  .clux-hero__copywrap{ height: 280px; }
-}
-
-/* if any browser shows horizontal scroll, kill it */
-html, body{ overflow-x:hidden; }
