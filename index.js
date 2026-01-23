@@ -3,9 +3,6 @@
 // - Hero crossfade + copy + dots
 // - Menu / Search / Products / Currency / Chat
 // ============================
-
-console.log("C-LUXURY JS loaded ✅");
-
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
