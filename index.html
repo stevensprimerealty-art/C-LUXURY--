@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>C-LUXURY</title>
 
-  <!-- bump version whenever you update CSS -->
-  <link rel="stylesheet" href="./assets/clux.css?v=12" />
+  <!-- bump version when you update css to force refresh -->
+  <link rel="stylesheet" href="./assets/clux.css?v=9" />
 </head>
 
 <body>
@@ -29,21 +29,20 @@
     <a href="#products">Shop</a>
     <a href="#products">Products</a>
     <a href="#banners">Lookbook</a>
-    <!-- ✅ IMPORTANT: go to about page -->
     <a href="./about.html">About</a>
   </nav>
 
   <!-- ================= HERO (3 IMAGE CROSSFADE) ================= -->
   <section class="clux-hero clux-grain" data-clux-hero data-interval-ms="3200">
 
-    <div class="clux-hero__stage" aria-hidden="true">
+    <div class="clux-hero__stage">
       <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url('./assets/hero-1.jpg')"></div>
       <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-2.jpg')"></div>
       <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-3.jpg')"></div>
     </div>
 
-    <!-- TEXT (sync with slides) -->
-    <div class="clux-hero__copywrap" aria-live="polite">
+    <!-- TEXT that fades with slides -->
+    <div class="clux-hero__copywrap">
       <div class="clux-hero__copy is-active" data-clux-copy>
         <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
         <h1 class="clux-hero__headline">Streetwear in Different Colors, Culture &amp; Style</h1>
@@ -60,14 +59,14 @@
       </div>
     </div>
 
-    <!-- CTA -->
+    <!-- CENTER GLASS CTA -->
     <a class="clux-hero__cta"
-      href="https://mrcharliestxs.myshopify.com/collections/all"
-      target="_blank" rel="noopener">
+       href="https://mrcharliestxs.myshopify.com/collections/all"
+       target="_blank" rel="noopener">
       Shop Now
     </a>
 
-    <!-- DOTS -->
+    <!-- DOT NAV -->
     <div class="clux-hero__dots" data-clux-dots aria-label="Hero navigation">
       <button class="clux-dot is-active" type="button" aria-label="Slide 1" data-dot="0"></button>
       <button class="clux-dot" type="button" aria-label="Slide 2" data-dot="1"></button>
@@ -85,13 +84,17 @@
   </section>
 
   <!-- ================= BANNERS (INSPO STYLE) ================= -->
+  <!-- IMPORTANT: do NOT add clux-grain on the <a> because it can clash with banner ::after overlay -->
   <section id="banners" class="clux-bannerstack">
 
-    <a class="clux-heroBanner clux-grain"
-      href="https://mrcharliestxs.myshopify.com/collections/all"
-      target="_blank" rel="noopener"
-      aria-label="New Releases - Explore Now"
-      style="--bannerImg:url('./assets/banner-1.jpg');">
+    <a class="clux-heroBanner"
+       href="https://mrcharliestxs.myshopify.com/collections/all"
+       target="_blank" rel="noopener"
+       aria-label="New Releases - Explore Now"
+       style="--bannerImg:url('./assets/banner-1.jpg');">
+
+      <!-- ✅ needed for grain since we removed clux-grain from <a> -->
+      <span class="clux-bannerGrain" aria-hidden="true"></span>
 
       <div class="clux-heroBanner__content">
         <div class="clux-heroBanner__kicker">NEW RELEASES</div>
@@ -99,11 +102,13 @@
       </div>
     </a>
 
-    <a class="clux-heroBanner clux-grain"
-      href="https://mrcharliestxs.myshopify.com/collections/all"
-      target="_blank" rel="noopener"
-      aria-label="From our new collection - Explore Now"
-      style="--bannerImg:url('./assets/banner-2.jpg');">
+    <a class="clux-heroBanner"
+       href="https://mrcharliestxs.myshopify.com/collections/all"
+       target="_blank" rel="noopener"
+       aria-label="From our new collection - Explore Now"
+       style="--bannerImg:url('./assets/banner-2.jpg');">
+
+      <span class="clux-bannerGrain" aria-hidden="true"></span>
 
       <div class="clux-heroBanner__content">
         <div class="clux-heroBanner__kicker">FROM OUR NEW COLLECTION</div>
@@ -152,7 +157,8 @@
     </div>
   </div>
 
-  <!-- ✅ IMPORTANT: must be index.js in ROOT -->
-  <script src="./index.js?v=12" defer></script>
+  <!-- IMPORTANT: script name must match your repo file -->
+  <!-- If your JS file is index.js keep this. If the file is named about.js / main.js change it. -->
+  <script src="./index.js" defer></script>
 </body>
 </html>
