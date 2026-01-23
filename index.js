@@ -1,81 +1,58 @@
-console.log("C-LUXURY JS loaded ✅");
-
 // ============================
-// C-LUXURY — Standalone JS (ROOT /index.js) ✅ FULL FIXED
-// - Hero crossfade + copy + dots (NO TEXT JUMP, no inline styling)
+// C-LUXURY — Standalone JS (ROOT /index.js) ✅ FINAL STABLE
+// - Hero crossfade + copy + dots
 // - Menu / Search / Products / Currency / Chat
 // ============================
+
+console.log("C-LUXURY JS loaded ✅");
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 /* ============================
-   HERO — Crossfade + Copy + Dots Sync (CLEAN)
-   ✅ JS only toggles classes (CSS controls position + transitions)
-   Requires:
-   - [data-clux-hero]
-   - [data-clux-slide] inside hero
-   - [data-clux-copy] inside hero
-   - .clux-hero__dots (optional) with buttons [data-dot="0..n-1"]
+   HERO — Crossfade + Copy + Dots Sync
+   ✅ JS only toggles classes (CSS controls layout)
 ============================ */
 function initHero() {
-  const hero = $("[data-clux-hero]");
+  const hero = document.querySelector("[data-clux-hero]");
   if (!hero) return;
 
   const slides = $$("[data-clux-slide]", hero);
   const copies = $$("[data-clux-copy]", hero);
   if (slides.length < 2) return;
 
-  const ms = Number(hero.getAttribute("data-interval-ms") || 3200);
+  const ms = Number(hero.getAttribute("data-interval-ms")) || 3200;
 
   const dotsWrap =
-    hero.querySelector("[data-clux-dots]") ||
-    hero.querySelector(".clux-hero__dots");
-
+    hero.querySelector("[data-clux-dots]") || hero.querySelector(".clux-hero__dots");
   const dots = dotsWrap ? $$("[data-dot]", dotsWrap) : [];
 
   let i = 0;
   let timer = null;
 
-  function setActive(index) {
+  const setActive = (index) => {
     i = ((index % slides.length) + slides.length) % slides.length;
 
-    slides.forEach((s, idx) => {
-      s.classList.toggle("is-active", idx === i);
-    });
+    slides.forEach((s, idx) => s.classList.toggle("is-active", idx === i));
+    copies.forEach((c, idx) => c.classList.toggle("is-active", idx === i));
+    dots.forEach((d, idx) => d.classList.toggle("is-active", idx === i));
+  };
 
-    if (copies.length) {
-      copies.forEach((c, idx) => {
-        c.classList.toggle("is-active", idx === i);
-      });
-    }
-
-    if (dots.length) {
-      dots.forEach((d, idx) => {
-        d.classList.toggle("is-active", idx === i);
-      });
-    }
-  }
-
-  function next() {
-    setActive(i + 1);
-  }
-
-  function start() {
+  const start = () => {
     stop();
-    timer = setInterval(next, ms);
-  }
+    timer = window.setInterval(() => setActive(i + 1), ms);
+  };
 
-  function stop() {
-    if (timer) clearInterval(timer);
+  const stop = () => {
+    if (timer) window.clearInterval(timer);
     timer = null;
-  }
+  };
 
   // Init
   setActive(0);
   start();
 
-  // Dot navigation
+  // Dot click
   if (dotsWrap && dots.length) {
     dotsWrap.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-dot]");
@@ -97,7 +74,7 @@ function initHero() {
   hero.addEventListener("touchstart", stop, { passive: true });
   hero.addEventListener("touchend", start, { passive: true });
 
-  // Pause when tab not visible (saves battery + stops weird jumps)
+  // Pause when tab hidden
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stop();
     else start();
@@ -171,9 +148,8 @@ const PRODUCTS = [
   { title:"C-LUXURY Women's White Tie-Side Bikini Swimsuit", priceUSD:28.76, url:"https://mrcharliestxs.myshopify.com/products/white-tie-side-bikini-swimsuit-with-minimal-geometric-accent", img:"./assets/product-16.jpg" }
 ];
 
-// Currency toggle
 let currency = "USD";
-let usdToNgn = 1500;
+const usdToNgn = 1500;
 
 function money(n) {
   if (currency === "USD") return `$${n.toFixed(2)}`;
@@ -206,38 +182,37 @@ function initCurrency() {
   if (!btn) return;
 
   btn.addEventListener("click", () => {
-    currency = (currency === "USD") ? "NGN" : "USD";
+    currency = currency === "USD" ? "NGN" : "USD";
     renderProducts();
   });
 }
 
 /* ============================
-   CHAT MODAL (Open/Close)
+   CHAT MODAL
 ============================ */
 function initChat() {
   const box = $("#chatBox");
-  const open = $("#chatOpen");
-  const close = $("#chatClose");
-  if (!box || !open || !close) return;
+  const openBtn = $("#chatOpen");
+  const closeBtn = $("#chatClose");
+  if (!box || !openBtn || !closeBtn) return;
 
-  box.style.display = "none";
-  box.setAttribute("aria-hidden", "true");
-
-  open.addEventListener("click", () => {
+  const open = () => {
     box.style.display = "flex";
     box.setAttribute("aria-hidden", "false");
-  });
+  };
 
-  close.addEventListener("click", () => {
+  const close = () => {
     box.style.display = "none";
     box.setAttribute("aria-hidden", "true");
-  });
+  };
+
+  close(); // init hidden
+
+  openBtn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
 
   box.addEventListener("click", (e) => {
-    if (e.target === box) {
-      box.style.display = "none";
-      box.setAttribute("aria-hidden", "true");
-    }
+    if (e.target === box) close();
   });
 }
 
