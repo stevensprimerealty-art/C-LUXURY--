@@ -1,7 +1,8 @@
 /* =========================================
-   C-LUXURY — CLEAN STABLE CSS (LOCKED HERO TEXT + EDITORIAL BANNERS)
+   C-LUXURY — FULL STABLE CSS (HERO + BANNERS + ABOUT PAGE)
    Replace your whole assets/clux.css with this
 ========================================= */
+
 *{margin:0;padding:0;box-sizing:border-box}
 
 :root{
@@ -12,11 +13,16 @@
   --darkBtn: rgba(0,0,0,.82);
   --darkBtnBorder: rgba(255,255,255,.20);
 
-  /* ✅ EASY CONTROLS */
-  --heroTextTop: 58%;   /* move hero text DOWN/UP (try 56%~62%) */
-  --heroCtaTop: 74%;    /* move Shop Now DOWN/UP */
-  --bannerHeight: 520px; /* banner height on desktop */
-  --bannerHeightMobile: 460px; /* banner height on mobile */
+  /* HERO controls */
+  --heroTextTop: 60%;
+  --heroCtaTop: 74%;
+
+  /* banner height */
+  --bannerMinH: 320px;
+  --bannerH: clamp(320px, 60vh, 680px);
+
+  /* about */
+  --aboutPad: clamp(44px, 7vw, 90px);
 }
 
 html,body{
@@ -49,12 +55,14 @@ img{max-width:100%;display:block}
   border-bottom:1px solid rgba(0,0,0,.06);
   width:100%;
 }
+
 .clux-header__inner{
   height:72px;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
+
 .clux-brand{
   text-decoration:none;
   font-family:"Georgia","Times New Roman",serif;
@@ -66,7 +74,9 @@ img{max-width:100%;display:block}
   background-clip:text;
   color:transparent;
 }
+
 .clux-header__icons{display:flex;gap:12px}
+
 .clux-icon-btn{
   width:40px;height:40px;
   border-radius:12px;
@@ -88,6 +98,7 @@ img{max-width:100%;display:block}
   z-index:80;
   padding:18px;
 }
+
 .clux-menu__close{
   width:44px;height:44px;
   border-radius:14px;
@@ -96,6 +107,7 @@ img{max-width:100%;display:block}
   cursor:pointer;
   margin-bottom:12px;
 }
+
 .clux-menu a{
   display:block;
   padding:14px 10px;
@@ -105,7 +117,7 @@ img{max-width:100%;display:block}
 }
 .clux-menu a:active{background:rgba(0,0,0,.05)}
 
-/* ================= GRAIN (LIGHT) ================= */
+/* ================= LIGHT GRAIN (safe helper class) ================= */
 .clux-grain{position:relative}
 .clux-grain::after{
   content:"";
@@ -114,16 +126,16 @@ img{max-width:100%;display:block}
   pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
   mix-blend-mode:overlay;
-  opacity:.28;
+  opacity:.24;
 }
 
 /* ===================================================
-   HERO — LOCKED TEXT (NO JUMP) + GLASS CTA + DOTS
+   HERO — LOCKED TEXT + CROSSFADE (NO JUMP)
 =================================================== */
 .clux-hero{
   position:relative;
   height: calc(100vh - 72px);
-  min-height: 560px;
+  min-height: 620px;
   overflow:hidden;
   background:#111;
 }
@@ -143,7 +155,7 @@ img{max-width:100%;display:block}
 }
 .clux-hero__slide.is-active{ opacity:1; }
 
-/* very light overlay */
+/* overlay */
 .clux-hero__slide::before{
   content:"";
   position:absolute;
@@ -151,38 +163,26 @@ img{max-width:100%;display:block}
   pointer-events:none;
   background: linear-gradient(
     to bottom,
-    rgba(0,0,0,.06) 0%,
-    rgba(0,0,0,.06) 55%,
-    rgba(0,0,0,.08) 100%
+    rgba(0,0,0,.10) 0%,
+    rgba(0,0,0,.10) 55%,
+    rgba(0,0,0,.20) 100%
   );
 }
 
-/* extra hero grain (light) */
-.clux-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-  mix-blend-mode:overlay;
-  opacity:.25;
-  z-index:2;
-}
-
-/* ✅ HERO TEXT BLOCK — moved DOWN near CTA, still LOCKED (no jumping) */
+/* locked text wrap */
 .clux-hero__copywrap{
   position:absolute;
   left:50%;
-  top: var(--heroTextTop);        /* ✅ control here */
+  top: var(--heroTextTop);
   transform:translate(-50%, -50%);
   width:min(1100px, 92%);
-  height:260px;                  /* fixed height = no shift */
+  height:260px;
   z-index:3;
   pointer-events:none;
   text-align:center;
 }
 
-/* all copies sit in same exact place */
+/* all copies on same spot */
 .clux-hero__copy{
   position:absolute;
   inset:0;
@@ -196,7 +196,7 @@ img{max-width:100%;display:block}
 .clux-hero__copy.is-active{ opacity:1; }
 
 .clux-hero__eyebrow{
-  color: rgba(255,255,255,.88);
+  color: rgba(255,255,255,.90);
   letter-spacing:.22em;
   text-transform: uppercase;
   font-size:12px;
@@ -205,18 +205,18 @@ img{max-width:100%;display:block}
 
 .clux-hero__headline{
   color:#fff;
-  font-size: clamp(38px, 7vw, 84px);
+  font-size: clamp(44px, 5.3vw, 78px);
   font-weight:300;
   letter-spacing:.01em;
-  line-height:1.05;
-  max-width: 18ch; /* nice stacked lines like your sample */
+  line-height:1.06;
+  max-width: 22ch;
 }
 
-/* SHOP NOW — GLASS (moved lower so text can sit above it) */
+/* CTA */
 .clux-hero__cta{
   position:absolute;
   left:50%;
-  top: var(--heroCtaTop);          /* ✅ control here */
+  top: var(--heroCtaTop);
   transform:translate(-50%, -50%);
   z-index:4;
 
@@ -240,7 +240,7 @@ img{max-width:100%;display:block}
   box-shadow: 0 18px 60px rgba(0,0,0,0.25);
 }
 
-/* DOTS — RING NAV */
+/* dots */
 .clux-hero__dots{
   position:absolute;
   left:50%;
@@ -266,9 +266,6 @@ img{max-width:100%;display:block}
   background: rgba(255,255,255,.22);
 }
 
-/* ✅ IMPORTANT: JS controls hero fade — disable CSS animation */
-.clux-hero__slide{animation:none!important}
-
 /* ================= SECTIONS ================= */
 .clux-section{width:100%;padding:84px 0 0}
 .clux-section-title{
@@ -287,11 +284,13 @@ img{max-width:100%;display:block}
   gap:18px;
   padding-bottom:70px;
 }
+
 .clux-product{
   display:flex;
   flex-direction:column;
   gap:10px;
 }
+
 .clux-product__img{
   width:100%;
   border-radius: var(--radius);
@@ -299,6 +298,7 @@ img{max-width:100%;display:block}
   border:1px solid rgba(0,0,0,.06);
   background:#f4f4f4;
 }
+
 .clux-quick-buy{
   width:100%;
   text-align:center;
@@ -311,9 +311,9 @@ img{max-width:100%;display:block}
   text-decoration:none;
   font-weight:700;
 }
+
 .clux-product-name{font-size:.92rem;letter-spacing:.04em;color:#0b0b0b}
 .clux-product-price{font-size:.92rem;color:rgba(11,11,11,.60)}
-
 
 /* ================= FLOATING TOOLS ================= */
 .clux-tools{
@@ -390,17 +390,170 @@ img{max-width:100%;display:block}
   letter-spacing:.04em;
 }
 
+/* ===================================================
+   INSPO BANNER STACK (LIKE YOUR SCREENSHOT)
+   ✅ No clux-grain on the <a> (avoid ::after collision)
+   ✅ Use a child <span class="clux-bannerGrain">
+=================================================== */
+.clux-bannerstack{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.clux-heroBanner,
+.clux-heroBanner:visited,
+.clux-heroBanner:hover,
+.clux-heroBanner:active{
+  color:#fff !important;
+  text-decoration:none !important;
+}
+
+.clux-heroBanner{
+  position:relative;
+  width:100%;
+  height: var(--bannerH);
+  min-height: var(--bannerMinH);
+  display:block;
+  overflow:hidden;
+  background:#111;
+  text-decoration:none;
+}
+
+/* background image */
+.clux-heroBanner::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: var(--bannerImg) center / cover no-repeat;
+  transform: scale(1.02);
+  filter: saturate(1.05) contrast(1.05);
+  z-index:0;
+}
+
+/* dark overlay */
+.clux-heroBanner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.28) 0%,
+    rgba(0,0,0,.18) 35%,
+    rgba(0,0,0,.60) 100%
+  );
+  z-index:1;
+}
+
+/* grain layer (separate element) */
+.clux-bannerGrain{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+  opacity:.22;
+  z-index:2;
+}
+
+.clux-heroBanner__content{
+  position:absolute;
+  left:18px;
+  bottom:22px;
+  z-index:3;
+  color:#fff;
+}
+
+.clux-heroBanner__kicker{
+  font-size:12px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  opacity:.88;
+  margin-bottom:16px;
+}
+
+.clux-heroBanner__link{
+  font-size:16px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  display:inline-block;
+  padding-bottom:6px;
+  border-bottom: 1px solid rgba(255,255,255,.75);
+}
+
+@media (hover:hover){
+  .clux-heroBanner::before{ transition: transform 700ms ease; }
+  .clux-heroBanner:hover::before{ transform: scale(1.05); }
+}
+
+/* ===================================================
+   ABOUT PAGE
+=================================================== */
+.clux-about{
+  padding: var(--aboutPad) 0;
+}
+
+.clux-about__title{
+  text-align:center;
+  font-size: clamp(28px, 4vw, 48px);
+  letter-spacing:.18em;
+  font-weight:800;
+  margin-bottom:24px;
+}
+
+.clux-about__copy{
+  max-width: 860px;
+  margin: 0 auto;
+  text-align:center;
+  color: rgba(11,11,11,.72);
+  line-height: 1.8;
+  font-size: 1.02rem;
+}
+
+/* Continuous C-LUXURY slide (marquee) */
+.clux-marquee{
+  width:100%;
+  overflow:hidden;
+  border-top:1px solid rgba(0,0,0,.08);
+  border-bottom:1px solid rgba(0,0,0,.08);
+  background:#fff;
+  margin: 34px 0;
+}
+
+.clux-marquee__track{
+  display:flex;
+  gap:40px;
+  padding: 18px 0;
+  width:max-content;
+  animation: cluxMarquee 26s linear infinite;
+}
+
+.clux-marquee__item{
+  font-family:"Georgia","Times New Roman",serif;
+  font-weight:700;
+  letter-spacing:.28em;
+  font-size: clamp(18px, 2.6vw, 34px);
+  color:#0b0b0b;
+  opacity:.92;
+  white-space:nowrap;
+}
+
+@keyframes cluxMarquee{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(-50%); }
+}
+
 /* ================= RESPONSIVE ================= */
 @media (max-width:780px){
-  :root{
-    --bannerHeight: var(--bannerHeightMobile);
+  .clux-hero{
+    min-height: 560px;
   }
-
   .clux-hero__copywrap{
     height:300px;
   }
   .clux-hero__headline{
-    max-width: 14ch;
+    font-size: clamp(36px, 9vw, 54px);
+    max-width: 16ch;
   }
   .clux-hero__cta{
     font-size:18px;
@@ -410,79 +563,4 @@ img{max-width:100%;display:block}
 
 @media (min-width:780px){
   .clux-grid{gap:26px}
-}
-
-/* =========================================
-   FIX PATCH — BANNERS + HERO (DESKTOP/LAPTOP)
-   Paste this at the END of clux.css
-========================================= */
-
-/* -------------------------
-   BANNERS: remove default link styling (purple/underline)
-------------------------- */
-.clux-heroBanner,
-.clux-heroBanner:visited,
-.clux-heroBanner:hover,
-.clux-heroBanner:active{
-  color:#fff !important;
-  text-decoration:none !important;
-}
-
-.clux-heroBanner *{
-  color:#fff !important;
-  text-decoration:none !important;
-}
-
-/* make sure overlay/text stack is correct */
-.clux-heroBanner::before{ z-index:0; }
-.clux-heroBanner::after{ z-index:1; }
-.clux-heroBanner__content{ z-index:2; }
-
-/* optional: smooth zoom on desktop too */
-@media (hover:hover){
-  .clux-heroBanner::before{
-    transition: transform 700ms ease;
-  }
-}
-
-/* -------------------------
-   HERO: fix laptop “messed up” layout
-------------------------- */
-
-/* Improve overall hero height on larger screens */
-@media (min-width: 900px){
-  .clux-hero{
-    min-height: 640px;
-  }
-
-  /* Headline gets too huge on wide screens: clamp it down */
-  .clux-hero__headline{
-    font-size: clamp(44px, 5.2vw, 76px);
-    max-width: 20ch;
-    line-height: 1.06;
-  }
-
-  /* Keep the text block a bit lower but not too low */
-  :root{
-    --heroTextTop: 60%;
-    --heroCtaTop: 74%;
-  }
-}
-
-/* For very large desktops */
-@media (min-width: 1300px){
-  .clux-hero__headline{
-    font-size: clamp(48px, 4.6vw, 78px);
-    max-width: 22ch;
-  }
-}
-
-/* Mobile: keep your settings but tighten spacing slightly */
-@media (max-width: 430px){
-  .clux-hero__eyebrow{
-    margin-bottom: 12px;
-  }
-  .clux-hero__copywrap{
-    height: 280px;
-  }
 }
