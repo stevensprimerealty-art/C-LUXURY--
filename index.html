@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>C-LUXURY</title>
 
-  <!-- bump version when you update css to force refresh -->
-  <link rel="stylesheet" href="./assets/clux.css?v=5" />
+  <!-- bump version whenever you update CSS -->
+  <link rel="stylesheet" href="./assets/clux.css?v=12" />
 </head>
 
 <body>
@@ -14,7 +14,7 @@
   <!-- ================= HEADER ================= -->
   <header class="clux-header">
     <div class="clux-wrap clux-header__inner">
-      <a class="clux-brand" href="#top" aria-label="C-LUXURY home">C-LUXURY</a>
+      <a class="clux-brand" href="./index.html" aria-label="C-LUXURY home">C-LUXURY</a>
 
       <div class="clux-header__icons">
         <button class="clux-icon-btn" aria-label="Search" id="searchBtn">🔍</button>
@@ -29,47 +29,45 @@
     <a href="#products">Shop</a>
     <a href="#products">Products</a>
     <a href="#banners">Lookbook</a>
-    <a href="#about">About</a>
+    <!-- ✅ IMPORTANT: go to about page -->
+    <a href="./about.html">About</a>
   </nav>
 
   <!-- ================= HERO (3 IMAGE CROSSFADE) ================= -->
   <section class="clux-hero clux-grain" data-clux-hero data-interval-ms="3200">
 
-    <div class="clux-hero__stage">
+    <div class="clux-hero__stage" aria-hidden="true">
       <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url('./assets/hero-1.jpg')"></div>
       <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-2.jpg')"></div>
       <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-3.jpg')"></div>
     </div>
 
-    <!-- TEXT that fades with slides -->
-    <div class="clux-hero__copywrap">
-      <!-- Slide 1 -->
+    <!-- TEXT (sync with slides) -->
+    <div class="clux-hero__copywrap" aria-live="polite">
       <div class="clux-hero__copy is-active" data-clux-copy>
         <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
         <h1 class="clux-hero__headline">Streetwear in Different Colors, Culture &amp; Style</h1>
       </div>
 
-      <!-- Slide 2 (✅ add eyebrow so text height stays same) -->
       <div class="clux-hero__copy" data-clux-copy>
         <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
         <h1 class="clux-hero__headline">Explore New Street &amp; Distinctive Wears</h1>
       </div>
 
-      <!-- Slide 3 (✅ add eyebrow so text height stays same) -->
       <div class="clux-hero__copy" data-clux-copy>
         <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
         <h1 class="clux-hero__headline">Explore New Drops From C-LUXURY</h1>
       </div>
     </div>
 
-    <!-- CENTER GLASS CTA (stays) -->
+    <!-- CTA -->
     <a class="clux-hero__cta"
-       href="https://mrcharliestxs.myshopify.com/collections/all"
-       target="_blank" rel="noopener">
+      href="https://mrcharliestxs.myshopify.com/collections/all"
+      target="_blank" rel="noopener">
       Shop Now
     </a>
 
-    <!-- DOT NAV (rings) -->
+    <!-- DOTS -->
     <div class="clux-hero__dots" data-clux-dots aria-label="Hero navigation">
       <button class="clux-dot is-active" type="button" aria-label="Slide 1" data-dot="0"></button>
       <button class="clux-dot" type="button" aria-label="Slide 2" data-dot="1"></button>
@@ -86,37 +84,37 @@
     </div>
   </section>
 
-<!-- ================= BANNERS (INSPO STYLE) ================= -->
-<section id="banners" class="clux-bannerstack">
+  <!-- ================= BANNERS (INSPO STYLE) ================= -->
+  <section id="banners" class="clux-bannerstack">
 
-  <a class="clux-heroBanner clux-grain"
-     href="https://mrcharliestxs.myshopify.com/collections/all"
-     target="_blank" rel="noopener"
-     aria-label="New Releases - Explore Now"
-     style="--bannerImg:url('./assets/banner-1.jpg');">
+    <a class="clux-heroBanner clux-grain"
+      href="https://mrcharliestxs.myshopify.com/collections/all"
+      target="_blank" rel="noopener"
+      aria-label="New Releases - Explore Now"
+      style="--bannerImg:url('./assets/banner-1.jpg');">
 
-    <div class="clux-heroBanner__content">
-      <div class="clux-heroBanner__kicker">NEW RELEASES</div>
-      <div class="clux-heroBanner__link">EXPLORE NOW</div>
-    </div>
-  </a>
+      <div class="clux-heroBanner__content">
+        <div class="clux-heroBanner__kicker">NEW RELEASES</div>
+        <div class="clux-heroBanner__link">EXPLORE NOW</div>
+      </div>
+    </a>
 
-  <a class="clux-heroBanner clux-grain"
-     href="https://mrcharliestxs.myshopify.com/collections/all"
-     target="_blank" rel="noopener"
-     aria-label="From our new collection - Explore Now"
-     style="--bannerImg:url('./assets/banner-2.jpg');">
+    <a class="clux-heroBanner clux-grain"
+      href="https://mrcharliestxs.myshopify.com/collections/all"
+      target="_blank" rel="noopener"
+      aria-label="From our new collection - Explore Now"
+      style="--bannerImg:url('./assets/banner-2.jpg');">
 
-    <div class="clux-heroBanner__content">
-      <div class="clux-heroBanner__kicker">FROM OUR NEW COLLECTION</div>
-      <div class="clux-heroBanner__link">EXPLORE NOW</div>
-    </div>
-  </a>
+      <div class="clux-heroBanner__content">
+        <div class="clux-heroBanner__kicker">FROM OUR NEW COLLECTION</div>
+        <div class="clux-heroBanner__link">EXPLORE NOW</div>
+      </div>
+    </a>
 
-</section>
+  </section>
 
-  <!-- ================= COMMUNITY (LAST) ================= -->
-  <section class="clux-community" id="about">
+  <!-- ================= COMMUNITY ================= -->
+  <section class="clux-community" id="community">
     <div class="clux-wrap">
       <h2>Join Our Community</h2>
       <p>To receive more information on our brand growth every day.</p>
@@ -154,6 +152,7 @@
     </div>
   </div>
 
-  <script src="./index.js" defer></script>
+  <!-- ✅ IMPORTANT: must be index.js in ROOT -->
+  <script src="./index.js?v=12" defer></script>
 </body>
 </html>
