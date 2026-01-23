@@ -33,11 +33,10 @@
 
   <!-- ================= HERO ================= -->
   <section class="clux-hero clux-grain" data-clux-hero data-interval-ms="3200">
-
     <div class="clux-hero__stage">
-      <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url('./assets/hero-1.jpg')"></div>
-      <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-2.jpg')"></div>
-      <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-3.jpg')"></div>
+      <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url(./assets/hero-1.jpg)"></div>
+      <div class="clux-hero__slide" data-clux-slide style="background-image:url(./assets/hero-2.jpg)"></div>
+      <div class="clux-hero__slide" data-clux-slide style="background-image:url(./assets/hero-3.jpg)"></div>
     </div>
 
     <div class="clux-hero__copywrap">
@@ -63,12 +62,11 @@
       Shop Now
     </a>
 
-    <div class="clux-hero__dots" data-clux-dots aria-label="Hero navigation">
-      <button class="clux-dot is-active" type="button" aria-label="Slide 1" data-dot="0"></button>
-      <button class="clux-dot" type="button" aria-label="Slide 2" data-dot="1"></button>
-      <button class="clux-dot" type="button" aria-label="Slide 3" data-dot="2"></button>
+    <div class="clux-hero__dots" data-clux-dots>
+      <button class="clux-dot is-active" data-dot="0"></button>
+      <button class="clux-dot" data-dot="1"></button>
+      <button class="clux-dot" data-dot="2"></button>
     </div>
-
   </section>
 
   <!-- ================= PRODUCTS ================= -->
@@ -79,16 +77,16 @@
     </div>
   </section>
 
-  <!-- ================= BANNERS (INSPO STYLE) ================= -->
+  <!-- ================= BANNERS ================= -->
   <section id="banners" class="clux-bannerstack">
 
     <a class="clux-heroBanner"
        href="https://mrcharliestxs.myshopify.com/collections/all"
        target="_blank" rel="noopener"
-       aria-label="New Releases - Explore Now"
-       style="--bannerImg:url('./assets/banner-1.jpg');">
+       aria-label="New Releases"
+       style="--bannerImg:url(./assets/banner-1.jpg);">
 
-      <span class="clux-bannerGrain" aria-hidden="true"></span>
+      <span class="clux-bannerGrain"></span>
 
       <div class="clux-heroBanner__content">
         <div class="clux-heroBanner__kicker">NEW RELEASES</div>
@@ -99,10 +97,10 @@
     <a class="clux-heroBanner"
        href="https://mrcharliestxs.myshopify.com/collections/all"
        target="_blank" rel="noopener"
-       aria-label="From our new collection - Explore Now"
-       style="--bannerImg:url('./assets/banner-2.jpg');">
+       aria-label="New Collection"
+       style="--bannerImg:url(./assets/banner-2.jpg);">
 
-      <span class="clux-bannerGrain" aria-hidden="true"></span>
+      <span class="clux-bannerGrain"></span>
 
       <div class="clux-heroBanner__content">
         <div class="clux-heroBanner__kicker">FROM OUR NEW COLLECTION</div>
@@ -113,43 +111,17 @@
   </section>
 
   <!-- ================= COMMUNITY ================= -->
-  <section class="clux-community" id="community">
+  <section class="clux-community">
     <div class="clux-wrap">
       <h2>Join Our Community</h2>
       <p>To receive more information on our brand growth every day.</p>
 
       <div class="clux-social-btns">
-        <a class="clux-glass-btn" href="https://www.tiktok.com/@_cluxury" target="_blank" rel="noopener">
-          Follow us on TikTok
-        </a>
-        <a class="clux-glass-btn" href="https://www.instagram.com/_cluxury0" target="_blank" rel="noopener">
-          Follow us on Instagram
-        </a>
+        <a class="clux-glass-btn" href="https://www.tiktok.com/@_cluxury" target="_blank">TikTok</a>
+        <a class="clux-glass-btn" href="https://www.instagram.com/_cluxury0" target="_blank">Instagram</a>
       </div>
     </div>
   </section>
-
-  <!-- FLOATING TOOLS -->
-  <div class="clux-tools">
-    <button type="button" class="clux-tool-btn" id="currencyToggle">USD ↔ NGN</button>
-    <button type="button" class="clux-tool-btn" id="chatOpen">Chat now</button>
-  </div>
-
-  <!-- CHAT MODAL -->
-  <div class="clux-chat" id="chatBox" aria-hidden="true">
-    <div class="clux-chat__panel clux-grain">
-      <button class="clux-chat__close" id="chatClose" aria-label="Close">✕</button>
-      <img src="./assets/logo.jpg" alt="C-LUXURY" class="clux-chat__brandmark" />
-
-      <div class="clux-chat__msg">
-        <strong>Welcome to C-LUXURY Support 👋</strong><br><br>
-        For order updates, kindly share your order number.<br><br>
-        For anything else, drop us a message and we’ll assist you.
-      </div>
-
-      <a class="clux-glass-btn" href="mailto:support@cluxury.com">Send message</a>
-    </div>
-  </div>
 
   <script src="./index.js" defer></script>
 </body>
