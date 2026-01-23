@@ -564,3 +564,56 @@ img{max-width:100%;display:block}
 @media (min-width:780px){
   .clux-grid{gap:26px}
 }
+
+/* =========================================
+   FINAL PATCH — HERO + BANNERS (PASTE LAST)
+========================================= */
+
+/* prevent anchor default purple/underline in banners */
+.clux-heroBanner,
+.clux-heroBanner:visited,
+.clux-heroBanner:hover,
+.clux-heroBanner:active{
+  color:#fff !important;
+  text-decoration:none !important;
+}
+.clux-heroBanner *{
+  color:#fff !important;
+  text-decoration:none !important;
+}
+
+/* make sure the banner image variable actually renders */
+.clux-heroBanner::before{
+  background: var(--bannerImg) center / cover no-repeat !important;
+}
+
+/* HERO stability on laptop */
+.clux-hero{
+  width:100%;
+  overflow:hidden;
+}
+
+/* keep copy always centered and never “push” layout */
+.clux-hero__copywrap{
+  pointer-events:none;
+}
+
+/* Fix big headline on desktop/laptop */
+@media (min-width: 900px){
+  .clux-hero{
+    min-height: 640px;
+  }
+  .clux-hero__headline{
+    font-size: clamp(44px, 5vw, 76px);
+    max-width: 20ch;
+    line-height: 1.06;
+  }
+}
+
+/* smaller phones */
+@media (max-width: 430px){
+  .clux-hero__copywrap{ height: 280px; }
+}
+
+/* if any browser shows horizontal scroll, kill it */
+html, body{ overflow-x:hidden; }
