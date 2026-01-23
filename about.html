@@ -1,101 +1,89 @@
 <!doctype html>
-<html lang="en" id="top">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About — C-LUXURY</title>
 
-  <link rel="stylesheet" href="./assets/clux.css?v=6" />
+  <link rel="stylesheet" href="./assets/clux.css?v=6">
 </head>
 
 <body>
 
-  <header class="clux-header">
-    <div class="clux-wrap clux-header__inner">
-      <a class="clux-brand" href="./" aria-label="C-LUXURY home">C-LUXURY</a>
+<header class="clux-header">
+  <div class="clux-wrap clux-header__inner">
+    <a class="clux-brand" href="./">C-LUXURY</a>
+    <button class="clux-icon-btn" id="menuBtn">☰</button>
+  </div>
+</header>
 
-      <div class="clux-header__icons">
-        <button class="clux-icon-btn" aria-label="Menu" id="menuBtn">☰</button>
-      </div>
+<nav class="clux-menu" id="cluxMenu" aria-hidden="true">
+  <button class="clux-menu__close" id="menuClose">✕</button>
+  <a href="./">Home</a>
+  <a href="./#products">Shop</a>
+  <a href="./about.html">About</a>
+</nav>
+
+<!-- ================= ABOUT BANNER 1 ================= -->
+<section class="clux-bannerstack">
+  <a class="clux-heroBanner"
+     style="--bannerImg:url('./assets/about-banner-1.jpg');">
+
+    <span class="clux-bannerGrain"></span>
+
+    <div class="clux-heroBanner__content">
+      <div class="clux-heroBanner__kicker">ABOUT</div>
+      <div class="clux-heroBanner__link">C-LUXURY</div>
     </div>
-  </header>
+  </a>
+</section>
 
-  <nav class="clux-menu" id="cluxMenu" aria-hidden="true">
-    <button class="clux-menu__close" id="menuClose" aria-label="Close">✕</button>
-    <a href="./#products">Shop</a>
-    <a href="./#products">Products</a>
-    <a href="./#banners">Lookbook</a>
-    <a href="./about.html">About</a>
-  </nav>
+<!-- ================= MARQUEE ================= -->
+<div class="clux-marquee">
+  <div class="clux-marquee__track">
+    <div class="clux-marquee__item">C-LUXURY</div>
+    <div class="clux-marquee__item">C-LUXURY</div>
+    <div class="clux-marquee__item">C-LUXURY</div>
+    <div class="clux-marquee__item">C-LUXURY</div>
+    <div class="clux-marquee__item">C-LUXURY</div>
+    <div class="clux-marquee__item">C-LUXURY</div>
 
-  <!-- Banner 1 -->
-  <section class="clux-bannerstack">
-    <a class="clux-heroBanner"
-       href="https://mrcharliestxs.myshopify.com/collections/all"
-       target="_blank" rel="noopener"
-       aria-label="About banner"
-       style="--bannerImg:url('./assets/about-banner-1.jpg');">
+    <!-- repeat for smooth loop -->
+    <div class="clux-marquee__item">C-LUXURY</div>
+    <div class="clux-marquee__item">C-LUXURY</div>
+    <div class="clux-marquee__item">C-LUXURY</div>
+    <div class="clux-marquee__item">C-LUXURY</div>
+  </div>
+</div>
 
-      <span class="clux-bannerGrain" aria-hidden="true"></span>
+<!-- ================= ABOUT TEXT ================= -->
+<section class="clux-about">
+  <div class="clux-wrap">
+    <div class="clux-about__title">C-LUXURY</div>
 
-      <div class="clux-heroBanner__content">
-        <div class="clux-heroBanner__kicker">ABOUT</div>
-        <div class="clux-heroBanner__link">C-LUXURY</div>
-      </div>
-    </a>
-  </section>
-
-  <!-- Continuous slide -->
-  <div class="clux-marquee" aria-label="C-LUXURY marquee">
-    <div class="clux-marquee__track">
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
-
-      <!-- repeat (needed for smooth loop) -->
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
-      <div class="clux-marquee__item">C-LUXURY</div>
+    <div class="clux-about__copy">
+      C-LUXURY is built on contrast — silence that connotes noise.
+      Our designs do not shout; they resonate.
+      Luxury doesn’t have to be loud to be felt, but it must be seen.
+      Every piece is intentional, minimal, and bold in presence.
     </div>
   </div>
+</section>
 
-  <!-- Overview -->
-  <section class="clux-about">
-    <div class="clux-wrap">
-      <div class="clux-about__title">C-LUXURY</div>
+<!-- ================= ABOUT BANNER 2 ================= -->
+<section class="clux-bannerstack">
+  <a class="clux-heroBanner"
+     style="--bannerImg:url('./assets/about-banner-2.jpg');">
 
-      <div class="clux-about__copy">
-        C-LUXURY is a dark, minimalist streetwear label built on contrast—silence that connotes noise.
-        Our pieces don’t shout for attention; they hold it. Luxury doesn’t have to be loud to be felt,
-        but it must be seen—through detail, finish, and presence. Every drop is designed to look clean,
-        move boldly, and speak without saying too much.
-      </div>
+    <span class="clux-bannerGrain"></span>
+
+    <div class="clux-heroBanner__content">
+      <div class="clux-heroBanner__kicker">THE COLLECTION</div>
+      <div class="clux-heroBanner__link">EXPLORE NOW</div>
     </div>
-  </section>
+  </a>
+</section>
 
-  <!-- Banner 2 -->
-  <section class="clux-bannerstack">
-    <a class="clux-heroBanner"
-       href="https://mrcharliestxs.myshopify.com/collections/all"
-       target="_blank" rel="noopener"
-       aria-label="Explore collection"
-       style="--bannerImg:url('./assets/about-banner-2.jpg');">
-
-      <span class="clux-bannerGrain" aria-hidden="true"></span>
-
-      <div class="clux-heroBanner__content">
-        <div class="clux-heroBanner__kicker">THE COLLECTION</div>
-        <div class="clux-heroBanner__link">EXPLORE NOW</div>
-      </div>
-    </a>
-  </section>
-
-  <script src="./index.js" defer></script>
+<script src="./index.js" defer></script>
 </body>
 </html>
