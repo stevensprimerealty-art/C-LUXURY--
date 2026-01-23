@@ -411,13 +411,16 @@ img{max-width:100%;display:block}
   content:"";
   position:absolute;
   inset:0;
+  display:block;
+  z-index:0;
+
   background-image: var(--bannerImg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
   transform: scale(1.02);
   filter: saturate(1.05) contrast(1.05);
-  z-index:0;
 }
 
 .clux-heroBanner::after{
