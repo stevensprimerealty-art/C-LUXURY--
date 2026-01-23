@@ -1,69 +1,101 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About — C-LUXURY</title>
 
-  <!-- SAME CSS AS HOME -->
-  <link rel="stylesheet" href="./assets/clux.css?v=8" />
+  <link rel="stylesheet" href="./assets/clux.css?v=6" />
 </head>
 
 <body>
 
-<header class="clux-header">
-  <div class="clux-wrap clux-header__inner">
-    <a class="clux-brand" href="./index.html">C-LUXURY</a>
+  <header class="clux-header">
+    <div class="clux-wrap clux-header__inner">
+      <a class="clux-brand" href="./" aria-label="C-LUXURY home">C-LUXURY</a>
+
+      <div class="clux-header__icons">
+        <button class="clux-icon-btn" aria-label="Menu" id="menuBtn">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="clux-menu" id="cluxMenu" aria-hidden="true">
+    <button class="clux-menu__close" id="menuClose" aria-label="Close">✕</button>
+    <a href="./#products">Shop</a>
+    <a href="./#products">Products</a>
+    <a href="./#banners">Lookbook</a>
+    <a href="./about.html">About</a>
+  </nav>
+
+  <!-- Banner 1 -->
+  <section class="clux-bannerstack">
+    <a class="clux-heroBanner"
+       href="https://mrcharliestxs.myshopify.com/collections/all"
+       target="_blank" rel="noopener"
+       aria-label="About banner"
+       style="--bannerImg:url('./assets/about-banner-1.jpg');">
+
+      <span class="clux-bannerGrain" aria-hidden="true"></span>
+
+      <div class="clux-heroBanner__content">
+        <div class="clux-heroBanner__kicker">ABOUT</div>
+        <div class="clux-heroBanner__link">C-LUXURY</div>
+      </div>
+    </a>
+  </section>
+
+  <!-- Continuous slide -->
+  <div class="clux-marquee" aria-label="C-LUXURY marquee">
+    <div class="clux-marquee__track">
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+
+      <!-- repeat (needed for smooth loop) -->
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+      <div class="clux-marquee__item">C-LUXURY</div>
+    </div>
   </div>
-</header>
 
-<!-- ================= ABOUT HERO ================= -->
-<section class="clux-heroBanner clux-grain"
-  style="--bannerImg:url('./assets/about-hero.jpg');">
+  <!-- Overview -->
+  <section class="clux-about">
+    <div class="clux-wrap">
+      <div class="clux-about__title">C-LUXURY</div>
 
-  <div class="clux-heroBanner__content">
-    <div class="clux-heroBanner__kicker">ABOUT C-LUXURY</div>
-    <div class="clux-heroBanner__link">SILENCE CONNOTES NOISE</div>
-  </div>
-</section>
+      <div class="clux-about__copy">
+        C-LUXURY is a dark, minimalist streetwear label built on contrast—silence that connotes noise.
+        Our pieces don’t shout for attention; they hold it. Luxury doesn’t have to be loud to be felt,
+        but it must be seen—through detail, finish, and presence. Every drop is designed to look clean,
+        move boldly, and speak without saying too much.
+      </div>
+    </div>
+  </section>
 
-<!-- ================= SLOW SLIDING TEXT ================= -->
-<section class="clux-about-slide">
-  <div class="clux-wrap">
-    <h1 class="clux-about-title">
-      C-LUXURY CONTINUES
-    </h1>
+  <!-- Banner 2 -->
+  <section class="clux-bannerstack">
+    <a class="clux-heroBanner"
+       href="https://mrcharliestxs.myshopify.com/collections/all"
+       target="_blank" rel="noopener"
+       aria-label="Explore collection"
+       style="--bannerImg:url('./assets/about-banner-2.jpg');">
 
-    <p class="clux-about-text">
-      Silence connotes noise. Luxury does not need to be loud to be felt.
-      At C-LUXURY, we believe true expression is seen before it is heard.
-      Our designs exist in restraint, precision, and confidence —
-      where presence speaks louder than excess.
-    </p>
-  </div>
-</section>
+      <span class="clux-bannerGrain" aria-hidden="true"></span>
 
-<!-- ================= BANNER 2 ================= -->
-<section class="clux-heroBanner clux-grain"
-  style="--bannerImg:url('./assets/about-banner-1.jpg');">
-</section>
+      <div class="clux-heroBanner__content">
+        <div class="clux-heroBanner__kicker">THE COLLECTION</div>
+        <div class="clux-heroBanner__link">EXPLORE NOW</div>
+      </div>
+    </a>
+  </section>
 
-<!-- ================= BRAND OVERVIEW ================= -->
-<section class="clux-about-overview">
-  <div class="clux-wrap">
-    <p>
-      C-LUXURY is a contemporary street-luxury label built on culture,
-      minimalism, and intention. Each piece reflects balance — between
-      silence and statement, form and meaning. Luxury is not explained.
-      It is recognized.
-    </p>
-  </div>
-</section>
-
-<!-- ================= FINAL BANNER ================= -->
-<section class="clux-heroBanner clux-grain"
-  style="--bannerImg:url('./assets/about-banner-2.jpg');">
-</section>
-
+  <script src="./index.js" defer></script>
 </body>
 </html>
