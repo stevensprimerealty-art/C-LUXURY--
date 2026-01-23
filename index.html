@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>C-LUXURY</title>
 
-  <!-- bump version when you update css to force refresh -->
-  <link rel="stylesheet" href="./assets/clux.css?v=9" />
+  <link rel="stylesheet" href="./assets/clux.css?v=6" />
 </head>
 
 <body>
@@ -14,7 +13,7 @@
   <!-- ================= HEADER ================= -->
   <header class="clux-header">
     <div class="clux-wrap clux-header__inner">
-      <a class="clux-brand" href="./index.html" aria-label="C-LUXURY home">C-LUXURY</a>
+      <a class="clux-brand" href="./" aria-label="C-LUXURY home">C-LUXURY</a>
 
       <div class="clux-header__icons">
         <button class="clux-icon-btn" aria-label="Search" id="searchBtn">🔍</button>
@@ -32,7 +31,7 @@
     <a href="./about.html">About</a>
   </nav>
 
-  <!-- ================= HERO (3 IMAGE CROSSFADE) ================= -->
+  <!-- ================= HERO ================= -->
   <section class="clux-hero clux-grain" data-clux-hero data-interval-ms="3200">
 
     <div class="clux-hero__stage">
@@ -41,7 +40,6 @@
       <div class="clux-hero__slide" data-clux-slide style="background-image:url('./assets/hero-3.jpg')"></div>
     </div>
 
-    <!-- TEXT that fades with slides -->
     <div class="clux-hero__copywrap">
       <div class="clux-hero__copy is-active" data-clux-copy>
         <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
@@ -59,14 +57,12 @@
       </div>
     </div>
 
-    <!-- CENTER GLASS CTA -->
     <a class="clux-hero__cta"
        href="https://mrcharliestxs.myshopify.com/collections/all"
        target="_blank" rel="noopener">
       Shop Now
     </a>
 
-    <!-- DOT NAV -->
     <div class="clux-hero__dots" data-clux-dots aria-label="Hero navigation">
       <button class="clux-dot is-active" type="button" aria-label="Slide 1" data-dot="0"></button>
       <button class="clux-dot" type="button" aria-label="Slide 2" data-dot="1"></button>
@@ -84,7 +80,6 @@
   </section>
 
   <!-- ================= BANNERS (INSPO STYLE) ================= -->
-  <!-- IMPORTANT: do NOT add clux-grain on the <a> because it can clash with banner ::after overlay -->
   <section id="banners" class="clux-bannerstack">
 
     <a class="clux-heroBanner"
@@ -93,7 +88,6 @@
        aria-label="New Releases - Explore Now"
        style="--bannerImg:url('./assets/banner-1.jpg');">
 
-      <!-- ✅ needed for grain since we removed clux-grain from <a> -->
       <span class="clux-bannerGrain" aria-hidden="true"></span>
 
       <div class="clux-heroBanner__content">
@@ -157,8 +151,6 @@
     </div>
   </div>
 
-  <!-- IMPORTANT: script name must match your repo file -->
-  <!-- If your JS file is index.js keep this. If the file is named about.js / main.js change it. -->
   <script src="./index.js" defer></script>
 </body>
 </html>
