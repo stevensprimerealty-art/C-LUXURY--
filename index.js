@@ -1,3 +1,5 @@
+console.log("C-LUXURY JS loaded ✅");
+
 // ============================
 // C-LUXURY — Standalone JS (ROOT /index.js) ✅ FULL FIXED
 // - Hero crossfade + copy + dots (NO TEXT JUMP, no inline styling)
