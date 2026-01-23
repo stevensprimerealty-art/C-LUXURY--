@@ -314,52 +314,6 @@ img{max-width:100%;display:block}
 .clux-product-name{font-size:.92rem;letter-spacing:.04em;color:#0b0b0b}
 .clux-product-price{font-size:.92rem;color:rgba(11,11,11,.60)}
 
-/* ================= BANNERS — EDITORIAL STYLE (LIKE YOUR EXAMPLE) ================= */
-.clux-banners{
-  width:100%;
-  display:grid;
-  grid-template-columns: 1fr; /* ✅ always stacked like the sample */
-  gap:20px;
-  padding:20px 0 90px;
-}
-
-.clux-banner{
-  width:100%;
-  border-radius:22px;
-  overflow:hidden;
-  border:1px solid rgba(0,0,0,.06);
-  display:block;
-  background:#f2f2f2;
-  min-height: var(--bannerHeight);
-  position:relative;
-  transform: translateZ(0);
-}
-
-.clux-banner img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transform: scale(1.02);          /* subtle “editorial” zoom */
-  transition: transform 600ms ease;
-}
-
-.clux-banner:active img{
-  transform: scale(1.01);
-}
-
-/* subtle top/bottom fade like magazine banners */
-.clux-banner::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,.10) 0%,
-    rgba(0,0,0,.00) 35%,
-    rgba(0,0,0,.12) 100%
-  );
-}
 
 /* ================= FLOATING TOOLS ================= */
 .clux-tools{
@@ -458,95 +412,77 @@ img{max-width:100%;display:block}
   .clux-grid{gap:26px}
 }
 
-/* =========================
-   INSPO BANNER STACK (like screenshot)
-========================= */
-.clux-bannerstack{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-}
+/* =========================================
+   FIX PATCH — BANNERS + HERO (DESKTOP/LAPTOP)
+   Paste this at the END of clux.css
+========================================= */
 
-.clux-heroBanner{
-  position:relative;
-  width:100%;
-  height: clamp(300px, 60vh, 680px); /* tall like inspo */
-  display:block;
-  overflow:hidden;
-  text-decoration:none;
-  background:#111;
-  border-top:1px solid rgba(0,0,0,.06);
-}
-
-/* background image */
-.clux-heroBanner::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image: var(--bannerImg);
-  background-size: cover;
-  background-position: center;
-  transform: scale(1.02);
-  filter: saturate(1.05) contrast(1.05);
-}
-
-/* dark overlay for readability */
-.clux-heroBanner::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,.30) 0%,
-    rgba(0,0,0,.22) 35%,
-    rgba(0,0,0,.55) 100%
-  );
-}
-
-/* text position like inspo */
-.clux-heroBanner__content{
-  position:absolute;
-  left:18px;
-  bottom:22px;
-  z-index:2;
-  color:#fff;
-}
-
-/* small spaced heading */
-.clux-heroBanner__kicker{
-  font-size:12px;
-  letter-spacing:.32em;
-  text-transform:uppercase;
-  opacity:.88;
-  margin-bottom:16px;
-}
-
-/* underline CTA */
-.clux-heroBanner__link{
-  font-size:16px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  display:inline-block;
-  padding-bottom:6px;
-  border-bottom: 1px solid rgba(255,255,255,.75);
-}
-
-/* little interaction */
-.clux-heroBanner:hover::before{
-  transform: scale(1.05);
-  transition: transform 700ms ease;
-}
+/* -------------------------
+   BANNERS: remove default link styling (purple/underline)
+------------------------- */
+.clux-heroBanner,
+.clux-heroBanner:visited,
+.clux-heroBanner:hover,
 .clux-heroBanner:active{
-  opacity:.98;
+  color:#fff !important;
+  text-decoration:none !important;
 }
 
-@media (max-width:780px){
-  .clux-heroBanner{
-    height: 46vh;
-    min-height: 320px;
+.clux-heroBanner *{
+  color:#fff !important;
+  text-decoration:none !important;
+}
+
+/* make sure overlay/text stack is correct */
+.clux-heroBanner::before{ z-index:0; }
+.clux-heroBanner::after{ z-index:1; }
+.clux-heroBanner__content{ z-index:2; }
+
+/* optional: smooth zoom on desktop too */
+@media (hover:hover){
+  .clux-heroBanner::before{
+    transition: transform 700ms ease;
   }
-  .clux-heroBanner__content{
-    left:16px;
-    bottom:20px;
+}
+
+/* -------------------------
+   HERO: fix laptop “messed up” layout
+------------------------- */
+
+/* Improve overall hero height on larger screens */
+@media (min-width: 900px){
+  .clux-hero{
+    min-height: 640px;
+  }
+
+  /* Headline gets too huge on wide screens: clamp it down */
+  .clux-hero__headline{
+    font-size: clamp(44px, 5.2vw, 76px);
+    max-width: 20ch;
+    line-height: 1.06;
+  }
+
+  /* Keep the text block a bit lower but not too low */
+  :root{
+    --heroTextTop: 60%;
+    --heroCtaTop: 74%;
+  }
+}
+
+/* For very large desktops */
+@media (min-width: 1300px){
+  .clux-hero__headline{
+    font-size: clamp(48px, 4.6vw, 78px);
+    max-width: 22ch;
+  }
+}
+
+/* Mobile: keep your settings but tighten spacing slightly */
+@media (max-width: 430px){
+  .clux-hero__eyebrow{
+    margin-bottom: 12px;
+  }
+  .clux-hero__copywrap{
+    height: 280px;
   }
 }
