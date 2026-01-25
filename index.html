@@ -1,128 +1,162 @@
 <!doctype html>
 <html lang="en" id="top">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>C-LUXURY</title>
+
   <base href="/C-LUXURY--/">
-  <link rel="stylesheet" href="assets/clux.css?v=7" />
+  <link rel="stylesheet" href="assets/clux.css?v=10">
 </head>
 
 <body>
 
-  <!-- ================= HEADER ================= -->
-  <header class="clux-header">
-    <div class="clux-wrap clux-header__inner">
-      <a class="clux-brand" href="./" aria-label="C-LUXURY home">C-LUXURY</a>
+<!-- ================= HEADER ================= -->
+<header class="clux-header">
+  <div class="clux-wrap clux-header__inner">
+    <a class="clux-brand" href="./" aria-label="C-LUXURY home">C-LUXURY</a>
 
-      <div class="clux-header__icons">
-        <button class="clux-icon-btn" aria-label="Search" id="searchBtn">🔍</button>
-        <button class="clux-icon-btn" aria-label="Menu" id="menuBtn">☰</button>
-      </div>
+    <div class="clux-header__icons">
+      <button class="clux-icon-btn" aria-label="Search" id="searchBtn">🔍</button>
+      <button class="clux-icon-btn" aria-label="Menu" id="menuBtn">☰</button>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- ================= MINI MENU ================= -->
-  <nav class="clux-menu" id="cluxMenu" aria-hidden="true">
-    <button class="clux-menu__close" id="menuClose" aria-label="Close">✕</button>
-    <a href="#products">Shop</a>
-    <a href="#products">Products</a>
-    <a href="#banners">Lookbook</a>
-    <a href="./about.html">About</a>
-  </nav>
+<!-- ================= MINI MENU ================= -->
+<nav class="clux-menu" id="cluxMenu" aria-hidden="true">
+  <button class="clux-menu__close" id="menuClose" aria-label="Close">✕</button>
+  <a href="#products">Shop</a>
+  <a href="#products">Products</a>
+  <a href="#lookbook">Lookbook</a>
+  <a href="about.html">About</a>
+</nav>
 
-  <!-- ================= HERO ================= -->
-  <section class="clux-hero clux-grain" data-clux-hero data-interval-ms="3200">
-    <div class="clux-hero__stage">
-      <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url(./assets/hero-1.jpg)"></div>
-      <div class="clux-hero__slide" data-clux-slide style="background-image:url(./assets/hero-2.jpg)"></div>
-      <div class="clux-hero__slide" data-clux-slide style="background-image:url(./assets/hero-3.jpg)"></div>
-    </div>
+<!-- ================= HERO ================= -->
+<section class="clux-hero clux-grain" data-clux-hero data-interval-ms="3200">
+  <div class="clux-hero__stage">
+    <div class="clux-hero__slide is-active" data-clux-slide
+         style="background-image:url('assets/hero-1.jpg')"></div>
+    <div class="clux-hero__slide" data-clux-slide
+         style="background-image:url('assets/hero-2.jpg')"></div>
+    <div class="clux-hero__slide" data-clux-slide
+         style="background-image:url('assets/hero-3.jpg')"></div>
+  </div>
 
-    <div class="clux-hero__copywrap">
-      <div class="clux-hero__copy is-active" data-clux-copy>
-        <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
-        <h1 class="clux-hero__headline">Streetwear in Different Colors, Culture &amp; Style</h1>
-      </div>
-
-      <div class="clux-hero__copy" data-clux-copy>
-        <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
-        <h1 class="clux-hero__headline">Explore New Street &amp; Distinctive Wears</h1>
-      </div>
-
-      <div class="clux-hero__copy" data-clux-copy>
-        <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
-        <h1 class="clux-hero__headline">Explore New Drops From C-LUXURY</h1>
-      </div>
+  <div class="clux-hero__copywrap">
+    <div class="clux-hero__copy is-active" data-clux-copy>
+      <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
+      <h1 class="clux-hero__headline">Streetwear in Different Colors, Culture &amp; Style</h1>
     </div>
 
-    <a class="clux-hero__cta"
-       href="https://mrcharliestxs.myshopify.com/collections/all"
-       target="_blank" rel="noopener">
-      Shop Now
-    </a>
-
-    <div class="clux-hero__dots" data-clux-dots>
-      <button class="clux-dot is-active" data-dot="0"></button>
-      <button class="clux-dot" data-dot="1"></button>
-      <button class="clux-dot" data-dot="2"></button>
+    <div class="clux-hero__copy" data-clux-copy>
+      <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
+      <h1 class="clux-hero__headline">Explore New Street &amp; Distinctive Wears</h1>
     </div>
-  </section>
 
-  <!-- ================= PRODUCTS ================= -->
-  <section id="products" class="clux-section">
-    <div class="clux-wrap">
-      <div class="clux-section-title">C-New Arrivals</div>
-      <div class="clux-grid" id="productGrid"></div>
+    <div class="clux-hero__copy" data-clux-copy>
+      <div class="clux-hero__eyebrow">NEW EXCITING DROPS FROM</div>
+      <h1 class="clux-hero__headline">Explore New Drops From C-LUXURY</h1>
     </div>
-  </section>
+  </div>
 
-  <!-- ================= BANNERS (INSPO STYLE) ================= -->
-<section id="banners" class="clux-bannerstack">
-
-  <!-- Banner 1 -->
-  <a class="clux-heroBanner"
+  <a class="clux-hero__cta"
      href="https://mrcharliestxs.myshopify.com/collections/all"
-     target="_blank" rel="noopener"
-     aria-label="New Releases - Explore Now"
-     style="--bannerImg:url('assets/banner-1.jpg');"
-    <span class="clux-bannerGrain" aria-hidden="true"></span>
-
-    <div class="clux-heroBanner__content">
-      <div class="clux-heroBanner__kicker">NEW RELEASES</div>
-      <div class="clux-heroBanner__link">EXPLORE NOW</div>
-    </div>
+     target="_blank" rel="noopener">
+    Shop Now
   </a>
 
-  <!-- Banner 2 -->
-  <a class="clux-heroBanner"
-     href="https://mrcharliestxs.myshopify.com/collections/all"
-     target="_blank" rel="noopener"
-     aria-label="From our new collection - Explore Now"
-     style="--bannerImg:url('assets/banner-2.jpg');"
-    <span class="clux-bannerGrain" aria-hidden="true"></span>
-
-    <div class="clux-heroBanner__content">
-      <div class="clux-heroBanner__kicker">FROM OUR NEW COLLECTION</div>
-      <div class="clux-heroBanner__link">EXPLORE NOW</div>
-    </div>
-  </a>
-
+  <div class="clux-hero__dots" data-clux-dots>
+    <button class="clux-dot is-active" data-dot="0"></button>
+    <button class="clux-dot" data-dot="1"></button>
+    <button class="clux-dot" data-dot="2"></button>
+  </div>
 </section>
 
-  <!-- ================= COMMUNITY ================= -->
-  <section class="clux-community">
-    <div class="clux-wrap">
-      <h2>Join Our Community</h2>
-      <p>To receive more information on our brand growth every day.</p>
+<!-- ================= PRODUCTS ================= -->
+<section id="products" class="clux-section">
+  <div class="clux-wrap">
+    <div class="clux-section-title">C-New Arrivals</div>
+    <div class="clux-grid" id="productGrid"></div>
+  </div>
+</section>
 
-      <div class="clux-social-btns">
-        <a class="clux-glass-btn" href="https://www.tiktok.com/@_cluxury" target="_blank">TikTok</a>
-        <a class="clux-glass-btn" href="https://www.instagram.com/_cluxury0" target="_blank">Instagram</a>
+<!-- ================= SIMPLE LOOKBOOK (NO INSPO BANNERS) ================= -->
+<section id="lookbook" class="clux-section" style="padding-top: 20px;">
+  <div class="clux-wrap">
+
+    <div class="clux-section-title" style="margin-bottom: 18px;">LOOKBOOK</div>
+
+    <!-- Image 1 -->
+    <a href="https://mrcharliestxs.myshopify.com/collections/all"
+       target="_blank" rel="noopener"
+       aria-label="Explore new releases"
+       style="display:block; text-decoration:none;">
+      <div style="
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,.08);
+        background: #111;
+      ">
+        <img
+          src="assets/banner-1.jpg"
+          alt="New releases"
+          style="width:100%; height: clamp(280px, 55vh, 620px); object-fit: cover; display:block;"
+        >
       </div>
-    </div>
-  </section>
 
-  <script src="./index.js" defer></script>
+      <div style="text-align:center; margin-top: 14px;">
+        <div style="letter-spacing:.32em; font-size:12px; font-weight:800;">NEW RELEASES</div>
+        <div style="margin-top:8px;">
+          <span class="clux-glass-btn">Explore Now</span>
+        </div>
+      </div>
+    </a>
+
+    <div style="height:24px;"></div>
+
+    <!-- Image 2 -->
+    <a href="https://mrcharliestxs.myshopify.com/collections/all"
+       target="_blank" rel="noopener"
+       aria-label="Explore the new collection"
+       style="display:block; text-decoration:none;">
+      <div style="
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,.08);
+        background: #111;
+      ">
+        <img
+          src="assets/banner-2.jpg"
+          alt="From our new collection"
+          style="width:100%; height: clamp(280px, 55vh, 620px); object-fit: cover; display:block;"
+        >
+      </div>
+
+      <div style="text-align:center; margin-top: 14px;">
+        <div style="letter-spacing:.32em; font-size:12px; font-weight:800;">FROM OUR NEW COLLECTION</div>
+        <div style="margin-top:8px;">
+          <span class="clux-glass-btn">Explore Now</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ================= COMMUNITY ================= -->
+<section class="clux-community">
+  <div class="clux-wrap">
+    <h2>Join Our Community</h2>
+    <p>To receive more information on our brand growth every day.</p>
+
+    <div class="clux-social-btns">
+      <a class="clux-glass-btn" href="https://www.tiktok.com/@_cluxury" target="_blank" rel="noopener">TikTok</a>
+      <a class="clux-glass-btn" href="https://www.instagram.com/_cluxury0" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</section>
+
+<script src="index.js" defer></script>
 </body>
 </html>
