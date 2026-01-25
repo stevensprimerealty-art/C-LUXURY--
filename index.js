@@ -2,8 +2,8 @@
 // C-LUXURY — Standalone JS ✅ (Matches your HTML IDs)
 // - Hero crossfade + copy + dots
 // - Menu fade in/out (adds/removes .is-open)
-// - Search scroll
-// - Products render
+// - Search: scroll on home, redirect to home on other pages
+// - Products render (home only if #productGrid exists)
 // - Currency toggle (id="currencyBtn")
 // - Chat modal fade in/out (id="chatBox")
 // - Chat quick buttons -> simple auto replies
@@ -117,15 +117,28 @@ function initMenu() {
 }
 
 /* ============================
-   SEARCH ICON → scroll to products (home only)
+   SEARCH ICON
+   - If #products exists: smooth scroll
+   - Else: go to home/#products
 ============================ */
 function initSearch() {
   const btn = $("#searchBtn");
-  const target = $("#products");
-  if (!btn || !target) return;
+  if (!btn) return;
 
-  btn.addEventListener("click", () => {
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  btn.addEventListener("click", (e) => {
+    const target = $("#products");
+
+    // If we're on home (target exists), smooth scroll
+    if (target) {
+      e.preventDefault(); // important if #searchBtn is an <a>
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+
+    // Otherwise, go to home products
+    // (works with GitHub Pages base href too)
+    e.preventDefault();
+    window.location.href = "./#products";
   });
 }
 
@@ -173,7 +186,6 @@ function renderProducts() {
         </a>
       </div>
 
-      <!-- ✅ FIXED: Quick Buy goes to the product page (safe + correct) -->
       <a class="clux-quick-buy" href="${p.url}" target="_blank" rel="noopener">
         Shop Now
       </a>
@@ -200,7 +212,7 @@ function initCurrency() {
   btn.addEventListener("click", () => {
     currency = currency === "USD" ? "NGN" : "USD";
     paint();
-    renderProducts();
+    renderProducts(); // only rerenders if grid exists
   });
 }
 
