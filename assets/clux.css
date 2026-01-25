@@ -280,7 +280,14 @@ img{max-width:100%;display:block}
   display:block;
   height: clamp(280px, 55vh, 620px);
   object-fit: cover;
+
+  /* ✅ Show heads: crop from top instead of center */
+  object-position: center top;
 }
+
+/* Optional: if you want even more head space on some images */
+.clux-imgTop{ object-position: center top; }
+
 .clux-center{ text-align:center; }
 .clux-subkicker{
   letter-spacing:.32em;
