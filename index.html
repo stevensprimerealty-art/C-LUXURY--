@@ -6,12 +6,11 @@
   <title>C-LUXURY</title>
 
   <base href="/C-LUXURY--/">
-  <link rel="stylesheet" href="assets/clux.css?v=11">
+  <link rel="stylesheet" href="assets/clux.css?v=12">
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
 <header class="clux-header">
   <div class="clux-wrap clux-header__inner">
     <a class="clux-brand" href="./" aria-label="C-LUXURY home">C-LUXURY</a>
@@ -23,7 +22,6 @@
   </div>
 </header>
 
-<!-- ================= MINI MENU ================= -->
 <nav class="clux-menu" id="cluxMenu" aria-hidden="true">
   <button class="clux-menu__close" id="menuClose" aria-label="Close">✕</button>
   <a href="#products">Shop</a>
@@ -35,12 +33,9 @@
 <!-- ================= HERO ================= -->
 <section class="clux-hero clux-grain" data-clux-hero data-interval-ms="3200">
   <div class="clux-hero__stage">
-    <div class="clux-hero__slide is-active" data-clux-slide
-         style="background-image:url('assets/hero-1.jpg')"></div>
-    <div class="clux-hero__slide" data-clux-slide
-         style="background-image:url('assets/hero-2.jpg')"></div>
-    <div class="clux-hero__slide" data-clux-slide
-         style="background-image:url('assets/hero-3.jpg')"></div>
+    <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url('assets/hero-1.jpg')"></div>
+    <div class="clux-hero__slide" data-clux-slide style="background-image:url('assets/hero-2.jpg')"></div>
+    <div class="clux-hero__slide" data-clux-slide style="background-image:url('assets/hero-3.jpg')"></div>
   </div>
 
   <div class="clux-hero__copywrap">
@@ -81,63 +76,41 @@
   </div>
 </section>
 
-<!-- ================= SIMPLE LOOKBOOK (NO INSPO BANNERS) ================= -->
-<section id="lookbook" class="clux-section" style="padding-top: 20px;">
+<!-- ================= LOOKBOOK (SIMPLE IMAGES) ================= -->
+<section id="lookbook" class="clux-section clux-lookbook">
   <div class="clux-wrap">
+    <div class="clux-section-title">LOOKBOOK</div>
 
-    <div class="clux-section-title" style="margin-bottom: 18px;">LOOKBOOK</div>
-
-    <!-- Image 1 -->
-    <a href="https://mrcharliestxs.myshopify.com/collections/all"
+    <!-- Card 1 -->
+    <a class="clux-cardLink"
+       href="https://mrcharliestxs.myshopify.com/collections/all"
        target="_blank" rel="noopener"
-       aria-label="Explore new releases"
-       style="display:block; text-decoration:none;">
-      <div style="
-        border-radius: 18px;
-        overflow: hidden;
-        border: 1px solid rgba(0,0,0,.08);
-        background: #111;
-      ">
-        <img
-          src="assets/banner-1.jpg"
-          alt="New releases"
-          style="width:100%; height: clamp(280px, 55vh, 620px); object-fit: cover; display:block;"
-        >
+       aria-label="New releases - explore now">
+      <div class="clux-imgCard">
+        <img class="clux-imgTop" src="assets/banner-1.jpg" alt="New releases">
       </div>
 
-      <div style="text-align:center; margin-top: 14px;">
-        <div style="letter-spacing:.32em; font-size:12px; font-weight:800;">NEW RELEASES</div>
-        <div style="margin-top:8px;">
-          <span class="clux-glass-btn">Explore Now</span>
-        </div>
+      <div class="clux-cardMeta">
+        <div class="clux-subkicker">NEW RELEASES</div>
+        <span class="clux-glass-btn">Explore Now</span>
       </div>
     </a>
 
-    <div style="height:24px;"></div>
+    <!-- spacing -->
+    <div class="clux-space"></div>
 
-    <!-- Image 2 -->
-    <a href="https://mrcharliestxs.myshopify.com/collections/all"
+    <!-- Card 2 -->
+    <a class="clux-cardLink"
+       href="https://mrcharliestxs.myshopify.com/collections/all"
        target="_blank" rel="noopener"
-       aria-label="Explore the new collection"
-       style="display:block; text-decoration:none;">
-      <div style="
-        border-radius: 18px;
-        overflow: hidden;
-        border: 1px solid rgba(0,0,0,.08);
-        background: #111;
-      ">
-        <img
-          src="assets/banner-2.jpg"
-          alt="From our new collection"
-          style="width:100%; height: clamp(280px, 55vh, 620px); object-fit: cover; display:block;"
-        >
+       aria-label="From our new collection - explore now">
+      <div class="clux-imgCard">
+        <img class="clux-imgTop" src="assets/banner-2.jpg" alt="From our new collection">
       </div>
 
-      <div style="text-align:center; margin-top: 14px;">
-        <div style="letter-spacing:.32em; font-size:12px; font-weight:800;">FROM OUR NEW COLLECTION</div>
-        <div style="margin-top:8px;">
-          <span class="clux-glass-btn">Explore Now</span>
-        </div>
+      <div class="clux-cardMeta">
+        <div class="clux-subkicker">FROM OUR NEW COLLECTION</div>
+        <span class="clux-glass-btn">Explore Now</span>
       </div>
     </a>
 
