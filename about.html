@@ -5,12 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About — C-LUXURY</title>
 
+  <!-- GitHub Pages subfolder fix -->
   <base href="/C-LUXURY--/">
-  <link rel="stylesheet" href="assets/clux.css?v=10">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/clux.css?v=11">
 </head>
 
 <body>
 
+<!-- ================= HEADER ================= -->
 <header class="clux-header">
   <div class="clux-wrap clux-header__inner">
     <a class="clux-brand" href="./" aria-label="C-LUXURY home">C-LUXURY</a>
@@ -21,6 +25,7 @@
   </div>
 </header>
 
+<!-- ================= MENU ================= -->
 <nav class="clux-menu" id="cluxMenu" aria-hidden="true">
   <button class="clux-menu__close" id="menuClose" aria-label="Close">✕</button>
   <a href="./">Home</a>
@@ -28,69 +33,65 @@
   <a href="./about.html">About</a>
 </nav>
 
-<!-- ================= SIMPLE ABOUT HERO (NO INSPO) ================= -->
-<section class="clux-section" style="padding-top: 28px;">
+<!-- ================= ABOUT HERO IMAGE ================= -->
+<section class="clux-section" style="padding-top:32px;">
   <div class="clux-wrap">
 
-    <div style="
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(0,0,0,.08);
-      background: #111;
-    ">
+    <div class="clux-imgCard">
       <img
         src="assets/about-banner-1.jpg"
-        alt="C-LUXURY"
-        style="width:100%; height: clamp(320px, 55vh, 640px); object-fit: cover; display:block;"
+        alt="About C-LUXURY"
+        class="clux-imgTop"
       >
-    </div>
-
-    <div style="text-align:center; margin-top: 22px;">
-      <div class="clux-section-title" style="margin-bottom: 10px;">ABOUT C-LUXURY</div>
-
-      <p style="
-        max-width: 860px;
-        margin: 0 auto;
-        color: rgba(11,11,11,.72);
-        line-height: 1.85;
-        font-size: 1.02rem;
-      ">
-        C-LUXURY is built on contrast — silence that connotes noise.
-        Our designs do not shout; they resonate.
-        Luxury doesn’t have to be loud to be felt, but it must be seen.
-        Every piece is intentional, minimal, and bold in presence.
-      </p>
-
-      <div style="margin-top: 22px;">
-        <a class="clux-glass-btn"
-           href="https://mrcharliestxs.myshopify.com/collections/all"
-           target="_blank" rel="noopener">
-          Shop the Collection
-        </a>
-      </div>
     </div>
 
   </div>
 </section>
 
-<!-- ================= OPTIONAL SECOND IMAGE ================= -->
-<section class="clux-section" style="padding-top: 40px;">
+<!-- ================= ABOUT TEXT ================= -->
+<section class="clux-section">
+  <div class="clux-wrap clux-center">
+
+    <div class="clux-section-title">ABOUT C-LUXURY</div>
+
+    <p class="clux-about__copy">
+      C-LUXURY is built on contrast — silence that connotes noise.
+      Our designs do not shout; they resonate.
+      Luxury doesn’t have to be loud to be felt, but it must be seen.
+      Every piece is intentional, minimal, and bold in presence.
+    </p>
+
+    <div style="margin-top:22px;">
+      <a
+        class="clux-glass-btn"
+        href="https://mrcharliestxs.myshopify.com/collections/all"
+        target="_blank"
+        rel="noopener"
+      >
+        Shop the Collection
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= SECOND ABOUT IMAGE ================= -->
+<section class="clux-section" style="padding-top:40px;">
   <div class="clux-wrap">
-    <div style="
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(0,0,0,.08);
-      background: #111;
-    ">
+
+    <div class="clux-imgCard">
       <img
         src="assets/about-banner-2.jpg"
         alt="C-LUXURY Collection"
-        style="width:100%; height: clamp(260px, 45vh, 560px); object-fit: cover; display:block;"
+        class="clux-imgTop"
       >
     </div>
+
   </div>
 </section>
 
+<!-- JS -->
 <script src="index.js" defer></script>
+
 </body>
 </html>
