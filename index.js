@@ -12,10 +12,6 @@
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-// ✅ YOUR QUICK BUY CHECKOUT LINK
-const QUICK_BUY_URL =
-  "https://mrcharliestxs.myshopify.com/checkouts/cn/hWN7ZmclI4XgWZtheB2Vhic7/en-ng?_r=AQABUs0iACzNKrExlnHahky4lpduUMtVGeGhbyoRWGeboiA&preview_theme_id=140961939507";
-
 /* ============================
    HERO — Crossfade + Copy + Dots Sync
 ============================ */
@@ -110,6 +106,7 @@ function initMenu() {
   closeBtn.addEventListener("click", close);
   if (overlay) overlay.addEventListener("click", close);
 
+  // close menu after clicking any link
   $$("a", menu).forEach((a) => a.addEventListener("click", close));
 
   document.addEventListener("keydown", (e) => {
@@ -120,7 +117,7 @@ function initMenu() {
 }
 
 /* ============================
-   SEARCH ICON → scroll to products
+   SEARCH ICON → scroll to products (home only)
 ============================ */
 function initSearch() {
   const btn = $("#searchBtn");
@@ -133,7 +130,7 @@ function initSearch() {
 }
 
 /* ============================
-   PRODUCTS (Fixed paths for <base>)
+   PRODUCTS
 ============================ */
 const PRODUCTS = [
   { title:"C-Lux Baseball Jersey - Vintage Brown Star Sleeve Shirt", priceUSD:48.31, url:"https://mrcharliestxs.myshopify.com/products/baseball-jersey-vintage-brown-star-sleeve-team-shirt", img:"assets/product-1.jpg" },
@@ -155,6 +152,7 @@ const PRODUCTS = [
 ];
 
 let currency = "USD";
+// NOTE: hard-coded rate is fine for display; Shopify checkout will show real totals
 const usdToNgn = 1500;
 
 function money(n) {
@@ -175,9 +173,9 @@ function renderProducts() {
         </a>
       </div>
 
-      <!-- ✅ Quick Buy now uses your checkout link -->
-      <a class="clux-quick-buy" href="${QUICK_BUY_URL}" target="_blank" rel="noopener">
-        Quick Buy
+      <!-- ✅ FIXED: Quick Buy goes to the product page (safe + correct) -->
+      <a class="clux-quick-buy" href="${p.url}" target="_blank" rel="noopener">
+        Shop Now
       </a>
 
       <div class="clux-product-name">${p.title}</div>
