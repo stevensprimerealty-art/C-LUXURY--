@@ -8,8 +8,8 @@
   <!-- GitHub Pages subfolder fix -->
   <base href="/C-LUXURY--/">
 
-  <!-- ✅ updated to match your CSS v14.1 -->
-  <link rel="stylesheet" href="assets/clux.css?v=14.1" />
+  <!-- ✅ CSS v14.2 (matches your latest full CSS) -->
+  <link rel="stylesheet" href="assets/clux.css?v=14.2" />
 </head>
 
 <body>
@@ -29,6 +29,7 @@
   <!-- ================= MENU OVERLAY ================= -->
   <div class="clux-overlay" id="cluxOverlay" aria-hidden="true"></div>
 
+  <!-- ================= MENU ================= -->
   <nav class="clux-menu clux-menu--dark" id="cluxMenu" aria-hidden="true">
     <div class="clux-menu__top">
       <div class="clux-menu__title">MENU</div>
@@ -37,13 +38,19 @@
 
     <div class="clux-menu__divider"></div>
 
-    <a href="#products">Shop</a>
-    <a href="#lookbook">Lookbook</a>
+    <!-- ✅ FIXED: Menu Shop opens NEW shop page -->
+    <a href="./shop.html">Shop</a>
+
+    <!-- ✅ FIXED: Menu Lookbook opens NEW lookbook page -->
+    <a href="./lookbook.html">Lookbook</a>
+
     <a href="./about.html">About</a>
 
     <div class="clux-menu__divider"></div>
 
-    <a href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">Open Shopify Store ↗</a>
+    <a href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">
+      Open Shopify Store ↗
+    </a>
   </nav>
 
   <!-- ================= HERO ================= -->
@@ -71,9 +78,9 @@
       </div>
     </div>
 
-    <!-- ✅ updated: Shop Now goes to your Quick Buy checkout link -->
+    <!-- ✅ FIXED: Hero Shop Now goes to Shopify store -->
     <a class="clux-hero__cta"
-       href="https://mrcharliestxs.myshopify.com/checkouts/cn/hWN7ZmclI4XgWZtheB2Vhic7/en-ng?_r=AQABUs0iACzNKrExlnHahky4lpduUMtVGeGhbyoRWGeboiA&preview_theme_id=140961939507"
+       href="https://mrcharliestxs.myshopify.com/collections/all"
        target="_blank" rel="noopener">
       Shop Now
     </a>
@@ -85,19 +92,27 @@
     </div>
   </section>
 
-  <!-- ================= PRODUCTS ================= -->
+  <!-- ================= PRODUCTS (Home preview grid) ================= -->
   <section id="products" class="clux-section">
     <div class="clux-wrap">
       <div class="clux-section-title">C-New Arrivals</div>
+
+      <!-- Your JS fills this -->
       <div class="clux-grid" id="productGrid"></div>
+
+      <!-- Optional: button to full shop page -->
+      <div style="display:flex; justify-content:center; padding: 16px 0 0;">
+        <a class="clux-pillBtn" href="./shop.html">Open Full Shop</a>
+      </div>
     </div>
   </section>
 
-  <!-- ================= LOOKBOOK IMAGES (simple, head-safe) ================= -->
-  <section id="lookbook" class="clux-section">
+  <!-- ================= LOOKBOOK PREVIEW (Home) ================= -->
+  <section class="clux-section">
     <div class="clux-wrap">
       <div class="clux-section-title">LOOKBOOK</div>
 
+      <!-- simple preview banners (keeps your current style) -->
       <div class="clux-stack">
         <div class="clux-imgCard">
           <img class="clux-imgTop" src="assets/banner-1.jpg" alt="Lookbook — New Releases">
@@ -105,11 +120,9 @@
 
         <div class="clux-ctaRow">
           <div class="clux-subkicker">NEW RELEASES</div>
-          <a class="clux-pillBtn"
-             href="https://mrcharliestxs.myshopify.com/collections/all"
-             target="_blank" rel="noopener">
-            Explore Now
-          </a>
+
+          <!-- ✅ Goes to NEW lookbook page -->
+          <a class="clux-pillBtn" href="./lookbook.html">Open Lookbook</a>
         </div>
 
         <div class="clux-imgCard">
@@ -139,7 +152,6 @@
 
       <div class="clux-accordion">
 
-        <!-- QUICK LINK -->
         <details class="clux-accItem">
           <summary class="clux-accSummary">
             <span>QUICK LINK</span>
@@ -166,7 +178,6 @@
           </div>
         </details>
 
-        <!-- GIFT CARDS (✅ updated link) -->
         <details class="clux-accItem">
           <summary class="clux-accSummary">
             <span>GIFT CARDS</span>
@@ -195,17 +206,12 @@
 
   <!-- ================= FLOATERS ================= -->
   <div class="clux-floaters">
-
-    <!-- Currency toggle bottom-left -->
     <button class="clux-floatBtn clux-floatBtn--left" id="currencyBtn" aria-label="Currency toggle">
-      USD
-      <span class="clux-caret">▾</span>
+      USD <span class="clux-caret">▾</span>
     </button>
 
-    <!-- Chat button bottom-right -->
     <button class="clux-floatBtn clux-floatBtn--right" id="chatOpen" aria-label="Open chat">
-      💬
-      <span class="clux-floatBtn__text">Chat</span>
+      💬 <span class="clux-floatBtn__text">Chat</span>
       <span class="clux-onlineDot" aria-hidden="true"></span>
     </button>
   </div>
@@ -213,17 +219,13 @@
   <!-- ================= CHAT MODAL ================= -->
   <div class="clux-chat" id="chatBox" aria-hidden="true">
     <div class="clux-chat__panel" role="dialog" aria-modal="true" aria-label="AI Assistant chat">
-
       <div class="clux-chat__top">
         <div class="clux-chat__title">Hi 👋</div>
         <button class="clux-chat__close" id="chatClose" aria-label="Close chat">✕</button>
       </div>
 
       <div class="clux-chat__subtitle">AI Assistant</div>
-
-      <div class="clux-chat__msg">
-        How can I help you today?
-      </div>
+      <div class="clux-chat__msg">How can I help you today?</div>
 
       <div class="clux-chat__quick">
         <button class="clux-chip" data-chat="shipping">Shipping</button>
@@ -237,13 +239,11 @@
         <a class="clux-chatContact" href="mailto:complaints@c-luxury.com">✉ Email</a>
       </div>
 
-      <div class="clux-chat__powered">
-        AI Assistant
-      </div>
+      <div class="clux-chat__powered">AI Assistant</div>
     </div>
   </div>
 
-  <!-- ✅ keep JS version matching your deployed file -->
-  <script src="index.js?v=12" defer></script>
+  <!-- ✅ keep JS version consistent with your deployed file -->
+  <script src="index.js?v=14" defer></script>
 </body>
 </html>
