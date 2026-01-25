@@ -1,13 +1,15 @@
 /* =========================================
-   C-LUXURY — CSS v13 ✅ (MATCHES YOUR INDEX.HTML)
+   C-LUXURY — CSS v14.1 ✅ (FINAL FIXED FULL)
+   Matches your index.html + your JS
    - Black sticky header + bigger icons
    - Fade overlay + menu (toggle .is-open)
-   - Hero crossfade (fallback if JS fails)
+   - Hero crossfade (NO double-exposure bug)
    - Product grid
    - Lookbook image cards (head visible)
    - Footer accordion + icons
    - Floaters: currency (left) + chat (right)
    - Chat modal fade in/out + slide panel
+   - iPhone safe-area + focus styles
 ========================================= */
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -34,6 +36,10 @@
 
   /* Image height (lookbook/about) */
   --imgH: clamp(320px, 55vh, 640px);
+
+  /* iPhone safe-area */
+  --safeBottom: env(safe-area-inset-bottom, 0px);
+  --safeTop: env(safe-area-inset-top, 0px);
 }
 
 html,body{
@@ -47,7 +53,14 @@ html,body{
 }
 
 img{max-width:100%;display:block}
-a{color:inherit}
+a{color:inherit;text-decoration:none}
+
+/* Better focus (keyboard) */
+:focus{outline:none}
+:focus-visible{
+  outline:2px solid rgba(255,255,255,.55);
+  outline-offset:3px;
+}
 
 /* wrapper */
 .clux-wrap{
@@ -76,6 +89,13 @@ a{color:inherit}
   align-items:center;
   justify-content:space-between;
 }
+
+/* Optional “--dark” helpers (your HTML uses them) */
+.clux-header--dark{
+  background:rgba(0,0,0,.92);
+  border-bottom:1px solid var(--lineDark);
+}
+
 .clux-brand{
   text-decoration:none;
   font-family:"Georgia","Times New Roman",serif;
@@ -87,6 +107,7 @@ a{color:inherit}
   background-clip:text;
   color:transparent;
 }
+.clux-brand--dark{ color:transparent; }
 
 .clux-header__icons{
   display:flex;
@@ -104,6 +125,12 @@ a{color:inherit}
   font-size:20px;
   line-height:1;
   cursor:pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.clux-icon-btn--dark{
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.08);
+  color:#fff;
 }
 .clux-icon-btn:active{transform:scale(.98)}
 
@@ -142,6 +169,8 @@ a{color:inherit}
   pointer-events:none;
   transition: opacity 220ms ease, transform 220ms ease;
 }
+.clux-menu--dark{ background:rgba(0,0,0,.96); }
+
 .clux-menu.is-open{
   opacity:1;
   transform: translateX(0);
@@ -169,6 +198,7 @@ a{color:inherit}
   color:#fff;
   cursor:pointer;
   font-size:18px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .clux-menu__divider{
@@ -183,13 +213,15 @@ a{color:inherit}
   align-items:center;
   justify-content:space-between;
   padding:16px 12px;
-  text-decoration:none;
   color:#fff;
   border-radius:14px;
   font-size:18px;
   letter-spacing:.06em;
+  -webkit-tap-highlight-color: transparent;
 }
-.clux-menu a:hover{background:rgba(255,255,255,.06)}
+@media (hover:hover){
+  .clux-menu a:hover{background:rgba(255,255,255,.06)}
+}
 .clux-menu a:active{background:rgba(255,255,255,.10)}
 
 /* ================= GRAIN ================= */
@@ -205,7 +237,7 @@ a{color:inherit}
 }
 
 /* ===================================================
-   HERO
+   HERO (FIXED: no first-child opacity bug)
 =================================================== */
 .clux-hero{
   position:relative;
@@ -227,7 +259,6 @@ a{color:inherit}
   filter: contrast(1.03) saturate(1.03) brightness(1.05);
 }
 .clux-hero__slide.is-active{ opacity:1; }
-.clux-hero__slide:first-child{ opacity:1; } /* fallback */
 
 .clux-hero__slide::before{
   content:"";
@@ -287,26 +318,23 @@ a{color:inherit}
   top: var(--heroCtaTop);
   transform:translate(-50%, -50%);
   z-index:4;
-
   display:inline-flex;
   align-items:center;
   justify-content:center;
   padding: 16px 54px;
   border-radius:999px;
-
   background: rgba(255,255,255,0.18);
   border: 1px solid rgba(255,255,255,0.40);
   color:#fff;
-  text-decoration:none;
-
   font-size:20px;
   font-weight:700;
   letter-spacing:.02em;
-
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+  -webkit-tap-highlight-color: transparent;
 }
+
 .clux-hero__dots{
   position:absolute;
   left:50%;
@@ -390,9 +418,9 @@ a{color:inherit}
   background: var(--darkBtn);
   border: 1px solid var(--darkBtnBorder);
   color:#fff;
-  text-decoration:none;
   font-weight:900;
   letter-spacing:.04em;
+  -webkit-tap-highlight-color: transparent;
 }
 .clux-pillBtn:active{transform:scale(.99)}
 
@@ -427,8 +455,8 @@ a{color:inherit}
   border:1px solid var(--darkBtnBorder);
   color:#fff;
   letter-spacing:.06em;
-  text-decoration:none;
   font-weight:900;
+  -webkit-tap-highlight-color: transparent;
 }
 .clux-product-name{font-size:.92rem;letter-spacing:.04em;color:#0b0b0b}
 .clux-product-price{font-size:.92rem;color:rgba(11,11,11,.60)}
@@ -438,7 +466,7 @@ a{color:inherit}
 =================================================== */
 .clux-footer{
   margin-top:80px;
-  padding: 48px 0 120px; /* room for floaters */
+  padding: 48px 0 calc(120px + var(--safeBottom)); /* room for floaters */
   background:#0b0b0b;
   color:#fff;
 }
@@ -456,7 +484,6 @@ a{color:inherit}
   justify-content:center;
   border:1px solid rgba(255,255,255,.12);
   background: rgba(255,255,255,.06);
-  text-decoration:none;
 }
 .clux-socialIcon svg{
   width:22px;height:22px;
@@ -468,7 +495,6 @@ a{color:inherit}
   border-top:1px solid rgba(255,255,255,.10);
   border-bottom:1px solid rgba(255,255,255,.10);
 }
-
 .clux-accItem{
   border-top:1px solid rgba(255,255,255,.10);
 }
@@ -507,7 +533,6 @@ a{color:inherit}
 }
 
 .clux-footerLink{
-  text-decoration:none;
   color:#fff;
   padding: 12px 12px;
   border-radius:14px;
@@ -515,7 +540,9 @@ a{color:inherit}
   background: rgba(255,255,255,.06);
   font-weight:800;
 }
-.clux-footerLink:hover{background: rgba(255,255,255,.10);}
+@media (hover:hover){
+  .clux-footerLink:hover{background: rgba(255,255,255,.10);}
+}
 
 .clux-footerText{
   opacity:.86;
@@ -544,14 +571,14 @@ a{color:inherit}
 .clux-floaters{
   position:fixed;
   left:0; right:0;
-  bottom:14px;
+  bottom: calc(14px + var(--safeBottom));
   z-index:260;
-  pointer-events:none; /* buttons enable themselves */
+  pointer-events:none;
 }
 .clux-floatBtn{
   pointer-events:auto;
   position:fixed;
-  bottom:14px;
+  bottom: calc(14px + var(--safeBottom));
   display:inline-flex;
   align-items:center;
   gap:10px;
@@ -563,16 +590,13 @@ a{color:inherit}
   font-weight:900;
   letter-spacing:.04em;
   cursor:pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 .clux-floatBtn--left{ left:14px; border-radius:16px; }
 .clux-floatBtn--right{ right:14px; }
 
 .clux-caret{opacity:.9}
-
-.clux-floatBtn__text{
-  font-size:.95rem;
-  letter-spacing:.02em;
-}
+.clux-floatBtn__text{font-size:.95rem;letter-spacing:.02em}
 
 .clux-onlineDot{
   width:10px;height:10px;
@@ -635,6 +659,7 @@ a{color:inherit}
   color:#fff;
   cursor:pointer;
   font-size:18px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .clux-chat__subtitle{
@@ -668,6 +693,7 @@ a{color:inherit}
   cursor:pointer;
   font-weight:800;
   letter-spacing:.02em;
+  -webkit-tap-highlight-color: transparent;
 }
 .clux-chip:active{transform:scale(.99)}
 
@@ -687,7 +713,6 @@ a{color:inherit}
   display:inline-flex;
   align-items:center;
   gap:8px;
-  text-decoration:none;
   padding: 10px 12px;
   border-radius:14px;
   background: rgba(255,255,255,.08);
@@ -727,3 +752,8 @@ a{color:inherit}
   .clux-chat{ transition:none; }
   .clux-chat__panel{ transition:none; }
 }
+
+/* OPTIONAL: if you want a safe no-JS hero fallback WITHOUT double exposure,
+   add class "no-js" to <html> and remove it with a tiny inline script if you want.
+*/
+html.no-js [data-clux-hero] .clux-hero__slide:first-child{ opacity:1; }
