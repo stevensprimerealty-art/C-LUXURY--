@@ -757,3 +757,28 @@ a{color:inherit;text-decoration:none}
    add class "no-js" to <html> and remove it with a tiny inline script if you want.
 */
 html.no-js [data-clux-hero] .clux-hero__slide:first-child{ opacity:1; }
+
+/* ================= SHOPIFY SHOP PAGE EMBED ================= */
+.clux-shopify-embed{
+  border-radius: var(--radius);
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,.10);
+  background:#fff;
+}
+
+.clux-shopify-embed iframe{
+  width:100%;
+  height: min(1200px, 85vh);
+  border:0;
+  display:block;
+}
+
+.clux-shopNote{
+  margin-top: 14px;
+  text-align:center;
+  opacity:.75;
+}
+
+.clux-shopNote a{
+  text-decoration: underline;
+}
