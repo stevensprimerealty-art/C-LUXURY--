@@ -1,14 +1,17 @@
 // ============================
-// C-LUXURY — Standalone JS (ROOT /index.js) ✅ FINAL STABLE
+// C-LUXURY — Standalone JS (ROOT /index.js) ✅ UPDATED FOR FADE UI
 // - Hero crossfade + copy + dots
-// - Menu / Search / Products / Currency / Chat
+// - Menu fade in/out (.is-open)
+// - Search scroll
+// - Products + Currency toggle
+// - Chat modal fade in/out (.is-open)
 // ============================
+
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 /* ============================
    HERO — Crossfade + Copy + Dots Sync
-   ✅ JS only toggles classes (CSS controls layout)
 ============================ */
 function initHero() {
   const hero = document.querySelector("[data-clux-hero]");
@@ -29,7 +32,6 @@ function initHero() {
 
   const setActive = (index) => {
     i = ((index % slides.length) + slides.length) % slides.length;
-
     slides.forEach((s, idx) => s.classList.toggle("is-active", idx === i));
     copies.forEach((c, idx) => c.classList.toggle("is-active", idx === i));
     dots.forEach((d, idx) => d.classList.toggle("is-active", idx === i));
@@ -45,33 +47,26 @@ function initHero() {
     timer = null;
   };
 
-  // Init
   setActive(0);
   start();
 
-  // Dot click
   if (dotsWrap && dots.length) {
     dotsWrap.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-dot]");
       if (!btn) return;
-
       const n = Number(btn.getAttribute("data-dot"));
       if (Number.isNaN(n)) return;
-
       setActive(n);
-      start(); // restart autoplay
+      start();
     });
   }
 
-  // Pause on hover (desktop)
   hero.addEventListener("mouseenter", stop);
   hero.addEventListener("mouseleave", start);
 
-  // Pause on touch (mobile)
   hero.addEventListener("touchstart", stop, { passive: true });
   hero.addEventListener("touchend", start, { passive: true });
 
-  // Pause when tab hidden
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stop();
     else start();
@@ -79,35 +74,46 @@ function initHero() {
 }
 
 /* ============================
-   MINI MENU
+   MINI MENU (FADE IN/OUT)
+   Requires CSS:
+   .clux-menu { opacity:0; pointer-events:none; }
+   .clux-menu.is-open { opacity:1; pointer-events:auto; }
 ============================ */
 function initMenu() {
   const menu = $("#cluxMenu");
   const openBtn = $("#menuBtn");
   const closeBtn = $("#menuClose");
+  const overlay = $(".clux-overlay"); // optional if you added it
   if (!menu || !openBtn || !closeBtn) return;
 
   const open = () => {
-    menu.style.display = "block";
+    menu.classList.add("is-open");
     menu.setAttribute("aria-hidden", "false");
+    if (overlay) overlay.classList.add("is-open");
   };
 
   const close = () => {
-    menu.style.display = "none";
+    menu.classList.remove("is-open");
     menu.setAttribute("aria-hidden", "true");
+    if (overlay) overlay.classList.remove("is-open");
   };
 
   openBtn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
 
   $$("a", menu).forEach((a) => a.addEventListener("click", close));
+  if (overlay) overlay.addEventListener("click", close);
 
+  // click outside closes
   document.addEventListener("click", (e) => {
-    const isOpen = menu.getAttribute("aria-hidden") === "false";
+    const isOpen = menu.classList.contains("is-open");
     if (!isOpen) return;
     if (menu.contains(e.target) || openBtn.contains(e.target)) return;
     close();
   });
+
+  // init closed
+  close();
 }
 
 /* ============================
@@ -146,7 +152,7 @@ const PRODUCTS = [
 ];
 
 let currency = "USD";
-const usdToNgn = 1500;
+const usdToNgn = 1500; // static for now
 
 function money(n) {
   if (currency === "USD") return `$${n.toFixed(2)}`;
@@ -174,18 +180,29 @@ function renderProducts() {
   `).join("");
 }
 
+/* Currency toggle button (bottom-left) */
 function initCurrency() {
   const btn = $("#currencyToggle");
   if (!btn) return;
 
+  const paint = () => {
+    btn.textContent = currency === "USD" ? "USD" : "NGN";
+  };
+
+  paint();
+
   btn.addEventListener("click", () => {
     currency = currency === "USD" ? "NGN" : "USD";
+    paint();
     renderProducts();
   });
 }
 
 /* ============================
-   CHAT MODAL
+   CHAT MODAL (FADE IN/OUT)
+   Requires CSS:
+   .clux-chat { opacity:0; pointer-events:none; }
+   .clux-chat.is-open { opacity:1; pointer-events:auto; }
 ============================ */
 function initChat() {
   const box = $("#chatBox");
@@ -194,12 +211,12 @@ function initChat() {
   if (!box || !openBtn || !closeBtn) return;
 
   const open = () => {
-    box.style.display = "flex";
+    box.classList.add("is-open");
     box.setAttribute("aria-hidden", "false");
   };
 
   const close = () => {
-    box.style.display = "none";
+    box.classList.remove("is-open");
     box.setAttribute("aria-hidden", "true");
   };
 
@@ -210,6 +227,11 @@ function initChat() {
 
   box.addEventListener("click", (e) => {
     if (e.target === box) close();
+  });
+
+  // ESC closes
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
   });
 }
 
