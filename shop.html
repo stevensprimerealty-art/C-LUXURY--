@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shop — C-LUXURY</title>
 
-  <!-- GitHub Pages subfolder fix -->
   <base href="/C-LUXURY--/">
-
-  <link rel="stylesheet" href="assets/clux.css?v=14" />
+  <link rel="stylesheet" href="assets/clux.css?v=14.2" />
 </head>
 
 <body>
@@ -19,7 +17,8 @@
       <a class="clux-brand clux-brand--dark" href="./" aria-label="C-LUXURY home">C-LUXURY</a>
 
       <div class="clux-header__icons">
-        <button class="clux-icon-btn clux-icon-btn--dark" aria-label="Search" id="searchBtn">🔍</button>
+        <!-- ✅ on shop page, search goes to home products -->
+        <a class="clux-icon-btn clux-icon-btn--dark" aria-label="Search products" href="./#products">🔍</a>
         <button class="clux-icon-btn clux-icon-btn--dark" aria-label="Menu" id="menuBtn">☰</button>
       </div>
     </div>
@@ -36,14 +35,15 @@
 
     <div class="clux-menu__divider"></div>
 
-    <!-- ✅ Shop now goes to this page -->
     <a href="./shop.html">Shop</a>
-    <a href="./#lookbook">Lookbook</a>
+    <a href="./lookbook.html">Lookbook</a>
     <a href="./about.html">About</a>
 
     <div class="clux-menu__divider"></div>
 
-    <a href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">Open Shopify Store ↗</a>
+    <a href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">
+      Open Shopify Store ↗
+    </a>
   </nav>
 
   <!-- ================= SHOP PAGE ================= -->
@@ -51,7 +51,6 @@
     <div class="clux-wrap">
       <div class="clux-section-title">SHOP</div>
 
-      <!-- ✅ Shopify products embedded -->
       <div class="clux-shopify-embed">
         <iframe
           src="https://mrcharliestxs.myshopify.com/collections/all"
@@ -62,7 +61,10 @@
       </div>
 
       <div class="clux-shopNote">
-        Prefer full store? <a href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">Open Shopify ↗</a>
+        Prefer full store?
+        <a href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">
+          Open Shopify ↗
+        </a>
       </div>
     </div>
   </main>
@@ -86,7 +88,6 @@
       </div>
 
       <div class="clux-accordion">
-
         <details class="clux-accItem">
           <summary class="clux-accSummary">
             <span>QUICK LINK</span>
@@ -97,14 +98,6 @@
             <a class="clux-footerLink" href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">
               Shopify Store ↗
             </a>
-
-            <a class="clux-footerLink" href="https://mrcharliestxs.myshopify.com/collections/all" target="_blank" rel="noopener">
-              Shop Well — Start Here ↗
-            </a>
-
-            <div class="clux-footerText">
-              Every order comes with a <strong>free gift</strong>.
-            </div>
 
             <div class="clux-footerText">
               Complaints / Support:
@@ -127,7 +120,6 @@
             </a>
           </div>
         </details>
-
       </div>
 
       <div class="clux-footer__bottom">
@@ -160,7 +152,6 @@
       </div>
 
       <div class="clux-chat__subtitle">AI Assistant</div>
-
       <div class="clux-chat__msg">How can I help you today?</div>
 
       <div class="clux-chat__quick">
