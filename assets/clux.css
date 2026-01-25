@@ -1,8 +1,9 @@
 /* =========================================
-   C-LUXURY — FINAL STABLE CSS
-   - Hero crossfade (locked copy)
-   - Editorial banners (works on iPhone Safari)
-   - About page marquee
+   C-LUXURY — STABLE CSS (SIMPLE VERSION)
+   - Hero crossfade (with fallback if JS fails)
+   - Product grid
+   - Simple image sections (no inspo banners needed)
+   - About page marquee + copy
 ========================================= */
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -18,10 +19,6 @@
   /* HERO controls */
   --heroTextTop: 60%;
   --heroCtaTop: 74%;
-
-  /* BANNERS */
-  --bannerMinH: 320px;
-  --bannerH: clamp(320px, 60vh, 680px);
 
   /* ABOUT */
   --aboutPad: clamp(44px, 7vw, 90px);
@@ -150,6 +147,9 @@ img{max-width:100%;display:block}
 }
 .clux-hero__slide.is-active{ opacity:1; }
 
+/* ✅ Fallback: if JS fails, still show first hero image */
+.clux-hero__slide:first-child{ opacity:1; }
+
 .clux-hero__slide::before{
   content:"";
   position:absolute;
@@ -266,6 +266,29 @@ img{max-width:100%;display:block}
   margin-bottom:28px;
 }
 
+/* ===================================================
+   SIMPLE IMAGE SECTIONS (NO INSPO BANNERS)
+=================================================== */
+.clux-imgCard{
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.08);
+  background:#111;
+}
+.clux-imgCard img{
+  width:100%;
+  display:block;
+  height: clamp(280px, 55vh, 620px);
+  object-fit: cover;
+}
+.clux-center{ text-align:center; }
+.clux-subkicker{
+  letter-spacing:.32em;
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
 /* ================= PRODUCT GRID ================= */
 .clux-grid{
   width:100%;
@@ -285,6 +308,11 @@ img{max-width:100%;display:block}
   overflow:hidden;
   border:1px solid rgba(0,0,0,.06);
   background:#f4f4f4;
+}
+.clux-product__img img{
+  width:100%;
+  height:auto;
+  display:block;
 }
 .clux-quick-buy{
   width:100%;
@@ -377,105 +405,7 @@ img{max-width:100%;display:block}
 }
 
 /* ===================================================
-   EDITORIAL BANNERS (iPhone-safe)
-   IMPORTANT: put <span class="clux-bannerGrain"></span> inside the banner
-=================================================== */
-.clux-bannerstack{
-  width:100%;
-  display:flex;
-  flex-direction:column;
-}
-
-/* remove purple underline always */
-.clux-heroBanner,
-.clux-heroBanner:visited,
-.clux-heroBanner:hover,
-.clux-heroBanner:active{
-  color:#fff !important;
-  text-decoration:none !important;
-}
-
-.clux-heroBanner{
-  position:relative;
-  width:100%;
-  height: var(--bannerH);
-  min-height: var(--bannerMinH);
-  display:block;
-  overflow:hidden;
-  background:#111;
-  text-decoration:none;
-}
-
-/* ✅ iPhone-safe: use background-image, not shorthand */
-.clux-heroBanner::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  display:block;
-  z-index:0;
-
-  background-image: var(--bannerImg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  transform: scale(1.02);
-  filter: saturate(1.05) contrast(1.05);
-}
-
-.clux-heroBanner::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,.28) 0%,
-    rgba(0,0,0,.18) 35%,
-    rgba(0,0,0,.60) 100%
-  );
-  z-index:1;
-}
-
-.clux-bannerGrain{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-  mix-blend-mode:overlay;
-  opacity:.22;
-  z-index:2;
-}
-
-.clux-heroBanner__content{
-  position:absolute;
-  left:18px;
-  bottom:22px;
-  z-index:3;
-  color:#fff;
-}
-.clux-heroBanner__kicker{
-  font-size:12px;
-  letter-spacing:.32em;
-  text-transform:uppercase;
-  opacity:.88;
-  margin-bottom:16px;
-}
-.clux-heroBanner__link{
-  font-size:16px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  display:inline-block;
-  padding-bottom:6px;
-  border-bottom: 1px solid rgba(255,255,255,.75);
-}
-
-@media (hover:hover){
-  .clux-heroBanner::before{ transition: transform 700ms ease; }
-  .clux-heroBanner:hover::before{ transform: scale(1.05); }
-}
-
-/* ===================================================
-   ABOUT PAGE
+   ABOUT PAGE (TEXT + MARQUEE)
 =================================================== */
 .clux-about{
   padding: var(--aboutPad) 0;
@@ -538,13 +468,16 @@ img{max-width:100%;display:block}
     font-size:18px;
     padding:14px 44px;
   }
+
+  .clux-grid{ grid-template-columns:repeat(2, 1fr); }
 }
 
 @media (min-width:780px){
-  .clux-grid{gap:26px}
+  .clux-grid{ gap:26px }
 }
 
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce){
+  .clux-hero__slide{ transition:none; }
   .clux-marquee__track{ animation: none; }
 }
