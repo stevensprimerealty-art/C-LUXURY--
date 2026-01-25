@@ -12,6 +12,10 @@
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
+// ✅ YOUR QUICK BUY CHECKOUT LINK
+const QUICK_BUY_URL =
+  "https://mrcharliestxs.myshopify.com/checkouts/cn/hWN7ZmclI4XgWZtheB2Vhic7/en-ng?_r=AQABUs0iACzNKrExlnHahky4lpduUMtVGeGhbyoRWGeboiA&preview_theme_id=140961939507";
+
 /* ============================
    HERO — Crossfade + Copy + Dots Sync
 ============================ */
@@ -76,8 +80,6 @@ function initHero() {
 
 /* ============================
    MENU — Fade in/out (.is-open)
-   Uses:
-   #menuBtn, #cluxMenu, #menuClose, #cluxOverlay
 ============================ */
 function initMenu() {
   const menu = $("#cluxMenu");
@@ -106,7 +108,6 @@ function initMenu() {
 
   openBtn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
-
   if (overlay) overlay.addEventListener("click", close);
 
   $$("a", menu).forEach((a) => a.addEventListener("click", close));
@@ -132,7 +133,7 @@ function initSearch() {
 }
 
 /* ============================
-   PRODUCTS (FIXED PATHS FOR <base>)
+   PRODUCTS (Fixed paths for <base>)
 ============================ */
 const PRODUCTS = [
   { title:"C-Lux Baseball Jersey - Vintage Brown Star Sleeve Shirt", priceUSD:48.31, url:"https://mrcharliestxs.myshopify.com/products/baseball-jersey-vintage-brown-star-sleeve-team-shirt", img:"assets/product-1.jpg" },
@@ -173,7 +174,12 @@ function renderProducts() {
           <img src="${p.img}" alt="${p.title}">
         </a>
       </div>
-      <a class="clux-quick-buy" href="${p.url}" target="_blank" rel="noopener">Quick Buy</a>
+
+      <!-- ✅ Quick Buy now uses your checkout link -->
+      <a class="clux-quick-buy" href="${QUICK_BUY_URL}" target="_blank" rel="noopener">
+        Quick Buy
+      </a>
+
       <div class="clux-product-name">${p.title}</div>
       <div class="clux-product-price">${money(p.priceUSD)}</div>
     </div>
@@ -201,8 +207,7 @@ function initCurrency() {
 }
 
 /* ============================
-   CHAT MODAL (Fade in/out with .is-open)
-   Uses: #chatOpen, #chatBox, #chatClose
+   CHAT MODAL
 ============================ */
 function initChat() {
   const box = $("#chatBox");
