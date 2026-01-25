@@ -1,10 +1,12 @@
 // ============================
-// C-LUXURY — Standalone JS (ROOT /index.js) ✅ UPDATED FOR FADE UI
+// C-LUXURY — Standalone JS ✅ (Matches your HTML IDs)
 // - Hero crossfade + copy + dots
-// - Menu fade in/out (.is-open)
+// - Menu fade in/out (adds/removes .is-open)
 // - Search scroll
-// - Products + Currency toggle
-// - Chat modal fade in/out (.is-open)
+// - Products render
+// - Currency toggle (id="currencyBtn")
+// - Chat modal fade in/out (id="chatBox")
+// - Chat quick buttons -> simple auto replies
 // ============================
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -63,7 +65,6 @@ function initHero() {
 
   hero.addEventListener("mouseenter", stop);
   hero.addEventListener("mouseleave", start);
-
   hero.addEventListener("touchstart", stop, { passive: true });
   hero.addEventListener("touchend", start, { passive: true });
 
@@ -74,42 +75,47 @@ function initHero() {
 }
 
 /* ============================
-   MINI MENU (FADE IN/OUT)
-   Requires CSS:
-   .clux-menu { opacity:0; pointer-events:none; }
-   .clux-menu.is-open { opacity:1; pointer-events:auto; }
+   MENU — Fade in/out (.is-open)
+   Uses:
+   #menuBtn, #cluxMenu, #menuClose, #cluxOverlay
 ============================ */
 function initMenu() {
   const menu = $("#cluxMenu");
   const openBtn = $("#menuBtn");
   const closeBtn = $("#menuClose");
-  const overlay = $(".clux-overlay"); // optional if you added it
+  const overlay = $("#cluxOverlay");
   if (!menu || !openBtn || !closeBtn) return;
 
   const open = () => {
     menu.classList.add("is-open");
     menu.setAttribute("aria-hidden", "false");
-    if (overlay) overlay.classList.add("is-open");
+    if (overlay) {
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+    }
   };
 
   const close = () => {
     menu.classList.remove("is-open");
     menu.setAttribute("aria-hidden", "true");
-    if (overlay) overlay.classList.remove("is-open");
+    if (overlay) {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+    }
   };
 
   openBtn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
 
-  $$("a", menu).forEach((a) => a.addEventListener("click", close));
+  // close when clicking overlay
   if (overlay) overlay.addEventListener("click", close);
 
-  // click outside closes
-  document.addEventListener("click", (e) => {
-    const isOpen = menu.classList.contains("is-open");
-    if (!isOpen) return;
-    if (menu.contains(e.target) || openBtn.contains(e.target)) return;
-    close();
+  // close when clicking a menu link
+  $$("a", menu).forEach((a) => a.addEventListener("click", close));
+
+  // ESC closes
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
   });
 
   // init closed
@@ -130,7 +136,7 @@ function initSearch() {
 }
 
 /* ============================
-   PRODUCTS (16) — images in /assets/
+   PRODUCTS
 ============================ */
 const PRODUCTS = [
   { title:"C-Lux Baseball Jersey - Vintage Brown Star Sleeve Shirt", priceUSD:48.31, url:"https://mrcharliestxs.myshopify.com/products/baseball-jersey-vintage-brown-star-sleeve-team-shirt", img:"./assets/product-1.jpg" },
@@ -171,22 +177,30 @@ function renderProducts() {
           <img src="${p.img}" alt="${p.title}">
         </a>
       </div>
-
       <a class="clux-quick-buy" href="${p.url}" target="_blank" rel="noopener">Quick Buy</a>
-
       <div class="clux-product-name">${p.title}</div>
       <div class="clux-product-price">${money(p.priceUSD)}</div>
     </div>
   `).join("");
 }
 
-/* Currency toggle button (bottom-left) */
+/* ============================
+   Currency toggle (YOUR HTML: id="currencyBtn")
+============================ */
 function initCurrency() {
-  const btn = $("#currencyToggle");
+  const btn = $("#currencyBtn");
   if (!btn) return;
 
   const paint = () => {
-    btn.textContent = currency === "USD" ? "USD" : "NGN";
+    // show USD / NGN text on the button
+    // keep your caret if you want (it is inside the button)
+    const caret = btn.querySelector(".clux-caret");
+    btn.childNodes.forEach((n) => {
+      if (n.nodeType === Node.TEXT_NODE) n.textContent = "";
+    });
+    // Set text before caret
+    btn.insertAdjacentText("afterbegin", currency === "USD" ? "USD " : "NGN ");
+    if (caret) caret.textContent = "▾";
   };
 
   paint();
@@ -199,15 +213,15 @@ function initCurrency() {
 }
 
 /* ============================
-   CHAT MODAL (FADE IN/OUT)
-   Requires CSS:
-   .clux-chat { opacity:0; pointer-events:none; }
-   .clux-chat.is-open { opacity:1; pointer-events:auto; }
+   CHAT MODAL (Fade in/out with .is-open)
+   Uses: #chatOpen, #chatBox, #chatClose
 ============================ */
 function initChat() {
   const box = $("#chatBox");
   const openBtn = $("#chatOpen");
   const closeBtn = $("#chatClose");
+  const responses = $("#chatResponses");
+  const chips = $$(".clux-chip", box || document);
   if (!box || !openBtn || !closeBtn) return;
 
   const open = () => {
@@ -220,11 +234,13 @@ function initChat() {
     box.setAttribute("aria-hidden", "true");
   };
 
-  close(); // init hidden
+  // init hidden
+  close();
 
   openBtn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
 
+  // click outside panel closes
   box.addEventListener("click", (e) => {
     if (e.target === box) close();
   });
@@ -232,6 +248,34 @@ function initChat() {
   // ESC closes
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") close();
+  });
+
+  // Simple quick replies (optional)
+  const reply = (topic) => {
+    if (!responses) return;
+
+    const map = {
+      shipping: "Shipping: Orders are processed within 24–72 hours. Delivery time depends on your location. If you need help, email complaints@c-luxury.com.",
+      sizing: "Sizing: Please check the product page size guide. If you tell me your height/weight, I can recommend a size.",
+      order: "Order Issue: Sorry about that. Please email complaints@c-luxury.com with your order number and what happened."
+    };
+
+    const text = map[topic] || "How can I help you today?";
+    const div = document.createElement("div");
+    div.style.marginTop = "10px";
+    div.style.padding = "12px 14px";
+    div.style.border = "1px solid rgba(255,255,255,.10)";
+    div.style.borderRadius = "14px";
+    div.style.background = "rgba(255,255,255,.06)";
+    div.textContent = text;
+    responses.appendChild(div);
+  };
+
+  chips.forEach((b) => {
+    b.addEventListener("click", () => {
+      const t = b.getAttribute("data-chat");
+      reply(t);
+    });
   });
 }
 
