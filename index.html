@@ -8,7 +8,7 @@
   <!-- GitHub Pages subfolder fix -->
   <base href="/C-LUXURY--/">
 
-  <!-- ✅ CSS v14.2 (matches your latest full CSS) -->
+  <!-- ✅ CSS v14.2 -->
   <link rel="stylesheet" href="assets/clux.css?v=14.2" />
 </head>
 
@@ -20,7 +20,9 @@
       <a class="clux-brand clux-brand--dark" href="./" aria-label="C-LUXURY home">C-LUXURY</a>
 
       <div class="clux-header__icons">
-        <button class="clux-icon-btn clux-icon-btn--dark" aria-label="Search" id="searchBtn">🔍</button>
+        <!-- ✅ FIX: make Search work even without JS -->
+        <a class="clux-icon-btn clux-icon-btn--dark" aria-label="Search" id="searchBtn" href="#products">🔍</a>
+
         <button class="clux-icon-btn clux-icon-btn--dark" aria-label="Menu" id="menuBtn">☰</button>
       </div>
     </div>
@@ -38,12 +40,8 @@
 
     <div class="clux-menu__divider"></div>
 
-    <!-- ✅ FIXED: Menu Shop opens NEW shop page -->
     <a href="./shop.html">Shop</a>
-
-    <!-- ✅ FIXED: Menu Lookbook opens NEW lookbook page -->
     <a href="./lookbook.html">Lookbook</a>
-
     <a href="./about.html">About</a>
 
     <div class="clux-menu__divider"></div>
@@ -54,7 +52,12 @@
   </nav>
 
   <!-- ================= HERO ================= -->
-  <section class="clux-hero clux-grain" data-clux-hero data-interval-ms="3200">
+  <section
+    class="clux-hero clux-grain"
+    data-clux-hero
+    data-interval-ms="3200"
+    style="min-height: calc(620px + env(safe-area-inset-top, 0px));"
+  >
     <div class="clux-hero__stage">
       <div class="clux-hero__slide is-active" data-clux-slide style="background-image:url(assets/hero-1.jpg)"></div>
       <div class="clux-hero__slide" data-clux-slide style="background-image:url(assets/hero-2.jpg)"></div>
@@ -78,7 +81,7 @@
       </div>
     </div>
 
-    <!-- ✅ FIXED: Hero Shop Now goes to Shopify store -->
+    <!-- ✅ Hero CTA -->
     <a class="clux-hero__cta"
        href="https://mrcharliestxs.myshopify.com/collections/all"
        target="_blank" rel="noopener">
@@ -92,15 +95,13 @@
     </div>
   </section>
 
-  <!-- ================= PRODUCTS (Home preview grid) ================= -->
+  <!-- ================= PRODUCTS ================= -->
   <section id="products" class="clux-section">
     <div class="clux-wrap">
       <div class="clux-section-title">C-New Arrivals</div>
 
-      <!-- Your JS fills this -->
       <div class="clux-grid" id="productGrid"></div>
 
-      <!-- Optional: button to full shop page -->
       <div style="display:flex; justify-content:center; padding: 16px 0 0;">
         <a class="clux-pillBtn" href="./shop.html">Open Full Shop</a>
       </div>
@@ -112,7 +113,6 @@
     <div class="clux-wrap">
       <div class="clux-section-title">LOOKBOOK</div>
 
-      <!-- simple preview banners (keeps your current style) -->
       <div class="clux-stack">
         <div class="clux-imgCard">
           <img class="clux-imgTop" src="assets/banner-1.jpg" alt="Lookbook — New Releases">
@@ -120,8 +120,6 @@
 
         <div class="clux-ctaRow">
           <div class="clux-subkicker">NEW RELEASES</div>
-
-          <!-- ✅ Goes to NEW lookbook page -->
           <a class="clux-pillBtn" href="./lookbook.html">Open Lookbook</a>
         </div>
 
@@ -151,7 +149,6 @@
       </div>
 
       <div class="clux-accordion">
-
         <details class="clux-accItem">
           <summary class="clux-accSummary">
             <span>QUICK LINK</span>
@@ -192,7 +189,6 @@
             </a>
           </div>
         </details>
-
       </div>
 
       <div class="clux-footer__bottom">
@@ -243,7 +239,6 @@
     </div>
   </div>
 
-  <!-- ✅ keep JS version consistent with your deployed file -->
   <script src="index.js?v=14" defer></script>
 </body>
 </html>
