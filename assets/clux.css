@@ -821,3 +821,68 @@ html.no-js [data-clux-hero] .clux-hero__slide:first-child{ opacity:1; }
 .clux-shopNote a{
   text-decoration: underline;
 }
+
+
+/* ===================================================
+   SHOP FEATURE GRID (4 cards)
+=================================================== */
+.clux-shopGrid{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:16px;
+  margin: 18px 0 26px;
+}
+
+.clux-shopCard{
+  position:relative;
+  display:block;
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,.08);
+  background:#111;
+  aspect-ratio: 4 / 5;
+  transform: translateZ(0);
+}
+
+.clux-shopCard img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  filter: contrast(1.04) saturate(1.02);
+}
+
+.clux-shopCard__overlay{
+  position:absolute;
+  left:0; right:0; top:0;
+  padding:18px 16px;
+  color:#fff;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.55) 0%,
+    rgba(0,0,0,.10) 60%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+.clux-shopCard__title{
+  font-size: clamp(22px, 4.8vw, 34px);
+  font-weight:900;
+  letter-spacing:.01em;
+  text-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.clux-shopCard__sub{
+  margin-top:6px;
+  font-size: 14px;
+  font-weight:700;
+  opacity:.92;
+  letter-spacing:.02em;
+}
+
+@media (min-width: 760px){
+  .clux-shopGrid{
+    grid-template-columns: repeat(2, 1fr);
+    gap:18px;
+  }
+}
